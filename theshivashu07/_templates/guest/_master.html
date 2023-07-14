@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html class="no-js">
+    <head>
+        <meta charset="utf-8">
+
+
+
+
+    <title>
+
+        {% block tcontent %}
+
+        {% endblock %}
+
+    </title>
+
+
+
+
+
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width">
+
+        <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto+Slab:400,700,300,100">
+        <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:400,400italic,300italic,300,500,500italic,700,900">
+        <!--
+        Artcore Template
+        http://www.templatemo.com/preview/templatemo_423_artcore
+        -->
+        <link rel="stylesheet" href="/_static/guest/css/bootstrap.css">
+        <link rel="stylesheet" href="/_static/guest/css/font-awesome.css">
+        <link rel="stylesheet" href="/_static/guest/css/animate.css">
+        <link rel="stylesheet" href="/_static/guest/css/templatemo-misc.css">
+        <link rel="stylesheet" href="/_static/guest/css/templatemo-style.css">
+
+        <link rel="stylesheet" href="/_static/guest/css/_target.css">
+        
+        <script src="/_static/guest/js/vendor/modernizr-2.6.1-respond-1.1.0.min.js"></script>
+
+
+        <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+        <script type="text/javascript">
+            $("input[type=text]").keyup(function(){
+                var className = $(this).attr('class').replace('valueEnter','').trim();
+                $("."+className).val($(this).val());
+            });
+        </script> -->
+
+        <style type="text/css">
+            a{
+                margin: 2px;
+                border-radius: 5px;
+            }
+        </style>
+    </head>
+    <body>
+        <!--[if lt IE 7]>
+            <p class="chromeframe">You are using an outdated browser. <a href="http://browsehappy.com/">Upgrade your browser today</a> or <a href="http://www.google.com/chromeframe/?redirect=true">install Google Chrome Frame</a> to better experience this site.</p>
+        <![endif]-->
+
+
+        <section id="pageloader">
+            <div class="loader-item fa fa-spin colored-border"></div>
+        </section> <!-- /#pageloader -->
+
+
+        <header class="site-header container-fluid">
+            <div class="top-header">
+                <div class="logo col-md-4 col-sm-4">
+                    <!-- <h1 style="height:45px;">
+                        <a href="/">
+                            <em>shiva</em>m
+                            <em>shu</em>kla
+                        </a>
+                    </h1> -->
+                    <h1 style="height:42px;">
+                        <a href="/">
+                            <em>shiva</em>m
+                            <em>shu</em>kla
+                        </a>
+                    </h1>
+                    <br>
+                    <!-- <div style="background-color:#fafafa;padding:0 5px;width:fit-content;margin-top:-10px;border-radius:5px;"> -->
+                    <div style="background-color:#fafafa;padding:0 5px;width:fit-content;border-radius:5px;">
+                        <b style="color: darkgray;">Role:</b>
+                        <span>Software Engineer, Backend Developer, Data Analyst.</span>
+                    </div>
+                    <!-- <div style="width:fit-content;font-family:'Lucida Handwriting',cursive;font-size:16px;margin-top:12px;background-color:#ff5500;padding:2px 5px;border-radius:2px;"> -->
+                    <div style="width:fit-content;font-size:16px;margin-top:12px;background-color:#ff5500;padding:2px 5px;border-radius:2px;">
+                        <b style="color:#ffbb00;">
+                            <u>Timer: </u>
+                            <span id="demo" style="color:#ffdd00;background-color:red;border-radius:2px; padding:2px 5px;"> </span>
+                        </b>
+                    </div>
+                </div> 
+                <!-- <div class="social-top col-md-8 col-sm-8" style="background-color:#fafafa;border-radius:5px; border:groove;"> -->
+                <div class="social-top col-md-8 col-sm-8" style="background-color:#fafafa;border-radius:5px;">
+                    <ul>
+
+                        <!--  If you want to open link in another page, so you use this under a tag... >>> target="_blank" rel="noopener"  -->
+
+                        <!-- Study  -->
+                        <li><a href="https://auth.geeksforgeeks.org/user/theshivashu07" target="_blank" rel="noopener" style="color:green;font-size:small; padding:0 8px;width:auto;" class="fa fa-code"> GFG</a></li>
+                        <li><a href="https://leetcode.com/theshivashu07/" target="_blank" rel="noopener" style="color:black;font-size:small;padding:0 8px;width:auto;" class="fa fa-code"> Leet<b style="color:orange;">code</b></a></li> 
+                        <li><a href="https://www.linkedin.com/in/theshivashu07" target="_blank" rel="noopener" style="color:blue;font-size:small;padding:0 8px;width:auto;" class="fa fa-linkedin-square"> LinkedIN</a></li>
+                        <li><a href="https://github.com/theshivashu07" target="_blank" rel="noopener" style="color:black;font-size:small;padding:0 8px;width:auto;" class="fa fa-github"> GitHub</a></li> 
+                        <li><a href="https://learn.thecodehelp.in/s/courses/63ac9183e4b0f1067f1b7b32/take" target="_blank" rel="noopener" style="color:#0f80d0;font-size:small; padding:0 8px;width:auto;" class="fa fa-code"> CodeHelp</a></li>
+                        <li><a href="https://discord.com/channels/@me" target="_blank" rel="noopener" style="color:#0099ff;font-size:small; padding:0 8px;width:auto;" class="fa fa-code"> Discord</a></li>
+
+                        <!-- Social Media -->
+                        <li><a href="https://twitter.com/theshivashu07" target="_blank" rel="noopener" style="color:deepskyblue;font-size:small; padding:0 8px;width:auto;" class="fa fa-twitter"> Twitter</a></li>
+                        <li><a href="https://www.instagram.com/theshivashu07/" target="_blank" rel="noopener" style="color:deeppink;font-size:small; padding:0 8px;width:auto;" class="fa fa-instagram"> Instagram</a></li>
+                        <li><a href="https://www.facebook.com/theshivashu07" target="_blank" rel="noopener" style="color:blue;font-size:small; padding:0 8px;width:auto;" class="fa fa-facebook-square"> Facebook</a></li>
+                        
+                        <!-- <br> -->
+
+                        <li><a href="https://youtube.com/" target="_blank" rel="noopener" style="color:red;font-size:small; padding:0 8px;width:auto;" class="fa fa-youtube-play"> YouTube</a></li> 
+                        <li><a href="https://plus.google.com/" target="_blank" rel="noopener" style="color:coral;font-size:small;padding:0 8px;width:auto;" class="fa fa-google-plus"> Google+</a></li>
+                        <!-- <li><a href="#" class="fa fa-flickr"></a></li> -->
+                        <!-- <li><a href="#" class="fa fa-rss"></a></li>  -->
+                    </ul>
+
+            <div class="main-header" style="padding: 10px 20px; background-color:#fafafa; border:none;">
+                <div class="row">
+
+                    <!-- <div class="main-header-left col-md-1 col-sm-1 col-xs-1"> -->
+                    <div class="main-header-left">
+                        <a id="search-icon" class="btn-left fa fa-search" href="#search-overlay"></a>
+                        <div id="search-overlay">
+                            <a href="#search-overlay" class="close-search"><i class="fa fa-times-circle"></i></a>
+                            <div class="search-form-holder">
+                                <h2>Type keywords and hit enter</h2>
+                                <form id="search-form" action="#">
+                                    <input type="search" name="s" placeholder="" autocomplete="off">
+                                </form>
+                            </div>
+                        </div>
+                        <!-- <a href="#" class="btn-left arrow-left fa fa-angle-left"></a> -->
+                        <!-- <a href="#" class="btn-left arrow-right fa fa-angle-right"></a> -->
+                    </div> 
+
+                    <!-- <div class="menu-wrapper col-md-11 col-sm-11 col-xs-11"> -->
+                    <div class="menu-wrapper">
+                        <a href="#" class="toggle-menu visible-sm visible-xs"><i class="fa fa-bars"></i></a>
+                        <ul class="sf-menu hidden-xs hidden-sm">
+                            <li {% if request.path in '/' %} class="active" {% endif %}><a href="/" style="border:none;display:contents;">Home</a></li>
+                            <!-- <li {% if '/programminglanguages/' in request.path %} class="active" {% endif %}><a href="/programminglanguages/" style="border:none;display:contents;">Programming Languages</a></li> -->
+                            <li {% if '/profile/' in request.path %} class="active" {% endif %}><a href="/profile/" style="border:none;display:contents;">Profile</a></li>
+                            <li {% if '/studycenter/' in request.path %} class="active" {% endif %}><a href="/studycenter/" style="border:none;display:contents;">Study Center</a></li>
+                            <li {% if '/codecollections/' in request.path %} class="active" {% endif %}><a href="/codecollections/" style="border:none;display:contents;">Code Collections</a></li>
+                            <li {% if '/dailyroutines/' in request.path %} class="active" {% endif %}><a href="/dailyroutines/" style="border:none;display:contents;">Daily Routines</a></li>
+                            <li {% if '/enjoysections/' in request.path %} class="active" {% endif %}><a href="/enjoysections/" style="border:none;display:contents;">Enjoy</a></li>
+                            <li {% if '/defaultsections/' in request.path %} class="active" {% endif %}><a href="/defaultsections/" style="border:none;display:contents;">DEFAULT</a></li>
+                        </ul>
+                    </div> 
+                </div>
+            </div>
+
+
+                </div> 
+            </div> 
+
+
+
+
+
+
+{% block headerplusplus %}
+
+{% endblock %}
+
+
+
+            <!-- <div class="main-header">
+                <div class="row">
+                    <div class="menu-wrapper">
+                        <a href="#" class="toggle-menu visible-sm visible-xs"><i class="fa fa-bars"></i></a>
+                        <ul class="sf-menu hidden-xs hidden-sm sf-js-enabled sf-arrows">
+                            <li {% if request.path == '/index/' %} class="active" {% endif %}><a href="/index/">Home</a></li>
+                        </ul>
+                    </div> 
+                </div>
+            </div>  -->
+
+
+
+
+
+            <div id="responsive-menu">
+                <ul>
+                    <li><a href="/">Home</a></li>
+                    <li><a href="/services/">Services</a></li>
+
+                    <!-- Under Projects -->
+                    <li><a href="/projects2/">Two Columns</a></li>
+                    <li><a href="/projects3/">Three Columns</a></li>
+                    <li><a href="/projectdetails/">Project Single</a></li>
+
+                    <!-- Under Blog -->
+                    <li><a href="/blog/">Blog Masonry</a></li>
+                    <li><a href="/blogsingle/">Post Single</a></li>
+
+                    <!-- Under Pages -->
+                    <li><a href="/ourteam/">Our Team</a></li>
+                    <li><a href="/archives/">Archives</a></li>
+                    <li><a href="/grids/">Columns</a></li>
+                    <li><a href="/error404/">404 Page</a></li>
+
+                    <li><a href="/contact/">Contact</a></li>
+
+                </ul>
+            </div>
+
+        </header>
+
+
+
+
+
+
+
+
+
+
+
+    {% block childcontent %}
+
+    {% endblock %}
+
+
+
+
+
+
+
+
+
+        <script src="/_static/guest/js/vendor/jquery-1.11.0.min.js"></script>
+        <script>window.jQuery || document.write('<script src="/_static/guest/js/vendor/jquery-1.11.0.min.js"><\/script>')</script>
+        <script src="/_static/guest/js/plugins.js"></script>
+        <script src="/_static/guest/js/main.js"></script>
+
+        <!-- Google Map -->
+        <script src="http://maps.google.com/maps/api/js?sensor=true"></script>
+        <script src="/_static/guest/js/vendor/jquery.gmap3.min.js"></script>
+        
+        <!-- Google Map Init-->
+        <script type="text/javascript">
+            jQuery(function($){
+                $('#map_canvas').gmap3({
+                    marker:{
+                        address: '40.717599,-74.005136' 
+                    },
+                        map:{
+                        options:{
+                        zoom: 17,
+                        scrollwheel: false,
+                        streetViewControl : true
+                        }
+                    }
+                });
+            });
+        </script>
+
+        <!-- Preloader -->
+        <script type="text/javascript">
+            //<![CDATA[
+            $(window).load(function() { // makes sure the whole site is loaded
+                $('.loader-item').fadeOut(); // will first fade out the loading animation
+                    $('#pageloader').delay(350).fadeOut('slow'); // will fade out the white DIV that covers the website.
+                $('body').delay(350).css({'overflow-y':'visible'});
+            })
+            //]]>
+        </script>
+
+
+
+        <script>
+
+            // Set the date we're counting down to
+            // We want only 22'april to 12'may... and then start my big-things from 13'may!!! So, 21'days track setup is ready!!!
+            var countDownDate = new Date("July 18, 2023 00:00:00").getTime();
+            // Update the count down every 1 second
+            var x = setInterval(function() {
+                // Get today's date and time
+                var now = new Date().getTime();    
+                // Find the distance between now and the count down date
+                var distance = countDownDate - now;    
+                // Time calculations for days, hours, minutes and seconds
+                var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+                var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                var seconds = Math.floor((distance % (1000 * 60)) / 1000);    
+                // Output the result in an element with id="demo"
+                document.getElementById("demo").innerHTML = days + "'Days " + hours + "'Hours " + minutes + "'Minutes " + seconds + "'Seconds.";
+                // If the count down is over, write some text 
+                if (distance < 0) {
+                  clearInterval(x);
+                  document.getElementById("demo").innerHTML = "EXPIRED";
+                }
+            }, 1000);
+
+        </script>
+
+
+
+    </body>
+</html>
+
+
+
+
+

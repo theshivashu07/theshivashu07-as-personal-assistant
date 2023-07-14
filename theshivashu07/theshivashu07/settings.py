@@ -56,7 +56,7 @@ ROOT_URLCONF = 'theshivashu07.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [BASE_DIR,"_templates"],    # 'DIRS': [],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -107,19 +107,32 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+# Dont use below line, because if we using this then automatically our time is now showing well, and save less 05:30 hours of actual timing...
+# TIME_ZONE = 'UTC'
+# USE_TZ = True 
+# I'm changing our time-zone, so that we save our time according to india date and time...
+TIME_ZONE =  'Asia/Kolkata'
 
 USE_I18N = True
-
-USE_TZ = True
 
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
 
-STATIC_URL = 'static/'
+STATIC_URL = '_static/'
+
+# Addituinal Adding, So that static files are accessable, 
+STATICFILES_DIRS = [ 
+    BASE_DIR,"_static" 
+    # BASE_DIR/"_static" 
+] 
+
+# Because of uploading media files, follow below!! 
+# MEDIA_ROOT =  os.path.join(BASE_DIR, '_uploads') 
+MEDIA_ROOT =  BASE_DIR / '_uploads' 
+MEDIA_URL = '/_uploads/' 
+
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
-
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'

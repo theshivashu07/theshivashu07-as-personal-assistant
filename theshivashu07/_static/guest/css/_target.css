@@ -1,0 +1,99 @@
+
+
+
+/*# SCROLLBAR */
+
+/* width */
+::-webkit-scrollbar {
+  width: 5px; 
+  height: 2px; 
+}
+/* Track */
+::-webkit-scrollbar-track {
+  background: #f1f1f1; 
+}
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: gray; 
+}
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555; 
+}
+
+
+
+
+
+
+
+
+
+.paragraph{    
+/*	margin-bottom: 2px;*/
+/*    background-color: #fafafa;*/
+/*    padding: 5px;*/
+	margin-bottom: 5px;
+    background-color: #f4f4f4;
+    padding: 15px 5px;
+    border-radius: 5px;
+}
+
+
+
+.tags1{
+	border-radius:5px; 
+	padding:0 5px;
+    color: #eeeeee;
+	background-color:#2c2c2c; 
+}
+
+.tags2{
+	border-radius:5px; 
+	padding:0 5px;
+	background-color:#eeeeee; 
+}
+
+
+.fixradius{
+	border-radius: 5px;
+}
+
+.codecollections{
+    border-radius: 5px;
+	background-color: #ffffff;
+}
+
+.codetextarea{
+	height: 550px;
+    border-radius: 0 0 5px 5px;
+    background-color: #071421;
+}
+
+.codeheading{
+/*	margin: 5px;*/
+/*    color: #444444;*/
+    font-size: 12px;
+    padding: 5px;
+/*    text-transform: lowercase;*/
+}
+
+
+.codeinputs{
+	width: 100%;
+    font-weight: bold;
+    font-size: 15px;
+    color: currentColor;
+    font-family: math;
+    border-radius: 4px;
+}
+
+.inputbox{
+	margin: 15px 0;
+}
+
+
+.labels{
+	padding-left: 5px;
+	font-weight: bold;
+}
