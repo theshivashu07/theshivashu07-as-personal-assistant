@@ -9,7 +9,7 @@ urlpatterns=[
 		# aur-all-apps-dummy-collections : we activate this till the app not haven...
 		path('profile/',views.profile_metaverse,name='profile_metaverse'),
 		path('studycenter/',views.study_center,name='study_center'),
-		path('codecollections/',views.code_collections,name='code_collections'),
+		# path('codecollections/',views.code_collections,name='code_collections'),
 		path('dailyroutines/',views.daily_routines,name='daily_routines'),
 		path('enjoysections/',views.enjoy_sections,name='enjoy_sections'),
 

@@ -18,8 +18,9 @@ def profile_metaverse(request):
 def study_center(request):
 	return render(request,"guest/404.html");
 
-def code_collections(request):
-	return render(request,"guest/404.html");
+# we move this to saperate App now, and name is codecollections
+# def code_collections(request):
+	# return render(request,"guest/404.html");
 
 def daily_routines(request):
 	return render(request,"guest/404.html");

@@ -1,0 +1,49 @@
+
+
+
+
+
+            <div class="main-header" style="border-bottom: groove white;">
+                <div class="row">
+                    <div class="menu-wrapper">
+                        <a href="#" class="toggle-menu visible-sm visible-xs"><i class="fa fa-bars"></i></a>
+                        <ul class="sf-menu hidden-xs hidden-sm sf-js-enabled sf-arrows">
+                            
+                            <!-- <li {% if request.path == '/index/' %} class="active" {% endif %}><a href="/index/">Home</a></li> -->
+                            <li {% if request.path == '/codecollections/' %} class="active" {% endif %}><a href="/codecollections/">Home</a></li>
+
+                            <!-- When we want to add data in main tables -->
+                            <li {% if request.path == '/codecollections/edittables/' %} class="active" {% endif %}><a href="/codecollections/edittables/"> Edit Tables </a></li>
+
+                            <!-- When we create a new problem, only problem -->
+                            <li {% if request.path == '/codecollections/problems/new/' %} class="active" {% endif %}><a href="/codecollections/problems/new/"> Add Problem </a></li>
+
+                            <!-- When we create new solution for any problem -->
+                            <li {% if request.path == '/codecollections/solutions/new/' %} class="active" {% endif %}><a href="/codecollections/solutions/new/"> Add Solution </a></li>
+
+                            <!-- When we create problem and solution directly -->
+                            <li {% if request.path == '/codecollections/problemsandsolutions/new/' %} class="active" {% endif %}><a href="/codecollections/problemsandsolutions/new/"> Add Both Directly </a></li>
+
+                            <!-- When we create a new problem, only problem -->
+                            <li {% if request.path == '/codecollections/problems/edit/' %} class="active" {% endif %}><a href="/codecollections/problems/edit/"> Edit Problem </a></li>
+
+                            <!-- When we create new solution for any problem -->
+                            <li {% if request.path == '/codecollections/solutions/edit/' %} class="active" {% endif %}><a href="/codecollections/solutions/edit/"> Edit Solution </a></li>
+
+                            <!-- When we create a new problem, only problem -->
+                            <li {% if request.path == '/codecollections/problems/wholelist/' %} class="active" {% endif %}><a href="/codecollections/problems/wholelist/"> Problems Listing </a></li>
+
+                            <!-- When we create new solution for any problem -->
+                            <li {% if request.path == '/codecollections/problemsandsolutions/' %} class="active" {% endif %}><a href="/codecollections/problemsandsolutions/"> Open Problem with Solution </a></li>
+
+                        </ul>
+                        </ul>
+                    </div> 
+                </div>
+            </div> 
+
+
+
+
+
+            

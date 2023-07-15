@@ -1,0 +1,98 @@
+
+
+
+
+            <div class="top-header">
+                <div class="logo col-md-4 col-sm-4">
+                    <!-- <h1 style="height:45px;">
+                        <a href="/">
+                            <em>shiva</em>m
+                            <em>shu</em>kla
+                        </a>
+                    </h1> -->
+                    <h1 style="height:42px;">
+                        <a href="/">
+                            <em>shiva</em>m
+                            <em>shu</em>kla
+                        </a>
+                    </h1>
+                    <br>
+                    <!-- <div style="background-color:#fafafa;padding:0 5px;width:fit-content;margin-top:-10px;border-radius:5px;"> -->
+                    <div style="background-color:#fafafa;padding:0 5px;width:fit-content;border-radius:5px;">
+                        <b style="color: darkgray;">Role:</b>
+                        <span>Software Engineer, Backend Developer, Data Analyst.</span>
+                    </div>
+                    <!-- <div style="width:fit-content;font-family:'Lucida Handwriting',cursive;font-size:16px;margin-top:12px;background-color:#ff5500;padding:2px 5px;border-radius:2px;"> -->
+                    <div style="width:fit-content;font-size:16px;margin-top:12px;background-color:#ff5500;padding:2px 5px;border-radius:2px;">
+                        <b style="color:#ffbb00;">
+                            <u>Timer: </u>
+                            <span id="demo" style="color:#ffdd00;background-color:red;border-radius:2px; padding:2px 5px;"> </span>
+                        </b>
+                    </div>
+                </div> 
+                <!-- <div class="social-top col-md-8 col-sm-8" style="background-color:#fafafa;border-radius:5px; border:groove;"> -->
+                <div class="social-top col-md-8 col-sm-8" style="background-color:#fafafa;border-radius:5px;">
+                    <ul>
+
+                        <!--  If you want to open link in another page, so you use this under a tag... >>> target="_blank" rel="noopener"  -->
+
+                        <!-- Study  -->
+                        <li><a href="https://auth.geeksforgeeks.org/user/theshivashu07" target="_blank" rel="noopener" style="color:green;font-size:small; padding:0 8px;width:auto;" class="fa fa-code"> GFG</a></li>
+                        <li><a href="https://leetcode.com/theshivashu07/" target="_blank" rel="noopener" style="color:black;font-size:small;padding:0 8px;width:auto;" class="fa fa-code"> Leet<b style="color:orange;">code</b></a></li> 
+                        <li><a href="https://www.linkedin.com/in/theshivashu07" target="_blank" rel="noopener" style="color:blue;font-size:small;padding:0 8px;width:auto;" class="fa fa-linkedin-square"> LinkedIN</a></li>
+                        <li><a href="https://github.com/theshivashu07" target="_blank" rel="noopener" style="color:black;font-size:small;padding:0 8px;width:auto;" class="fa fa-github"> GitHub</a></li> 
+                        <li><a href="https://learn.thecodehelp.in/s/courses/63ac9183e4b0f1067f1b7b32/take" target="_blank" rel="noopener" style="color:#0f80d0;font-size:small; padding:0 8px;width:auto;" class="fa fa-code"> CodeHelp</a></li>
+                        <li><a href="https://discord.com/channels/@me" target="_blank" rel="noopener" style="color:#0099ff;font-size:small; padding:0 8px;width:auto;" class="fa fa-code"> Discord</a></li>
+
+                        <!-- Social Media -->
+                        <li><a href="https://twitter.com/theshivashu07" target="_blank" rel="noopener" style="color:deepskyblue;font-size:small; padding:0 8px;width:auto;" class="fa fa-twitter"> Twitter</a></li>
+                        <li><a href="https://www.instagram.com/theshivashu07/" target="_blank" rel="noopener" style="color:deeppink;font-size:small; padding:0 8px;width:auto;" class="fa fa-instagram"> Instagram</a></li>
+                        <li><a href="https://www.facebook.com/theshivashu07" target="_blank" rel="noopener" style="color:blue;font-size:small; padding:0 8px;width:auto;" class="fa fa-facebook-square"> Facebook</a></li>
+                        
+                        <!-- <br> -->
+
+                        <li><a href="https://youtube.com/" target="_blank" rel="noopener" style="color:red;font-size:small; padding:0 8px;width:auto;" class="fa fa-youtube-play"> YouTube</a></li> 
+                        <li><a href="https://plus.google.com/" target="_blank" rel="noopener" style="color:coral;font-size:small;padding:0 8px;width:auto;" class="fa fa-google-plus"> Google+</a></li>
+                        <!-- <li><a href="#" class="fa fa-flickr"></a></li> -->
+                        <!-- <li><a href="#" class="fa fa-rss"></a></li>  -->
+                    </ul>
+
+            <div class="main-header" style="padding: 10px 20px; background-color:#fafafa; border:none;">
+                <div class="row">
+
+                    <!-- <div class="main-header-left col-md-1 col-sm-1 col-xs-1"> -->
+                    <div class="main-header-left">
+                        <a id="search-icon" class="btn-left fa fa-search" href="#search-overlay"></a>
+                        <div id="search-overlay">
+                            <a href="#search-overlay" class="close-search"><i class="fa fa-times-circle"></i></a>
+                            <div class="search-form-holder">
+                                <h2>Type keywords and hit enter</h2>
+                                <form id="search-form" action="#">
+                                    <input type="search" name="s" placeholder="" autocomplete="off">
+                                </form>
+                            </div>
+                        </div>
+                        <!-- <a href="#" class="btn-left arrow-left fa fa-angle-left"></a> -->
+                        <!-- <a href="#" class="btn-left arrow-right fa fa-angle-right"></a> -->
+                    </div> 
+
+                    <!-- <div class="menu-wrapper col-md-11 col-sm-11 col-xs-11"> -->
+                    <div class="menu-wrapper">
+                        <a href="#" class="toggle-menu visible-sm visible-xs"><i class="fa fa-bars"></i></a>
+                        <ul class="sf-menu hidden-xs hidden-sm">
+                            <li {% if request.path in '/' %} class="active" {% endif %}><a href="/" style="border:none;display:contents;">Home</a></li>
+                            <!-- <li {% if '/programminglanguages/' in request.path %} class="active" {% endif %}><a href="/programminglanguages/" style="border:none;display:contents;">Programming Languages</a></li> -->
+                            <li {% if '/profile/' in request.path %} class="active" {% endif %}><a href="/profile/" style="border:none;display:contents;">Profile</a></li>
+                            <li {% if '/studycenter/' in request.path %} class="active" {% endif %}><a href="/studycenter/" style="border:none;display:contents;">Study Center</a></li>
+                            <li {% if '/codecollections/' in request.path %} class="active" {% endif %}><a href="/codecollections/" style="border:none;display:contents;">Code Collections</a></li>
+                            <li {% if '/dailyroutines/' in request.path %} class="active" {% endif %}><a href="/dailyroutines/" style="border:none;display:contents;">Daily Routines</a></li>
+                            <li {% if '/enjoysections/' in request.path %} class="active" {% endif %}><a href="/enjoysections/" style="border:none;display:contents;">Enjoy</a></li>
+                            <li {% if '/defaultsections/' in request.path %} class="active" {% endif %}><a href="/defaultsections/" style="border:none;display:contents;">DEFAULT</a></li>
+                        </ul>
+                    </div> 
+                </div>
+            </div>
+
+
+                </div> 
+            </div> 
