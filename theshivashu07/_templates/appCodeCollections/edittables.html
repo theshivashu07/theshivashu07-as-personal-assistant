@@ -1,0 +1,161 @@
+
+{% extends 'guest/_master.html' %}
+
+
+
+
+{% block tcontent %}
+@theshivashu07's world!!
+{% endblock %}
+
+
+
+{% block headerplusplus %}
+
+{% include 'appCodeCollections/_header.html' %}
+
+{% endblock %}
+
+
+
+
+
+{% block childcontent %}
+
+
+        <div class="content-wrapper">
+            <div class="inner-container container">
+                <div class="row">
+                    <div class="section-header col-md-12">
+                        <h2 class="grid-heading codeheading" style="font-weight:bold;"> Show's Section</h2>
+                        <span>PATH: "{{request.path}}"</span>
+                    </div> <!-- /.section-header -->
+                </div> <!-- /.row -->
+                <div class="row">
+                    <div class="col-md-12">
+
+                      <!-- <form method="POST" action="/codecollections/edittables/"> -->
+                        <!-- {% csrf_token %} -->
+
+
+                        <div class="box-content">
+
+                            <div class="row" style="background-color:#fafafa;border-radius:5px;padding:20px 5px;">
+                                <div class="col-md-12">
+                                    <h3 class="codeheading" style="margin-bottom:0;font-weight:normal;color:#484848;font-size:20px;">
+                                        SHOW - Programming Language's
+                                    </h3>
+                                    <div class="col-md-12" style="padding:0;">
+                                        <div class="col-md-12 inputbox" style="background-color:black;border-radius:5px; margin:0;">
+                                            <ul style="list-style: decimal-leading-zero;padding:25px 50px;">
+                                                <div>
+                                                    {% for dataset in ProgrammingLanguages %}
+                                                        <li style="background-color: #222222;padding:0 10px; margin-bottom:1px;"> 
+                                                            <label class="labels" style=""> {{dataset.name}} </label> 
+                                                        </li>
+                                                    {% endfor %}
+                                                </div>
+                                                <div style="padding: 5px 0px;">
+                                                    <li> 
+                                                        <form method="POST" action="/codecollections/edittables/">
+                                                        {% csrf_token %}
+                                                            <div style="display: flex;">
+                                                                <!-- <input  type="hidden" name="comingFrom" value="Programming Language">  -->
+                                                                <input  type="hidden" name="comingFrom" value="ProgrammingLanguage"> 
+                                                                <!-- <input  type="hidden" name="comingFrom" value="programminglanguage">  -->
+                                                                <input class="codeinputs" name="comingData" type="text" placeholder="Enter new Programming Language!!" style="width:90%; margin-right:2px;" required>
+                                                                <input class="codeinputs" type="submit" style="width:10%; background-color:darkred; color:white;"> 
+                                                            </div>
+                                                        </form>
+                                                    </li>
+                                                </div>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div> <!-- /.row -->
+
+                            <hr>
+
+                            <div class="row" style="background-color:#fafafa;border-radius:5px;padding:20px 5px;">
+                                <div class="col-md-12">
+                                    <h3 class="codeheading" style="margin-bottom:0;font-weight:normal;color:#484848;font-size:20px;">
+                                        SHOW - Data Structure's
+                                    </h3>
+                                    <div class="col-md-12" style="padding:0;">
+                                        <div class="col-md-12 inputbox" style="background-color:black;border-radius:5px; margin:0;">
+                                            <ul style="list-style: decimal-leading-zero;padding:25px 50px;">
+                                                <div>
+                                                    {% for dataset in DataStructures %}
+                                                        <li style="background-color: #222222;padding:0 10px; margin-bottom:1px;"> <label class="labels" style=""> {{dataset.name}} </label> </li>
+                                                    {% endfor %}
+                                                </div>
+                                                <div style="padding: 5px 0px;">
+                                                    <li> 
+                                                        <form method="POST" action="/codecollections/edittables/">
+                                                        {% csrf_token %}
+                                                            <div style="display: flex;">
+                                                                <!-- <input  type="hidden" name="comingFrom" value="Data Structures">  -->
+                                                                <input  type="hidden" name="comingFrom" value="DataStructure"> 
+                                                                <!-- <input  type="hidden" name="comingFrom" value="datastructures">  -->
+                                                                <input class="codeinputs" name="comingData" type="text" placeholder="Enter new Data Structure!!" style="width:90%; margin-right:2px;" required> 
+                                                                <input class="codeinputs" type="submit" style="width:10%; background-color:darkred; color:white;"> 
+                                                            </div>
+                                                        </form>
+                                                    </li>
+                                                </div>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div> <!-- /.row -->
+
+                            <hr>
+                            
+                            <div class="row" style="background-color:#fafafa;border-radius:5px;padding:20px 5px;">
+                                <div class="col-md-12">
+                                    <h3 class="codeheading" style="margin-bottom:0;font-weight:normal;color:#484848;font-size:20px;">
+                                        SHOW - Plateform's
+                                    </h3>
+                                    <div class="col-md-12" style="padding:0;">
+                                        <div class="col-md-12 inputbox" style="background-color:black;border-radius:5px; margin:0;">
+                                            <ul style="list-style: decimal-leading-zero;padding:25px 50px;">
+                                                <div>
+                                                    {% for dataset in Plateforms %}
+                                                        <li style="background-color: #222222;padding:0 10px; margin-bottom:1px;"> <label class="labels" style=""> {{dataset.name}} </label> </li>
+                                                    {% endfor %}
+                                                </div>
+                                                <div style="padding: 5px 0px;">
+                                                    <li> 
+                                                        <form method="POST" action="/codecollections/edittables/">
+                                                        {% csrf_token %}
+                                                            <div style="display: flex;">
+                                                                <!-- <input  type="hidden" name="comingFrom" value="Plateform">  -->
+                                                                <input  type="hidden" name="comingFrom" value="Plateform">
+                                                                <!-- <input  type="hidden" name="comingFrom" value="plateform">  -->
+                                                                <input class="codeinputs" name="comingData" type="text" placeholder="Enter new Plateform!!" style="width:90%; margin-right:2px;" required> 
+                                                                <input class="codeinputs" type="submit" style="width:10%; background-color:darkred; color:white;"> 
+                                                            </div>
+                                                        </form>
+                                                    </li>
+                                                </div>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div> <!-- /.row -->
+
+                        </div> <!-- /.box-content -->
+
+                      <!-- </form> -->
+
+                    </div> <!-- /.col-md-12 -->
+                </div> <!-- /.row -->
+            </div> <!-- /.inner-content -->
+        </div> <!-- /.content-wrapper -->
+
+
+{% endblock %}
+
+
+
