@@ -33,12 +33,14 @@ def edittables(request):
 		else:
 			print("Go to somewhere else.....")
 		return redirect("/codecollections/edittables/")
-	returningDatabase = {
+	thisisReturningDatabase = {
 		'ProgrammingLanguages' : ProgrammingLanguages.objects.all(),
 		'DataStructures' : DataStructures.objects.all(), 
 		'Plateforms' : Plateforms.objects.all(),
+		'problemslug' : 'problem-number-0001',
+		'solutionid' : 1,
 	}
-	return render(request,"appCodeCollections/edittables.html",returningDatabase);
+	return render(request,"appCodeCollections/edittables.html", thisisReturningDatabase);
 
 def codesubmissions(request):
 	return render(request,"appCodeCollections/404.html");
@@ -48,25 +50,73 @@ def problemsubmissions(request):
 
 
 
-def addproblems(request):
-	return render(request,"appCodeCollections/404.html");
+def addProblem(request): 
+	thisisReturningDatabase = {
+		'Plateforms' : Plateforms.objects.all(),
+		'DataStructures' : DataStructures.objects.all(),
+		'problemslug' : 'problem-number-0001',
+		'solutionid' : 1,
+	}
+	return render(request,"appCodeCollections/Problems-Solutions-Mini-Templates/problem-add.html", thisisReturningDatabase);
+	# return render(request,"appCodeCollections/404.html");
 
-def addsolutions(request):
-	return render(request,"appCodeCollections/404.html");
+def addSolution(request, problemslug):
+	thisisReturningDatabase = {
+		'Plateforms' : Plateforms.objects.all(),
+		'DataStructures' : DataStructures.objects.all(),
+		'problemslug' : 'problem-number-0001',
+		'solutionid' : 1,
+	}
+	return render(request,"appCodeCollections/Problems-Solutions-Mini-Templates/solution-add.html", thisisReturningDatabase);
+	# return render(request,"appCodeCollections/404.html");
 
-def addproblemsandsolutions(request):
-	return render(request,"appCodeCollections/404.html");
+def addProblemAndSolution(request):
+	thisisReturningDatabase = {
+		'Plateforms' : Plateforms.objects.all(),
+		'DataStructures' : DataStructures.objects.all(),
+		'problemslug' : 'problem-number-0001',
+		'solutionid' : 1,
+	}
+	return render(request,"appCodeCollections/Problems-Solutions-Mini-Templates/problem-solution-add.html", thisisReturningDatabase);
+	# return render(request,"appCodeCollections/404.html");
 
-def editproblems(request):
-	return render(request,"appCodeCollections/404.html");
+def editProblem(request, problemslug):
+	thisisReturningDatabase = {
+		'Plateforms' : Plateforms.objects.all(),
+		'DataStructures' : DataStructures.objects.all(),
+		'problemslug' : 'problem-number-0001',
+		'solutionid' : 1,
+	}
+	return render(request,"appCodeCollections/Problems-Solutions-Mini-Templates/problem-edit.html", thisisReturningDatabase);
+	# return render(request,"appCodeCollections/404.html");
 
-def editsolutions(request):
-	return render(request,"appCodeCollections/404.html");
+def editSolution(request, problemslug, solutionid):
+	thisisReturningDatabase = {
+		'Plateforms' : Plateforms.objects.all(),
+		'DataStructures' : DataStructures.objects.all(),
+		'problemslug' : 'problem-number-0001',
+		'solutionid' : 1,
+	}
+	return render(request,"appCodeCollections/Problems-Solutions-Mini-Templates/problem-edit.html", thisisReturningDatabase);
+	# return render(request,"appCodeCollections/404.html");
 
-def problemswholelist(request):
-	return render(request,"appCodeCollections/404.html");
+def problemsWholeList(request):
+	thisisReturningDatabase = {
+		'problemslug' : 'problem-number-0001',
+		'solutionid' : 1,
+	}
+	return render(request,"appCodeCollections/404.html", thisisReturningDatabase);
 
-def openproblemsandsolutions(request):
+def ProblemWithSolution(request, problemslug, solutionid):
+	thisisReturningDatabase = {
+		'problemslug' : 'problem-number-0001',
+		'solutionid' : 1,
+	}
+	return render(request,"appCodeCollections/404.html", thisisReturningDatabase);
+
+
+
+def openProblem(request):
 	return render(request,"appCodeCollections/404.html");
 
 

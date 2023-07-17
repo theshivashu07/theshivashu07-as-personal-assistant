@@ -1,0 +1,71 @@
+
+
+
+
+                                    
+                                    
+                                    <div style="content-visibility: auto; background-color: white; padding: 20px; border-radius: 5px; ">
+                                        <h3 class="grid-heading codeheading" style="margin-bottom:0;">
+                                            <div style="display:flex;">
+                                                101. {{ProblemDataSet.title | default:None}}
+                                                <div style="margin: 10px 10px 0 10px; text-transform: initial; background-color: #ffa500; font-size: 14px; padding: 0 5px; border-radius: 5px; height: fit-content;">
+                                                    Powered by 
+                                                    {% if ProblemDataSet.plateforms %}
+                                                        {% for object in ProblemDataSet.plateforms %}
+                                                            <b class="tags1">{{object.name}}</b>
+                                                        {% endfor %}
+                                                    {% else %}
+                                                        <b class="tags1">None</b>
+                                                    {% endif %}
+                                                </div>
+                                            </div>
+                                            <div style="border-radius:2px;font-size:12px;margin-top:-5px;">
+                                                <b style="color:black; margin-right: 10px;">Related Tagged Data Structure's : </b>
+                                                {% if ProblemDataSet.datastructures %}
+                                                    {% for object in ProblemDataSet.datastructures %}
+                                                        <b class="tags2">{{object.name}}</b>
+                                                    {% endfor %}
+                                                {% else %}
+                                                    <b class="tags2">None</b>
+                                                {% endif %}
+                                            </div>
+                                        </h3>
+
+
+
+                                        <div style="margin-top: 30px;">
+                                            {% if ProblemDataSet.detailsset %}
+                                                    <div class="paragraph" style="padding: 20px 5px;">
+                                                        <p>
+                                                            {{ProblemDataSet.detailsset |safe }}
+                                                        </p>
+                                                    </div>
+                                            {% else %}
+                                                <div class="paragraph">
+                                                    <p>
+                                                        ....................................................................
+                                                        <br>
+                                                        ....................................................................
+                                                        <br>
+                                                        ....................................................................
+                                                        <br>
+                                                        ....................................................................
+                                                        <br>
+                                                        ....................................................................
+                                                        <br>
+                                                    </p>
+                                                </div>
+                                            {% endif %}
+
+                                            <div class="paragraph">
+                                                <p>
+                                                    <b>Expected Time Complexity:</b> {{ProblemDataSet.timecomplexity  | default:None}}.
+                                                </p>
+                                                <p>
+                                                   <b>Expected Auxiliary Space:</b> {{ProblemDataSet.auxiliaryspace  | default:None}}.
+                                               </p>
+                                            </div>
+                                        </div>
+                                    </div>
+
+

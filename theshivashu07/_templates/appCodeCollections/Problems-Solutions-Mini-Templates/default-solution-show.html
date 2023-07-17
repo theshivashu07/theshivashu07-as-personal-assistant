@@ -1,0 +1,57 @@
+
+
+
+
+
+
+
+
+
+
+                            <div class="row" style="background-color:#fafafa;border-radius:5px;">
+                                <div class="col-md-12" style="padding: 0 15px;">
+                                    <div class="codecollections" style="padding: 20px;">
+                                        <h3 class="grid-heading codeheading" style="margin-bottom:0; font-size:22px; color:#4c4c4c;">
+                                            <div style="display:flex;">
+                                                Solution Number - 0{{SolutionDataSet.explainlevel}}
+                                                <div style="margin: 10px 10px 0 10px; text-transform: initial; background-color: #ffa500; font-size: 12px; padding: 0 5px; border-radius: 5px; height: fit-content;">
+                                                    Using
+                                                    <b class="tags1">{{ SolutionDataSet.programminglanguages.name | default:None }}</b>
+                                                </div>
+                                            </div>
+                                            <div style="border-radius:2px;font-size:12px;margin-top:-5px;">
+                                                <b style="color:#1c1c1c; margin-right: 10px;">Related Tagged Data Structure's : </b>
+                                                {% if SolutionDataSet.datastructures %}
+                                                    {% for object in SolutionDataSet.datastructures %}
+                                                        <b class="tags2">{{object.name}}</b>
+                                                    {% endfor %}
+                                                {% else %}
+                                                    <b class="tags2">None</b>
+                                                {% endif %}
+                                            </div>
+                                        </h3>
+                                    
+                                        <div>
+                                            <textarea name="SolutionsCodeSubmissions" id="SolutionsCodeSubmissions" class="codetextarea codeinputs" placeholder="typing..." style="margin-top:20px; max-width: -webkit-fill-available; background-color: #f4f4f4; border-radius: 5px 5px 0 0; height:400px;" readonly >{{SolutionDataSet.codesubmissions | default:None}}
+                                            </textarea>
+                                        </div>
+
+
+                                        <div class="paragraph" style="border-radius: 0 0 5px 5px; padding: 10px; border: 1px solid #d5d5d5;">
+                                                <b>Expected Time Complexity:</b> {{SolutionDataSet.timecomplexity  | default:None}}.
+                                            <br>
+                                               <b>Expected Auxiliary Space:</b> {{SolutionDataSet.auxiliaryspace  | default:None}}.
+                                        </div>
+
+
+                                    </div>
+                                </div>
+                            </div> <!-- /.row -->
+
+
+
+
+
+
+
+
