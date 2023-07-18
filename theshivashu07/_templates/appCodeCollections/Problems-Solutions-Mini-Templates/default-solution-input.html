@@ -19,7 +19,7 @@
                                                     {% if DataStructures %}
                                                         {% for object in DataStructures %}
                                                             <div style="flex: none; padding: 5px 10px;">
-                                                                <input type="checkbox" id="SolutionsDataStructures" name="SolutionsDataStructures" value="{{object.id}}" >
+                                                                <input type="checkbox" id="SolutionsDataStructures" name="SolutionsDataStructures" value="{{object.id}}"  {% if object in SolutionDataSet.datastructures %} checked {% endif %}>
                                                                 <label for="SolutionsDataStructures"> {{object.name}}</label>
                                                             </div>
                                                         {% endfor %}
@@ -33,35 +33,38 @@
                                         </div>
                                         <div class="col-md-12">
                                             <div class="row">
-                                                <div class="col-md-3 inputbox">
+                                                <div class="col-md-6 inputbox">
                                                     <label class="labels"> Programming Language </label>
                                                     <select name="SolutionsProgrammingLanguage" id="SolutionsProgrammingLanguage" class="codeinputs">
+                                                    {% if SolutionDataSet.programminglanguages %}
+                                                        {% for object in ProgrammingLanguages %}
+                                                            <option value="{{object.id}}"{% if object.id == SolutionDataSet.programminglanguages.id %} selected {% endif %}>{{object.name}}</option>
+                                                        {% endfor %}
+                                                    {% else %}
                                                         {% for object in ProgrammingLanguages %}
                                                             <option value="{{object.id}}"{% if object.name == 'Python' %} selected {% endif %}>{{object.name}}</option>
                                                         {% endfor %}
-                                                        <!-- <option value="other">Other's</option> -->
+                                                    {% endif %}
+
                                                     </select>
                                                 </div>
-                                                <div class="col-md-3 inputbox">
-                                                    <label class="labels"> Plateform </label>
-                                                    <select name="SolutionsPlateforms" id="SolutionsPlateforms" class="codeinputs">
-                                                        {% for object in ProblemDataSet.plateforms %}
-                                                                <option value="{{object.id}}" {% if object.name == 'GeeksForGeeks' %} selected {% endif %}>{{object.name}}</option>
-                                                        {% endfor %}
-                                                        <!-- <option value="other">Other's</option> -->
-                                                    </select>
-                                                </div>
+                                                <!-- <div class="col-md-6 inputbox">
+                                                    <label class="labels"> Programming Language </label>
+                                                    <input class="codeinputs" type="text" id="SolutionsProgrammingLanguage" value="{{SolutionDataSet.programminglanguages.name}}" name="SolutionsProgrammingLanguage">
+                                                </div> -->
+
                                                 <div class="col-md-3 inputbox">
                                                     <label class="labels"> Time Complexity </label>
-                                                    <input class="codeinputs" type="text" id="SolutionsTimeComplexity" name="SolutionsTimeComplexity">
+                                                    <input class="codeinputs" type="text" id="SolutionsTimeComplexity" value="{{SolutionDataSet.timecomplexity}}" name="SolutionsTimeComplexity">
                                                 </div>
                                                 <div class="col-md-3 inputbox">
                                                     <label class="labels"> Auxiliary Complexity </label>
-                                                    <input class="codeinputs" type="text" id="SolutionsAuxiliarySpace" name="SolutionsAuxiliarySpace">
+                                                    <input class="codeinputs" type="text" id="SolutionsAuxiliarySpace" value="{{SolutionDataSet.auxiliaryspace}}" name="SolutionsAuxiliarySpace">
                                                 </div>
+
                                             </div>
                                         </div>
-                                        <textarea name="SolutionsCodeSubmissions" id="SolutionsCodeSubmissions" class="codetextarea codeinputs" placeholder="typing..." style="margin:15px;margin-top:0;  max-width: -webkit-fill-available;"></textarea>
+                                        <textarea name="SolutionsCodeSubmissions" id="SolutionsCodeSubmissions" class="codetextarea codeinputs" placeholder="typing..." style="margin:15px;margin-top:0;  max-width: -webkit-fill-available; min-height: 5em;overflow: auto;" contentEditable>{{SolutionDataSet.codesubmissions}}</textarea>
                                         <div style="margin:15px; margin-top: 0;">
                                             <input class="codeinputs" type="submit" style="width:10%; background-color:darkred; color:white;"> 
                                         </div>

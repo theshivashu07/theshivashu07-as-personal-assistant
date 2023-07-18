@@ -11,10 +11,10 @@
 
 	                                        <!-- <input  type="hidden" name="comingFrom" value="problem_head">  -->
 	                                        <div class="col-md-12" style="padding: 20px; background-color: #303030; border-radius: 5px;">  
-	                                            <div class="col-md-12 inputbox" style="padding:0; margin:0;">
-	                                                <label class="labels" style=""> Enter Problem Title </label>
-	                                                <input class="codeinputs" type="text" id="ProblemsTitle" name="ProblemsTitle" placeholder="typing..."  style="" required>
-	                                            </div>
+                                                <div class="col-md-12 inputbox" style="padding:0; margin:0;">
+                                                    <label class="labels" style=""> Enter Problem Title </label>
+                                                    <input class="codeinputs" type="text" id="ProblemsTitle" name="ProblemsTitle" placeholder="typing..." value="{{ ProblemDataSet.title }}" style="" required>
+                                                </div>
 	                                            <div class="col-md-12 inputbox" style="padding:0; margin: 0; margin-top:10px;">
 	                                                <label class="labels"> Select Plateforms </label>
                                                     <div style="display:flex;overflow-x: scroll; background-color: white; border-radius: 5px; border: 1px solid #d5d5d5; padding: 2px;">
@@ -53,15 +53,15 @@
 
                                                 <div class="col-md-12 inputbox" style="padding:0; margin:0; margin-top:10px;">
                                                     <label class="labels" style=""> Enter Details </label>
-                                                    <textarea name="ProblemsDetailSet" id="ProblemsDetailSet" class="codetextarea codeinputs" placeholder="typing..." style="height:250px; background-color:white;" required></textarea>
+                                                    <textarea name="ProblemsDetailSet" id="ProblemsDetailSet" class="codetextarea codeinputs" placeholder="typing..." style="height:250px; background-color:white;" required>{{ ProblemDataSet.detailsset |safe }}</textarea>
                                                 </div>
                                                 <div class="col-md-6 inputbox" style="padding:0; margin:0; padding-right:5px; margin-top:10px;">
                                                     <label class="labels" style=""> Expected Time Complexity </label>
-                                                    <input class="codeinputs" type="text" id="ProblemsTimeComplexity" name="ProblemsTimeComplexity" placeholder="typing..." style="">
+                                                    <input class="codeinputs" type="text" id="ProblemsTimeComplexity" name="ProblemsTimeComplexity" placeholder="typing..." value="{{ ProblemDataSet.timecomplexity }}" style="">
                                                 </div>
                                                 <div class="col-md-6 inputbox" style="padding:0; margin:0; padding-left:5px; margin-top:10px;">
                                                     <label class="labels" style=""> Expected Auxiliary Space </label>
-                                                    <input class="codeinputs" type="text" id="ProblemsAuxiliarySpace" name="ProblemsAuxiliarySpace" placeholder="typing..." style="">
+                                                    <input class="codeinputs" type="text" id="ProblemsAuxiliarySpace" name="ProblemsAuxiliarySpace" placeholder="typing..." value="{{ ProblemDataSet.auxiliaryspace }}" style="">
                                                 </div>
                                                 <div class="col-md-12 inputbox" style="padding:0; margin:0; padding:20px 0 10px 0">
                                                     <input class="codeinputs" type="submit" style="width:10%; background-color:darkred; color:white;"> 

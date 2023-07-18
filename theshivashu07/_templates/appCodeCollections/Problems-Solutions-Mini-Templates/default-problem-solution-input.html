@@ -1,0 +1,186 @@
+
+
+
+
+
+
+
+
+
+
+                        <div>
+
+
+                            <form method="POST" action="{{request.path}}">
+                            {% csrf_token %}
+
+
+                                <div>
+
+
+
+
+                                        <div style="content-visibility: auto; background-color: white; padding: 20px; border-radius: 5px; "> 
+
+                                            <!-- <input  type="hidden" name="comingFrom" value="problem_head">  -->
+                                            <div class="col-md-12" style="padding: 20px; background-color: #303030; border-radius: 5px;">  
+                                                <div class="col-md-12 inputbox" style="padding:0; margin:0;">
+                                                    <label class="labels" style=""> Enter Problem Title </label>
+                                                    <input class="codeinputs" type="text" id="ProblemsTitle" name="ProblemsTitle" placeholder="typing..."  style="" required>
+                                                </div>
+                                                <div class="col-md-12 inputbox" style="padding:0; margin: 0; margin-top:10px;">
+                                                    <label class="labels"> Select Plateforms </label>
+                                                    <div style="display:flex;overflow-x: scroll; background-color: white; border-radius: 5px; border: 1px solid #d5d5d5; padding: 2px;">
+                                                        {% if Plateforms %}
+                                                            {% for object in Plateforms %}
+                                                                <div style="flex: none; padding: 5px 10px;">
+                                                                    <input type="checkbox" selected id="ProblemsPlateforms" name="ProblemsPlateforms" value="{{object.id}}" {% if object in ProblemDataSet.plateforms %} checked {% endif %}>
+                                                                    <label for="ProblemsPlateforms"> {{object.name}}</label>
+                                                                </div>
+                                                            {% endfor %}
+                                                        {% else %}
+                                                            <div style="flex: none; padding: 5px 10px;">
+                                                                <label for="None" style="font-style:italic;color: burlywood;"> <u style='margin-right:5px;font-weight:bold;'>Note:</u>   Now no data-fields are available to select here.</label>
+                                                            </div>
+                                                        {% endif %}
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-12 inputbox" style="padding:0; margin: 0; margin-top:10px;">       
+                                                    <label class="labels"> Select Data Structures </label>
+                                                    <div style="padding-left:5px;display:flex;overflow-x: scroll; background-color: white; border-radius: 5px; border: 1px solid #d5d5d5; padding: 2px;">
+                                                        {% if DataStructures %}
+                                                            {% for object in DataStructures %}
+                                                                <div style="flex: none; padding: 5px 10px;">
+                                                                    <input type="checkbox" id="ProblemsDataStructures" name="ProblemsDataStructures" value="{{object.id}}" {% if object in ProblemDataSet.datastructures %} checked {% endif %}>
+                                                                    <label for="ProblemsDataStructures"> {{object.name}}</label>
+                                                                </div>
+                                                            {% endfor %}
+                                                        {% else %}
+                                                            <div style="flex: none; padding: 5px 10px;">
+                                                                <label for="None" style="font-style:italic;color: burlywood;"> <u style='margin-right:5px;font-weight:bold;'>Note:</u>   Now no data-fields are available to select here.</label>
+                                                            </div>
+                                                        {% endif %}
+                                                    </div>
+                                                </div>
+
+
+                                                <div class="col-md-12 inputbox" style="padding:0; margin:0; margin-top:10px;">
+                                                    <label class="labels" style=""> Enter Details </label>
+                                                    <textarea name="ProblemsDetailSet" id="ProblemsDetailSet" class="codetextarea codeinputs" placeholder="typing..." style="height:250px; background-color:white;" required></textarea>
+                                                </div>
+                                                <div class="col-md-6 inputbox" style="padding:0; margin:0; padding-right:5px; margin-top:10px;">
+                                                    <label class="labels" style=""> Expected Time Complexity </label>
+                                                    <input class="codeinputs" type="text" id="ProblemsTimeComplexity" name="ProblemsTimeComplexity" placeholder="typing..." style="">
+                                                </div>
+                                                <div class="col-md-6 inputbox" style="padding:0; margin:0; padding-left:5px; margin-top:10px;">
+                                                    <label class="labels" style=""> Expected Auxiliary Space </label>
+                                                    <input class="codeinputs" type="text" id="ProblemsAuxiliarySpace" name="ProblemsAuxiliarySpace" placeholder="typing..." style="">
+                                                </div>
+                                                <!-- <div class="col-md-12 inputbox" style="padding:0; margin:0; padding:20px 0 10px 0">
+                                                    <input class="codeinputs" type="submit" style="width:10%; background-color:darkred; color:white;"> 
+                                                </div> -->
+
+                                            </div>
+
+
+                                        </div>
+
+
+
+
+
+
+
+
+                                    <hr style="margin: 15px 0px;">
+
+
+
+
+                            <div class="row" style="background-color:#fafafa;border-radius:5px;">
+                                <div class="col-md-12" style="padding: 0 15px;">
+                                    <div class="codecollections" style="padding: 5px;">
+                                        <div class="col-md-12 inputbox" style="margin-bottom:0px; margin-top:30px;">
+                                                <label class="labels"> Data Structure </label>
+                                                <div style="display: flex; overflow-x: scroll; background-color: white; border-radius: 5px; border: 1px solid #d5d5d5; padding: 2px;">
+                                                    {% if DataStructures %}
+                                                        {% for object in DataStructures %}
+                                                            <div style="flex: none; padding: 5px 10px;">
+                                                                <input type="checkbox" id="SolutionsDataStructures" name="SolutionsDataStructures" value="{{object.id}}" >
+                                                                <label for="SolutionsDataStructures"> {{object.name}}</label>
+                                                            </div>
+                                                        {% endfor %}
+                                                    {% else %}
+                                                        <div style="flex: none; padding: 5px 10px;">
+                                                            <label for="None" style="font-style:italic;color: burlywood;"> <u style='margin-right:5px;font-weight:bold;'>Note:</u>   Now no data-fields are available to select here.</label>
+                                                        </div>
+                                                    {% endif %}
+                                                </div>
+                                            <!-- </div> -->
+                                        </div>
+                                        <div class="col-md-12">
+                                            <div class="row">
+                                                <div class="col-md-3 inputbox">
+                                                    <label class="labels"> Programming Language </label>
+                                                    <select name="SolutionsProgrammingLanguage" id="SolutionsProgrammingLanguage" class="codeinputs">
+                                                        {% for object in ProgrammingLanguages %}
+                                                            <option value="{{object.id}}"{% if object.name == 'Python' %} selected {% endif %}>{{object.name}}</option>
+                                                        {% endfor %}
+                                                        <!-- <option value="other">Other's</option> -->
+                                                    </select>
+                                                </div>
+                                                <div class="col-md-3 inputbox">
+                                                    <label class="labels"> Plateform </label>
+                                                    <select name="SolutionsPlateforms" id="SolutionsPlateforms" class="codeinputs">
+                                                        {% for object in ProblemDataSet.plateforms %}
+                                                                <option value="{{object.id}}" {% if object.name == 'GeeksForGeeks' %} selected {% endif %}>{{object.name}}</option>
+                                                        {% endfor %}
+                                                        <!-- <option value="other">Other's</option> -->
+                                                    </select>
+                                                </div>
+                                                <div class="col-md-3 inputbox">
+                                                    <label class="labels"> Time Complexity </label>
+                                                    <input class="codeinputs" type="text" id="SolutionsTimeComplexity" name="SolutionsTimeComplexity">
+                                                </div>
+                                                <div class="col-md-3 inputbox">
+                                                    <label class="labels"> Auxiliary Complexity </label>
+                                                    <input class="codeinputs" type="text" id="SolutionsAuxiliarySpace" name="SolutionsAuxiliarySpace">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <textarea name="SolutionsCodeSubmissions" id="SolutionsCodeSubmissions" class="codetextarea codeinputs" placeholder="typing..." style="margin:15px;margin-top:0;  max-width: -webkit-fill-available;"></textarea>
+                                        <!-- <div style="margin:15px; margin-top: 0;">
+                                            <input class="codeinputs" type="submit" style="width:10%; background-color:darkred; color:white;"> 
+                                        </div> -->
+                                    </div>
+                                </div>
+                            </div> <!-- /.row -->
+
+
+
+
+
+                                    <hr style="margin: 15px 0px;">
+
+
+
+                            <div class="row" style="background-color:#fafafa;border-radius:5px;">
+                                <div class="col-md-12" style="padding: 0 15px;">
+                                    <div class="codecollections" style="padding: 5px;">
+                                        <!-- <div style="margin:15px; margin-top: 0;"> -->
+                                        <div style="margin:15px;">
+                                            <input class="codeinputs" type="submit" style="width:10%; background-color:darkred; color:white;"> 
+                                        </div>
+                                    </div>
+                                </div>
+                            </div> <!-- /.row -->
+
+                        </div>
+
+
+                    </form>
+
+                </div>
+
+
+

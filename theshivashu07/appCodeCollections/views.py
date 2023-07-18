@@ -2,6 +2,7 @@ from django.shortcuts import render,redirect
 from django.http import HttpResponse
 # Create your views here.
 
+import appCodeCollections._BulkFunctions as _BulkFunctions
 from .models import *
 
 
@@ -50,7 +51,25 @@ def problemsubmissions(request):
 
 
 
+
+
+
+
+
+
+
+
+
 def addProblem(request): 
+	# problemID=Problems.objects.get(slug=defaultSlug)
+	if request.method=="POST":
+		if( request.POST["ProblemsTitle"] and request.POST["ProblemsDetailSet"] ):
+			object = _BulkFunctions.AddProblems(request)																#wantchange___
+			# _BulkFunctions.EditProblems(request,problemID)														#wantchange___
+		else:
+			print("This is not correct Input's... Reput again!!!")
+		return redirect("/codecollections/solution/"+object.slug+"/")
+	
 	thisisReturningDatabase = {
 		'Plateforms' : Plateforms.objects.all(),
 		'DataStructures' : DataStructures.objects.all(),
@@ -61,29 +80,78 @@ def addProblem(request):
 	# return render(request,"appCodeCollections/404.html");
 
 def addSolution(request, problemslug):
+	objectProblem=Problems.objects.get(slug=problemslug)
+	if request.method=="POST":
+		if( request.POST["SolutionsCodeSubmissions"] ):
+			objectSolution = _BulkFunctions.AddSolutions(request,objectProblem)
+			# _BulkFunctions.EditSolutions(request,objectProblem)
+		else:
+			print("This is not correct Input's... Reput again!!!")
+		# print(objectProblem.slug, type(objectProblem.slug), objectSolution.id, type(objectSolution.id))
+		return redirect("/codecollections/problem-solution/"+objectProblem.slug+"/"+str(objectSolution.id)+"/")
+
 	thisisReturningDatabase = {
+		'ProblemsSlug':objectProblem.slug,   #problemslug
+		'ProblemDataSet':_BulkFunctions.ProblemDataSet(objectProblem),
+
 		'Plateforms' : Plateforms.objects.all(),
 		'DataStructures' : DataStructures.objects.all(),
+		'ProgrammingLanguages' : ProgrammingLanguages.objects.all(),
 		'problemslug' : 'problem-number-0001',
 		'solutionid' : 1,
 	}
 	return render(request,"appCodeCollections/Problems-Solutions-Mini-Templates/solution-add.html", thisisReturningDatabase);
 	# return render(request,"appCodeCollections/404.html");
 
+
+
+
+
+
 def addProblemAndSolution(request):
+	if request.method=="POST":
+		if( request.POST["ProblemsTitle"] and request.POST["ProblemsDetailSet"] ):
+			objectProblem = _BulkFunctions.AddProblems(request)																					#wantchange___
+			if( request.POST["SolutionsCodeSubmissions"] ):
+				objectSolution = _BulkFunctions.AddSolutions(request,objectProblem)
+			else:
+				print("We're Discard only Solution... Reput again!!!")
+		else:
+			print("We're Discard both Problem and Solution... Reput again!!!")
+		print("__________________________________________________________________")
+		print("______________________________DONE______________________________")
+		print("__________________________________________________________________")
+		print(f"  /codecollections/problem-solution/{objectProblem.slug}/{objectSolution.id}/  ")
+		return redirect("/codecollections/problem-solution/"+objectProblem.slug+"/"+str(objectSolution.id)+"/")
+
 	thisisReturningDatabase = {
 		'Plateforms' : Plateforms.objects.all(),
 		'DataStructures' : DataStructures.objects.all(),
+		'ProgrammingLanguages' : ProgrammingLanguages.objects.all(),
 		'problemslug' : 'problem-number-0001',
 		'solutionid' : 1,
 	}
 	return render(request,"appCodeCollections/Problems-Solutions-Mini-Templates/problem-solution-add.html", thisisReturningDatabase);
 	# return render(request,"appCodeCollections/404.html");
 
+
+
 def editProblem(request, problemslug):
+	objectProblem=Problems.objects.get(slug=problemslug)
+	if request.method=="POST":
+		if( request.POST["ProblemsTitle"] and request.POST["ProblemsDetailSet"] ):
+			_BulkFunctions.EditProblems(request,objectProblem)																			#wantchange___
+		else:
+			print("This is not correct Input's... Reput again!!!")
+		return redirect("/codecollections/problem/"+objectProblem.slug+"/")
+
 	thisisReturningDatabase = {
+		'ProblemsSlug':problemslug,
+		'ProblemDataSet':_BulkFunctions.ProblemDataSet(objectProblem),
+
 		'Plateforms' : Plateforms.objects.all(),
 		'DataStructures' : DataStructures.objects.all(),
+		'ProgrammingLanguages' : ProgrammingLanguages.objects.all(),
 		'problemslug' : 'problem-number-0001',
 		'solutionid' : 1,
 	}
@@ -91,33 +159,80 @@ def editProblem(request, problemslug):
 	# return render(request,"appCodeCollections/404.html");
 
 def editSolution(request, problemslug, solutionid):
+	objectProblem=Problems.objects.get(slug=problemslug)
+	objectSolution=Solutions.objects.get(id=solutionid)
+	if request.method=="POST":
+		if( request.POST["SolutionsCodeSubmissions"] ):
+			_BulkFunctions.EditSolutions(request,objectProblem,objectSolution.id)
+		else:
+			print("This is not correct Input's... Reput again!!!")
+		return redirect("/codecollections/problem-solution/"+objectProblem.slug+"/"+str(objectSolution.id)+"/")
+
 	thisisReturningDatabase = {
+		'ProblemsSlug':problemslug,
+		'ProblemDataSet':_BulkFunctions.ProblemDataSet(objectProblem),
+		'SolutionDataSet':_BulkFunctions.SolutionDataSet(objectProblem,objectSolution),
+
 		'Plateforms' : Plateforms.objects.all(),
 		'DataStructures' : DataStructures.objects.all(),
+		'ProgrammingLanguages' : ProgrammingLanguages.objects.all(),
 		'problemslug' : 'problem-number-0001',
 		'solutionid' : 1,
 	}
-	return render(request,"appCodeCollections/Problems-Solutions-Mini-Templates/problem-edit.html", thisisReturningDatabase);
+	return render(request,"appCodeCollections/Problems-Solutions-Mini-Templates/solution-edit.html", thisisReturningDatabase);
 	# return render(request,"appCodeCollections/404.html");
+
+
+
+
 
 def problemsWholeList(request):
 	thisisReturningDatabase = {
+		'AllSolutions':_BulkFunctions.SolutionDataSet(objectProblem,objectSolution),
+
+		'Plateforms' : Plateforms.objects.all(),
+		'DataStructures' : DataStructures.objects.all(),
+		'ProgrammingLanguages' : ProgrammingLanguages.objects.all(),
 		'problemslug' : 'problem-number-0001',
 		'solutionid' : 1,
 	}
-	return render(request,"appCodeCollections/404.html", thisisReturningDatabase);
+	return render(request,"appCodeCollections/Problems-Solutions-Mini-Templates/wholelist.html", thisisReturningDatabase);
+	# return render(request,"appCodeCollections/404.html");
+
+
+
 
 def ProblemWithSolution(request, problemslug, solutionid):
+	print(problemslug, solutionid)
+	objectProblem=Problems.objects.get(slug=problemslug)
+	# objectSolution=Solutions.objects.get(id=solutionid)
 	thisisReturningDatabase = {
+		'ProblemDataSet':_BulkFunctions.ProblemDataSet(objectProblem),	
+		'SolutionDataSet':_BulkFunctions.SolutionDataSet(objectProblem,solutionid),
+		'Plateforms' : Plateforms.objects.all(),
+		'DataStructures' : DataStructures.objects.all(),
+		'ProgrammingLanguages' : ProgrammingLanguages.objects.all(),
 		'problemslug' : 'problem-number-0001',
 		'solutionid' : 1,
 	}
-	return render(request,"appCodeCollections/404.html", thisisReturningDatabase);
+	return render(request,"appCodeCollections/Problems-Solutions-Mini-Templates/problem-solution-show.html", thisisReturningDatabase);
 
 
 
-def openProblem(request):
-	return render(request,"appCodeCollections/404.html");
+def openProblem(request, problemslug):
+	objectProblem=Problems.objects.get(slug=problemslug)
+	thisisReturningDatabase = {
+		'ProblemsSlug':problemslug,
+		'ProblemDataSet':_BulkFunctions.ProblemDataSet(objectProblem),
+
+		'Plateforms' : Plateforms.objects.all(),
+		'DataStructures' : DataStructures.objects.all(),
+		'ProgrammingLanguages' : ProgrammingLanguages.objects.all(),
+		'problemslug' : 'problem-number-0001',
+		'solutionid' : 1,
+	}
+	return render(request,"appCodeCollections/Problems-Solutions-Mini-Templates/problem-show.html", thisisReturningDatabase);
+	# return render(request,"appCodeCollections/404.html");
 
 
 
