@@ -80,7 +80,7 @@ class problems_datastructures(models.Model):
 
 class Solutions(models.Model):
 	problem_id = models.ForeignKey(Problems, null=True, on_delete=models.CASCADE) 
-	plateforms = models.IntegerField(default=0, null=True); 
+	plateforms = models.IntegerField(default=0, null=True);  
 	programminglanguages = models.IntegerField(default=0, null=True);	
 	datastructures = models.IntegerField(default=0, null=True); 
 	codesubmissions =models.CharField(max_length=1000, default=None, null=True); 

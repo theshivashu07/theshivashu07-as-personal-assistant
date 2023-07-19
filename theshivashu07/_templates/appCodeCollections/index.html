@@ -24,22 +24,110 @@ theshivashu07 - Code Collections
 {% block childcontent %}
 
 
-        <div class="swiper-container">
-            <div class="swiper-wrapper">
+<div class="content-wrapper">
+            <div class="inner-container container">
+                <div class="row">
+                    <div class="section-header col-md-12">
+                        <h2>Home-Sweet-Home</h2> 
+                        <span>PATH: "{{request.path}}"</span>
+                    </div> <!-- /.section-header -->
+                </div> <!-- /.row -->
+                <div class="row">
+                    <div class="col-md-6 service-item service-left">
+                        <div class="box-content">
+                            <div class="service-icon">
+                                <i class="li_data"></i>
+                            </div>
+                            <div class="service-content">
+                                <h4>
+                                    <a href="/codecollections/problem/wholelist/"> 
+                                        All Problems-Solutions 
+                                    </a>
+                                </h4>
+                                <p>This section is to see all problem's which <b class="blue">one</b> or <b class="green">plus plus</b> solution available. Not matter in Python or C++ or else programming language. <b class="blue">#allproblemswithsolutions</b></p>  
+                            </div>
+                        </div> <!-- /.box-content -->
+                    </div> <!-- /.service-item -->
+                    <div class="col-md-6 service-item service-right">
+                        <div class="box-content">
+                            <div class="service-icon">
+                                <i class="li_data"></i>
+                            </div>
+                            <div class="service-content">
+                                <h4>
+                                    <a href="/codecollections/problem/onlyproblems/"> 
+                                        All Problems Only
+                                    </a>
+                                </h4>
+                                <p>This section is important, because if we only make a problem, but forgot to add its solution, or may intentionally left, then all such problems are here. <b class="blue">#problemsonly</b></p>
+                            </div>
+                        </div> <!-- /.box-content -->
+                    </div> <!-- /.service-item -->
 
-                <div class="swiper-slide" style="background-image: url(/_static/guest/images/slide3.jpg);">
-                    <div class="overlay-s"></div>
-                    <div class="slider-caption">
-                        <div class="inner-content">
-                            <h2>Welcome on the 'intro-vert' World</h2>
-                            <p>Your @shivashu is so shy and introvert, but you know about him only-on-there!!!</p>
-                            <a href="#" class="main-btn white">Can I Come?</a>
-                        </div> <!-- /.inner-content -->
-                    </div> <!-- /.slider-caption -->
-                </div> <!-- /.swier-slide -->
+                    <div class="col-md-6 service-item service-left">
+                        <div class="box-content">
+                            <div class="service-icon">
+                                <i class="li_pen"></i>
+                            </div>
+                            <div class="service-content">
+                                <h4>
+                                    <a href="/codecollections/problem/new/"> 
+                                        Add Problem
+                                    </a>
+                                </h4>
+                                <p>If you want to <b class="blue">add</b> <b class="green">new problem</b> then add this immidiate. But don't repeate already available problem again. I solve problem's many-name issue as-soon-as-possible. <b class="blue">#addnow</b></p>
+                            </div>
+                        </div> <!-- /.box-content -->
+                    </div> <!-- /.service-item -->
+                    <div class="col-md-6 service-item service-right">
+                        <div class="box-content">
+                            <div class="service-icon">
+                                <i class="li_search"></i>
+                            </div>
+                            <div class="service-content">
+                                <h4>
+                                    <a href="#"> 
+                                        Search Problems
+                                    </a>
+                                </h4>
+                                <p>Okay, so all problems are available there when you search. And yess no matter its with solution or without. We show you problems with there status of availability. <b class="blue">#findnow</b></p>
+                            </div>
+                        </div> <!-- /.box-content -->
+                    </div> <!-- /.service-item -->
 
-            </div> <!-- /.swiper-wrapper -->
-        </div> <!-- /.swiper-container -->
+                    <div class="col-md-6 service-item service-left">
+                        <div class="box-content">
+                            <div class="service-icon">
+                                <i class="li_like"></i>
+                            </div>
+                            <div class="service-content">
+                                <h4>
+                                    <a href="#"> 
+                                        Sincerely Supporting
+                                    </a>
+                                </h4>
+                                <p>A supporting letter is a personally written document that explains the writer's support for a person, cause or idea. You can write a letter of support for an individual. <b class="blue">#support</b></p>
+                            </div>
+                        </div> <!-- /.box-content -->
+                    </div> <!-- /.service-item -->
+                    <div class="col-md-6 service-item service-right">
+                        <div class="box-content">
+                            <div class="service-icon">
+                                <i class="li_study"></i>
+                            </div>
+                            <div class="service-content">
+                                <h4>
+                                    <a href="#"> 
+                                        Learning New Things  
+                                    </a>
+                                </h4>
+                                <p>Learning keeps your mind engaged and body active. It helps you get new and knowledge-based perspectives on the world around you. <b class="blue">#newthing #learnsomethingnew</b> </p>
+                            </div>
+                        </div> <!-- /.box-content -->
+                    </div> <!-- /.service-item -->
+                </div> <!-- /.row -->
+            </div> <!-- /.inner-content -->
+        </div>
 
 
 {% endblock %}

@@ -278,8 +278,29 @@ def EditSolutions(request,problemID,solutionID):
 
 
 
+def WholeDataSet():
+	objects=Solutions.objects.all()
+	result = list()
+	for object in objects:
+		object.programminglanguages = ProgrammingLanguages.objects.get(id=object.programminglanguages)
+		result.append(object)
+	return result
 
 
+def OnlyProblems():
+	objectsProblems = Problems.objects.all()
+	objectsSolutions = Solutions.objects.all()
+	print(objectsProblems)
+	print(objectsSolutions)
+	sets = set()
+	for object in objectsSolutions:
+		sets.add(object.problem_id.id)
+	print(sets)
+	objects = list()
+	for object in objectsProblems:
+		if(object.id not in sets):
+			objects.append(object)
+	return objects
 
 
 

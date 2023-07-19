@@ -13,7 +13,14 @@ from .models import *
 
 
 def index(request):
-	return render(request,"appCodeCollections/index.html");
+	thisisReturningDatabase = {
+		'ProgrammingLanguages' : ProgrammingLanguages.objects.all(),
+		'DataStructures' : DataStructures.objects.all(), 
+		'Plateforms' : Plateforms.objects.all(),
+		'problemslug' : 'problem-number-0001',
+		'solutionid' : 1,
+	}
+	return render(request,"appCodeCollections/index.html",thisisReturningDatabase);
 
 def edittables(request):
 	if request.method=="POST":
@@ -63,12 +70,16 @@ def problemsubmissions(request):
 def addProblem(request): 
 	# problemID=Problems.objects.get(slug=defaultSlug)
 	if request.method=="POST":
+		# termination-conditions
+		if(len(Problems.objects.filter(title=request.POST["ProblemsTitle"]))):
+			return redirect("/codecollections/problem/new/")
+
 		if( request.POST["ProblemsTitle"] and request.POST["ProblemsDetailSet"] ):
 			object = _BulkFunctions.AddProblems(request)																#wantchange___
 			# _BulkFunctions.EditProblems(request,problemID)														#wantchange___
 		else:
 			print("This is not correct Input's... Reput again!!!")
-		return redirect("/codecollections/solution/"+object.slug+"/")
+		return redirect("/codecollections/problem/"+object.slug+"/")
 	
 	thisisReturningDatabase = {
 		'Plateforms' : Plateforms.objects.all(),
@@ -84,10 +95,8 @@ def addSolution(request, problemslug):
 	if request.method=="POST":
 		if( request.POST["SolutionsCodeSubmissions"] ):
 			objectSolution = _BulkFunctions.AddSolutions(request,objectProblem)
-			# _BulkFunctions.EditSolutions(request,objectProblem)
 		else:
 			print("This is not correct Input's... Reput again!!!")
-		# print(objectProblem.slug, type(objectProblem.slug), objectSolution.id, type(objectSolution.id))
 		return redirect("/codecollections/problem-solution/"+objectProblem.slug+"/"+str(objectSolution.id)+"/")
 
 	thisisReturningDatabase = {
@@ -118,10 +127,6 @@ def addProblemAndSolution(request):
 				print("We're Discard only Solution... Reput again!!!")
 		else:
 			print("We're Discard both Problem and Solution... Reput again!!!")
-		print("__________________________________________________________________")
-		print("______________________________DONE______________________________")
-		print("__________________________________________________________________")
-		print(f"  /codecollections/problem-solution/{objectProblem.slug}/{objectSolution.id}/  ")
 		return redirect("/codecollections/problem-solution/"+objectProblem.slug+"/"+str(objectSolution.id)+"/")
 
 	thisisReturningDatabase = {
@@ -171,7 +176,7 @@ def editSolution(request, problemslug, solutionid):
 	thisisReturningDatabase = {
 		'ProblemsSlug':problemslug,
 		'ProblemDataSet':_BulkFunctions.ProblemDataSet(objectProblem),
-		'SolutionDataSet':_BulkFunctions.SolutionDataSet(objectProblem,objectSolution),
+		'SolutionDataSet':_BulkFunctions.SolutionDataSet(objectProblem,objectSolution.id),
 
 		'Plateforms' : Plateforms.objects.all(),
 		'DataStructures' : DataStructures.objects.all(),
@@ -185,25 +190,7 @@ def editSolution(request, problemslug, solutionid):
 
 
 
-
-def problemsWholeList(request):
-	thisisReturningDatabase = {
-		'AllSolutions':_BulkFunctions.SolutionDataSet(objectProblem,objectSolution),
-
-		'Plateforms' : Plateforms.objects.all(),
-		'DataStructures' : DataStructures.objects.all(),
-		'ProgrammingLanguages' : ProgrammingLanguages.objects.all(),
-		'problemslug' : 'problem-number-0001',
-		'solutionid' : 1,
-	}
-	return render(request,"appCodeCollections/Problems-Solutions-Mini-Templates/wholelist.html", thisisReturningDatabase);
-	# return render(request,"appCodeCollections/404.html");
-
-
-
-
 def ProblemWithSolution(request, problemslug, solutionid):
-	print(problemslug, solutionid)
 	objectProblem=Problems.objects.get(slug=problemslug)
 	# objectSolution=Solutions.objects.get(id=solutionid)
 	thisisReturningDatabase = {
@@ -238,6 +225,36 @@ def openProblem(request, problemslug):
 
 
 
+def problemsWholeList(request):
+	thisisReturningDatabase = {
+		'AllSolutions':_BulkFunctions.WholeDataSet(),
+
+		'Plateforms' : Plateforms.objects.all(),
+		'DataStructures' : DataStructures.objects.all(),
+		'ProgrammingLanguages' : ProgrammingLanguages.objects.all(),
+		'problemslug' : 'problem-number-0001',
+		'solutionid' : 1,
+	}
+	return render(request,"appCodeCollections/Problems-Solutions-Mini-Templates/wholelist.html", thisisReturningDatabase);
+	# return render(request,"appCodeCollections/404.html");
+
+
+
+def problemsOnly(request):
+	thisisReturningDatabase = {
+		'AllProblems':_BulkFunctions.OnlyProblems(),
+
+		'Plateforms' : Plateforms.objects.all(),
+		'DataStructures' : DataStructures.objects.all(),
+		'ProgrammingLanguages' : ProgrammingLanguages.objects.all(),
+		'problemslug' : 'problem-number-0001',
+		'solutionid' : 1,
+	}
+	return render(request,"appCodeCollections/Problems-Solutions-Mini-Templates/onlyproblems.html", thisisReturningDatabase);
+	# return render(request,"appCodeCollections/404.html");
+
+
+
 
 
 
@@ -245,34 +262,6 @@ def openProblem(request, problemslug):
 
 
  
-
-
-
-'''
-
-BULK - DATA - ASSIGNMENT
-
-	if request.method=="POST":
-		for key in _importantdatasets.Plateforms:
-			locks=Plateforms()
-			locks.name=key
-			locks.save()
-		count=0
-		for key in _importantdatasets.DataStructures:
-			count+=1
-			if(count==15):
-				break;
-			locks=DataStructures()
-			locks.name=key
-			locks.save()
-		for key in _importantdatasets.ProgrammingLanguages:
-			locks=ProgrammingLanguages()
-			locks.name=key
-			locks.save()
-		return redirect("/codecollections/edittables/")
-'''
-
-
 
 
 

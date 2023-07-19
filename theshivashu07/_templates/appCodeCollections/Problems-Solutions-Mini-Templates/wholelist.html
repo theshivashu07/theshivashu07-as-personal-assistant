@@ -27,7 +27,7 @@
             <div class="inner-container container">
                 <div class="row">
                     <div class="section-header col-md-12">
-                        <h2 class="grid-heading codeheading" style="font-weight:bold;"> Problem Submission Section</h2>
+                        <h2 class="grid-heading codeheading" style="font-weight:bold;"> Problems-Solutions List</h2>
                         <span>PATH: "{{request.path}}"</span>
                     </div> <!-- /.section-header -->
                 </div> <!-- /.row -->
@@ -42,29 +42,27 @@
   <thead>
     <tr>
       <th scope="col">#</th>
-      <th scope="col">First</th>
-      <th scope="col">Last</th>
-      <th scope="col">Handle</th>
+      <th scope="col">Problem Name</th>
+      <th scope="col">Solution Language</th>
+      <th scope="col">Time Complexity</th>
+      <th scope="col">Space Complexity</th>
     </tr>
   </thead>
   <tbody>
+  	{% for object in AllSolutions %}
     <tr>
-      <th scope="row">1</th>
-      <td>Mark</td>
-      <td>Otto</td>
-      <td>@mdo</td>
+      <th scope="row">
+        {{ forloop.counter }}.
+        </th>
+      <td scope="row">
+        <a href="/codecollections/problem-solution/{{object.problem_id.slug}}/{{object.id}}/">
+            {{object.problem_id.title}}
+        </td>
+      <td>{{object.programminglanguages.name}}</td>
+      <td>{{object.timecomplexity}}</td>
+      <td>{{object.auxiliaryspace}}</td>
     </tr>
-    <tr>
-      <th scope="row">2</th>
-      <td>Jacob</td>
-      <td>Thornton</td>
-      <td>@fat</td>
-    </tr>
-    <tr>
-      <th scope="row">3</th>
-      <td colspan="2">Larry the Bird</td>
-      <td>@twitter</td>
-    </tr>
+    {% endfor %}
   </tbody>
 </table>
 

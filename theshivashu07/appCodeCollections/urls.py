@@ -33,6 +33,7 @@ urlpatterns=[
 		path('problem/edit/<slug:problemslug>/',views.editProblem,name='editProblem'),
 		path('solution/edit/<slug:problemslug>/<str:solutionid>/',views.editSolution,name='editSolution'),
 
+		path('problem/onlyproblems/',views.problemsOnly,name='problemsOnly'),
 		path('problem/wholelist/',views.problemsWholeList,name='problemsWholeList'),
 		path('problem-solution/<slug:problemslug>/<str:solutionid>/',views.ProblemWithSolution,name='ProblemWithSolution'),
 
