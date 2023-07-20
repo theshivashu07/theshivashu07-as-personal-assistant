@@ -13,14 +13,7 @@ from .models import *
 
 
 def index(request):
-	thisisReturningDatabase = {
-		'ProgrammingLanguages' : ProgrammingLanguages.objects.all(),
-		'DataStructures' : DataStructures.objects.all(), 
-		'Plateforms' : Plateforms.objects.all(),
-		'problemslug' : 'problem-number-0001',
-		'solutionid' : 1,
-	}
-	return render(request,"appCodeCollections/index.html",thisisReturningDatabase);
+	return render(request,"appCodeCollections/index.html");
 
 def edittables(request):
 	if request.method=="POST":
@@ -40,26 +33,15 @@ def edittables(request):
 			lock.save()
 		else:
 			print("Go to somewhere else.....")
-		return redirect("/codecollections/edittables/")
+		return redirect("/codecollections/edit-tables/")
+
 	thisisReturningDatabase = {
-		'ProgrammingLanguages' : ProgrammingLanguages.objects.all(),
-		'DataStructures' : DataStructures.objects.all(), 
 		'Plateforms' : Plateforms.objects.all(),
-		'problemslug' : 'problem-number-0001',
-		'solutionid' : 1,
+		'DataStructures' : DataStructures.objects.all(),
+		'ProgrammingLanguages' : ProgrammingLanguages.objects.all(),
 	}
 	return render(request,"appCodeCollections/edittables.html", thisisReturningDatabase);
-
-def codesubmissions(request):
-	return render(request,"appCodeCollections/404.html");
-
-def problemsubmissions(request):
-	return render(request,"appCodeCollections/404.html");
-
-
-
-
-
+	# return render(request,"appCodeCollections/404.html");
 
 
 
@@ -72,11 +54,10 @@ def addProblem(request):
 	if request.method=="POST":
 		# termination-conditions
 		if(len(Problems.objects.filter(title=request.POST["ProblemsTitle"]))):
-			return redirect("/codecollections/problem/new/")
+			return redirect("/codecollections/add-problem/")
 
 		if( request.POST["ProblemsTitle"] and request.POST["ProblemsDetailSet"] ):
 			object = _BulkFunctions.AddProblems(request)																#wantchange___
-			# _BulkFunctions.EditProblems(request,problemID)														#wantchange___
 		else:
 			print("This is not correct Input's... Reput again!!!")
 		return redirect("/codecollections/problem/"+object.slug+"/")
@@ -84,11 +65,14 @@ def addProblem(request):
 	thisisReturningDatabase = {
 		'Plateforms' : Plateforms.objects.all(),
 		'DataStructures' : DataStructures.objects.all(),
-		'problemslug' : 'problem-number-0001',
-		'solutionid' : 1,
+		'ProgrammingLanguages' : ProgrammingLanguages.objects.all(),
 	}
 	return render(request,"appCodeCollections/Problems-Solutions-Mini-Templates/problem-add.html", thisisReturningDatabase);
 	# return render(request,"appCodeCollections/404.html");
+
+
+
+
 
 def addSolution(request, problemslug):
 	objectProblem=Problems.objects.get(slug=problemslug)
@@ -106,8 +90,6 @@ def addSolution(request, problemslug):
 		'Plateforms' : Plateforms.objects.all(),
 		'DataStructures' : DataStructures.objects.all(),
 		'ProgrammingLanguages' : ProgrammingLanguages.objects.all(),
-		'problemslug' : 'problem-number-0001',
-		'solutionid' : 1,
 	}
 	return render(request,"appCodeCollections/Problems-Solutions-Mini-Templates/solution-add.html", thisisReturningDatabase);
 	# return render(request,"appCodeCollections/404.html");
@@ -119,6 +101,10 @@ def addSolution(request, problemslug):
 
 def addProblemAndSolution(request):
 	if request.method=="POST":
+		# termination-conditions
+		if(len(Problems.objects.filter(title=request.POST["ProblemsTitle"]))):
+			return redirect("/codecollections/add-problem-solution/")
+			
 		if( request.POST["ProblemsTitle"] and request.POST["ProblemsDetailSet"] ):
 			objectProblem = _BulkFunctions.AddProblems(request)																					#wantchange___
 			if( request.POST["SolutionsCodeSubmissions"] ):
@@ -133,8 +119,6 @@ def addProblemAndSolution(request):
 		'Plateforms' : Plateforms.objects.all(),
 		'DataStructures' : DataStructures.objects.all(),
 		'ProgrammingLanguages' : ProgrammingLanguages.objects.all(),
-		'problemslug' : 'problem-number-0001',
-		'solutionid' : 1,
 	}
 	return render(request,"appCodeCollections/Problems-Solutions-Mini-Templates/problem-solution-add.html", thisisReturningDatabase);
 	# return render(request,"appCodeCollections/404.html");
@@ -157,8 +141,6 @@ def editProblem(request, problemslug):
 		'Plateforms' : Plateforms.objects.all(),
 		'DataStructures' : DataStructures.objects.all(),
 		'ProgrammingLanguages' : ProgrammingLanguages.objects.all(),
-		'problemslug' : 'problem-number-0001',
-		'solutionid' : 1,
 	}
 	return render(request,"appCodeCollections/Problems-Solutions-Mini-Templates/problem-edit.html", thisisReturningDatabase);
 	# return render(request,"appCodeCollections/404.html");
@@ -181,8 +163,6 @@ def editSolution(request, problemslug, solutionid):
 		'Plateforms' : Plateforms.objects.all(),
 		'DataStructures' : DataStructures.objects.all(),
 		'ProgrammingLanguages' : ProgrammingLanguages.objects.all(),
-		'problemslug' : 'problem-number-0001',
-		'solutionid' : 1,
 	}
 	return render(request,"appCodeCollections/Problems-Solutions-Mini-Templates/solution-edit.html", thisisReturningDatabase);
 	# return render(request,"appCodeCollections/404.html");
@@ -196,11 +176,10 @@ def ProblemWithSolution(request, problemslug, solutionid):
 	thisisReturningDatabase = {
 		'ProblemDataSet':_BulkFunctions.ProblemDataSet(objectProblem),	
 		'SolutionDataSet':_BulkFunctions.SolutionDataSet(objectProblem,solutionid),
+
 		'Plateforms' : Plateforms.objects.all(),
 		'DataStructures' : DataStructures.objects.all(),
 		'ProgrammingLanguages' : ProgrammingLanguages.objects.all(),
-		'problemslug' : 'problem-number-0001',
-		'solutionid' : 1,
 	}
 	return render(request,"appCodeCollections/Problems-Solutions-Mini-Templates/problem-solution-show.html", thisisReturningDatabase);
 
@@ -215,8 +194,6 @@ def openProblem(request, problemslug):
 		'Plateforms' : Plateforms.objects.all(),
 		'DataStructures' : DataStructures.objects.all(),
 		'ProgrammingLanguages' : ProgrammingLanguages.objects.all(),
-		'problemslug' : 'problem-number-0001',
-		'solutionid' : 1,
 	}
 	return render(request,"appCodeCollections/Problems-Solutions-Mini-Templates/problem-show.html", thisisReturningDatabase);
 	# return render(request,"appCodeCollections/404.html");
@@ -240,6 +217,7 @@ def problemsWholeList(request):
 
 
 
+
 def problemsOnly(request):
 	thisisReturningDatabase = {
 		'AllProblems':_BulkFunctions.OnlyProblems(),
@@ -257,7 +235,9 @@ def problemsOnly(request):
 
 
 
-
+def openTestingPage(request):
+	return render(request,"appCodeCollections/Problems-Solutions-Mini-Templates/testingpage.html");
+	# return render(request,"appCodeCollections/404.html");
 
 
 

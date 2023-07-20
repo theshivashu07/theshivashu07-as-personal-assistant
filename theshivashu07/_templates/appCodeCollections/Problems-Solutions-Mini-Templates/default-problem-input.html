@@ -5,7 +5,7 @@
 
                                     <div style="content-visibility: auto; background-color: white; padding: 20px; border-radius: 5px; "> 
 
-	                                    <form method="POST" action="{{ target | default:request.path}}">
+	                                    <form method="POST" action="{{request.path}}">
 	                                    {% csrf_token %}
 
 	                                        <!-- <input  type="hidden" name="comingFrom" value="problem_head">  -->

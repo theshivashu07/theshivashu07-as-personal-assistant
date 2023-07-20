@@ -120,20 +120,11 @@
                                         </div>
                                         <div class="col-md-12">
                                             <div class="row">
-                                                <div class="col-md-3 inputbox">
+                                                <div class="col-md-6 inputbox">
                                                     <label class="labels"> Programming Language </label>
                                                     <select name="SolutionsProgrammingLanguage" id="SolutionsProgrammingLanguage" class="codeinputs">
                                                         {% for object in ProgrammingLanguages %}
                                                             <option value="{{object.id}}"{% if object.name == 'Python' %} selected {% endif %}>{{object.name}}</option>
-                                                        {% endfor %}
-                                                        <!-- <option value="other">Other's</option> -->
-                                                    </select>
-                                                </div>
-                                                <div class="col-md-3 inputbox">
-                                                    <label class="labels"> Plateform </label>
-                                                    <select name="SolutionsPlateforms" id="SolutionsPlateforms" class="codeinputs">
-                                                        {% for object in ProblemDataSet.plateforms %}
-                                                                <option value="{{object.id}}" {% if object.name == 'GeeksForGeeks' %} selected {% endif %}>{{object.name}}</option>
                                                         {% endfor %}
                                                         <!-- <option value="other">Other's</option> -->
                                                     </select>

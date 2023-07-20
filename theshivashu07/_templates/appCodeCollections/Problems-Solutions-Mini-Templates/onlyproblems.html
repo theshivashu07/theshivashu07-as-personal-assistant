@@ -27,7 +27,7 @@
             <div class="inner-container container">
                 <div class="row">
                     <div class="section-header col-md-12">
-                        <h2 class="grid-heading codeheading" style="font-weight:bold;"> Problems-Solutions List</h2>
+                        <h2 class="grid-heading codeheading" style="font-weight:bold;"> Only-Problem's List</h2>
                         <span>PATH: "{{request.path}}"</span>
                     </div> <!-- /.section-header -->
                 </div> <!-- /.row -->
@@ -55,7 +55,7 @@
         {{ forloop.counter }}.
         </th>
       <td scope="row">
-        <a href="/codecollections/solution/new/{{object.slug}}/">
+        <a href="/codecollections/add-solution/{{object.slug}}/">
             {{object.title}}
         </td>
       <td>-</td>

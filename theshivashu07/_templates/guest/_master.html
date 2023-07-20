@@ -152,9 +152,9 @@
 
         <script>
 
-            // Set the date we're counting down to
-            // We want only 22'april to 12'may... and then start my big-things from 13'may!!! So, 21'days track setup is ready!!!
-            var countDownDate = new Date("July 18, 2023 00:00:00").getTime();
+            // Set the date we're counting down to...
+            // I've time only 18'July to 16'August, thats why write 17'Aug!!!
+            var countDownDate = new Date("Aug 17, 2023 00:00:00").getTime();
             // Update the count down every 1 second
             var x = setInterval(function() {
                 // Get today's date and time
@@ -167,7 +167,7 @@
                 var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
                 var seconds = Math.floor((distance % (1000 * 60)) / 1000);    
                 // Output the result in an element with id="demo"
-                document.getElementById("demo").innerHTML = days + "'Days " + hours + "'Hours " + minutes + "'Minutes " + seconds + "'Seconds.";
+                document.getElementById("demo").innerHTML = days + "'Days   +   " + hours + "'Hours " + minutes + "'Minutes " + seconds + "'Seconds.";
                 // If the count down is over, write some text 
                 if (distance < 0) {
                   clearInterval(x);

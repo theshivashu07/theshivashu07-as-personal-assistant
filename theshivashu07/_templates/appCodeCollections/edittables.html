@@ -57,7 +57,7 @@
                                                 </div>
                                                 <div style="padding: 5px 0px;">
                                                     <li> 
-                                                        <form method="POST" action="/codecollections/edittables/">
+                                                        <form method="POST" action="{{request.path}}">
                                                         {% csrf_token %}
                                                             <div style="display: flex;">
                                                                 <!-- <input  type="hidden" name="comingFrom" value="Programming Language">  -->
@@ -92,7 +92,7 @@
                                                 </div>
                                                 <div style="padding: 5px 0px;">
                                                     <li> 
-                                                        <form method="POST" action="/codecollections/edittables/">
+                                                        <form method="POST" action="{{request.path}}">
                                                         {% csrf_token %}
                                                             <div style="display: flex;">
                                                                 <!-- <input  type="hidden" name="comingFrom" value="Data Structures">  -->
@@ -127,7 +127,7 @@
                                                 </div>
                                                 <div style="padding: 5px 0px;">
                                                     <li> 
-                                                        <form method="POST" action="/codecollections/edittables/">
+                                                        <form method="POST" action="{{request.path}}">
                                                         {% csrf_token %}
                                                             <div style="display: flex;">
                                                                 <!-- <input  type="hidden" name="comingFrom" value="Plateform">  -->

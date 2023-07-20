@@ -290,12 +290,9 @@ def WholeDataSet():
 def OnlyProblems():
 	objectsProblems = Problems.objects.all()
 	objectsSolutions = Solutions.objects.all()
-	print(objectsProblems)
-	print(objectsSolutions)
 	sets = set()
 	for object in objectsSolutions:
 		sets.add(object.problem_id.id)
-	print(sets)
 	objects = list()
 	for object in objectsProblems:
 		if(object.id not in sets):

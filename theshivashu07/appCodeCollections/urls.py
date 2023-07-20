@@ -7,39 +7,31 @@ urlpatterns=[
 		# path('index/',views.index,name='index'),
 
 		# aur-all-apps-dummy-collections : we activate this till the app not haven...
-		path('edittables/',views.edittables,name='edittables'),
-		path('codesubmissions/',views.codesubmissions,name='codesubmissions'),
-		path('problemsubmissions/',views.problemsubmissions,name='problemsubmissions'),
+		path('edit-tables/',views.edittables,name='edittables'),
 
 
-		# path('problems/new/',views.addproblems,name='addproblems'),
-		# path('solutions/new/',views.addsolutions,name='addsolutions'),
-		# path('problemsandsolutions/new/',views.addproblemsandsolutions,name='addproblemsandsolutions'),
+		# when want to add new problem or its solution or both, so we use these urls!!!
+		path('add-problem/',views.addProblem,name='addProblem'),
+		path('add-solution/<slug:problemslug>/',views.addSolution,name='addSolution'),
+		path('add-problem-solution/',views.addProblemAndSolution,name='addProblemAndSolution'),
 
-		# path('problems/edit/',views.editproblems,name='editproblems'),
-		# path('solutions/edit/',views.editsolutions,name='editsolutions'),
+		# when wanted to update/edit our problems or solutions, we call these solutions!!!
+		path('edit-problem/<slug:problemslug>/',views.editProblem,name='editProblem'),
+		path('edit-solution/<slug:problemslug>/<str:solutionid>/',views.editSolution,name='editSolution'),
 
-		# path('problems/wholelist/',views.problemswholelist,name='problemswholelist'),
-		# path('problemsandsolutions/',views.openproblemsandsolutions,name='openproblemsandsolutions'),
+		# these are two specific urls, first is all problem with solution, and second is problems which solution not available!!!
+		path('problems-with-solutions/',views.problemsWholeList,name='problemsWholeList'),
+		path('problems-without-solutions/',views.problemsOnly,name='problemsOnly'),
 
-
-
-
-
-		path('problem/new/',views.addProblem,name='addProblem'),
-		path('solution/new/<slug:problemslug>/',views.addSolution,name='addSolution'),
-		path('problem-solution/new/',views.addProblemAndSolution,name='addProblemAndSolution'),
-
-		path('problem/edit/<slug:problemslug>/',views.editProblem,name='editProblem'),
-		path('solution/edit/<slug:problemslug>/<str:solutionid>/',views.editSolution,name='editSolution'),
-
-		path('problem/onlyproblems/',views.problemsOnly,name='problemsOnly'),
-		path('problem/wholelist/',views.problemsWholeList,name='problemsWholeList'),
-		path('problem-solution/<slug:problemslug>/<str:solutionid>/',views.ProblemWithSolution,name='ProblemWithSolution'),
-
-		# here is showing problem, and other solutions
+		# here is showing problem, and other solutions only links available, not all solutions shows!!!
 		path('problem/<slug:problemslug>/',views.openProblem,name='openProblem'),
 
+		# when we want to show problem with any specific solutions, so we use this!!!
+		path('problem-solution/<slug:problemslug>/<str:solutionid>/',views.ProblemWithSolution,name='ProblemWithSolution'),
+
+
+		# this is completly vella-testing-page, if any new future coming in our mind, we test this here...
+		path('testing-page/',views.openTestingPage,name='openTestingPage'),
 
 ]
 
