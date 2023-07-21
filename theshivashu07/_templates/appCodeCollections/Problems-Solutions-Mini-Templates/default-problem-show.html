@@ -7,10 +7,17 @@
                                     <div style="content-visibility: auto; background-color: white; padding: 20px; border-radius: 5px; ">
                                         <h3 class="grid-heading codeheading" style="margin-bottom:0;">
                                             {% if request.path != "/codecollections/add-problem/" and request.path != "/codecollections/add-problem-solution/" %}
-                                            <div style="float:right;text-align:right;background-color:lightgray; padding:5px;border-radius: 5px;">
-                                                <a href="/codecollections/edit-problem/{{ProblemDataSet.slug}}/" style="color:black; ">
-                                                    <i class="li_pen"></i>
-                                                </a>
+                                            <div style="float:right;text-align:right;display:inline-flex;">
+                                                <div style="background-color:lightgray; padding:5px; margin:5px; border-radius: 5px;">
+                                                    <a href="/codecollections/edit-problem/{{ProblemDataSet.slug}}/" style="color:black; ">
+                                                        <i class="li_pen"></i>
+                                                    </a>
+                                                </div>
+                                                <div style="background-color:lightgray; padding:5px; margin:5px; border-radius:5px;">
+                                                    <a href="/codecollections/delete-problem/{{ProblemDataSet.slug}}/" style="color:black; ">
+                                                        <i class="li_trash"></i>
+                                                    </a>
+                                                </div>
                                             </div>
                                             {% endif %}
                                             <div style="display:flex;">

@@ -19,6 +19,10 @@ urlpatterns=[
 		path('edit-problem/<slug:problemslug>/',views.editProblem,name='editProblem'),
 		path('edit-solution/<slug:problemslug>/<str:solutionid>/',views.editSolution,name='editSolution'),
 
+		# when want to delete any problem or its solution or both, so we use these urls!!!
+		path('delete-problem/<slug:problemslug>/',views.deleteProblem,name='deleteProblem'),
+		path('delete-solution/<slug:problemslug>/<str:solutionid>/',views.deleteSolution,name='deleteSolution'),
+
 		# these are two specific urls, first is all problem with solution, and second is problems which solution not available!!!
 		path('problems-with-solutions/',views.problemsWholeList,name='problemsWholeList'),
 		path('problems-without-solutions/',views.problemsOnly,name='problemsOnly'),

@@ -104,7 +104,7 @@ def addProblemAndSolution(request):
 		# termination-conditions
 		if(len(Problems.objects.filter(title=request.POST["ProblemsTitle"]))):
 			return redirect("/codecollections/add-problem-solution/")
-			
+
 		if( request.POST["ProblemsTitle"] and request.POST["ProblemsDetailSet"] ):
 			objectProblem = _BulkFunctions.AddProblems(request)																					#wantchange___
 			if( request.POST["SolutionsCodeSubmissions"] ):
@@ -166,6 +166,22 @@ def editSolution(request, problemslug, solutionid):
 	}
 	return render(request,"appCodeCollections/Problems-Solutions-Mini-Templates/solution-edit.html", thisisReturningDatabase);
 	# return render(request,"appCodeCollections/404.html");
+
+
+
+
+def deleteProblem(request, problemslug):
+	objectProblem=Problems.objects.get(slug=problemslug)
+	objectProblem.delete()
+	return redirect("/codecollections/problems-with-solutions/")
+
+def deleteSolution(request, problemslug, solutionid):
+	objectSolution=Solutions.objects.get(id=solutionid)
+	objectSolution.delete()
+	return redirect("/codecollections/problems-with-solutions/")
+
+
+
 
 
 
