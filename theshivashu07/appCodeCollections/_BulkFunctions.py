@@ -14,6 +14,13 @@ def ProblemDataSet(problemID):
 	holds=problems_datastructures.objects.filter(problem_id=problemID.id)
 	object.datastructures=[ DataStructures.objects.get(pk=object.datastructure_id) for object in holds ]
 	# object.detailsset=problems_detailssets.objects.filter(problem_id=problemID.id) 		#current_hidden_data 
+
+	# lets get files data, to show-case
+	with open( f"{object.slug}.txt", 'rb' ) as file:
+		# actually below we converting normal-text-data to a binary-data.
+		# object.detailsset=file.read()
+		object.detailsset=file.read().decode("ascii")
+
 	return object
 
 
@@ -92,6 +99,11 @@ def AddProblems(request):
 	if(ProblemsAuxiliarySpace):
 		object.auxiliaryspace=ProblemsAuxiliarySpace
 		object.save()
+
+	# lets create files for problem-input.
+	with open( f"{object.slug}.txt", 'wb' ) as file:
+		# actually below we converting normal-text-data to a binary-data.
+		file.write(ProblemsDetailSet.encode('ascii'))
 
 	return object
 	# return None
