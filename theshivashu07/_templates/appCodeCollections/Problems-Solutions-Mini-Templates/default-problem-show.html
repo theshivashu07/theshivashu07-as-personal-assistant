@@ -49,11 +49,20 @@
 
                                         <div style="margin-top: 30px;">
                                             {% if ProblemDataSet.detailsset %}
+
                                                     <div class="paragraph" style="padding: 20px 5px;">
-                                                        <p>
-                                                            {{ProblemDataSet.detailsset  |  safe}}
-                                                        </p>
+
+                                                            <p>
+                                                                {{ProblemDataSet.detailsset  |  safe}}
+                                                            </p>
+
+                                                        {% comment %}
+                                                        <textarea name="SolutionsCodeSubmissions" id="SolutionsCodeSubmissions" class="codetextarea codeinputs" placeholder="typing..." style="margin-top:20px; max-width: -webkit-fill-available; background-color: #f4f4f4; border-radius: 5px 5px 0 0; min-height:250px;" readonly >{{ProblemDataSet.detailsset | default:None}}
+                                                        </textarea>
+                                                        {% endcomment %}
+
                                                     </div>
+
                                             {% else %}
                                                 <div class="paragraph">
                                                     <p>

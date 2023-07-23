@@ -29,6 +29,7 @@ class Plateforms(models.Model):
 
 class ProgrammingLanguages(models.Model):
 	name = models.CharField(max_length=25);
+	extension = models.CharField(max_length=10, default=None, null=True);
 	slug = AutoSlugField(populate_from='name');
 	# this function save name's slug automatically...
 	def save(self, *args, **kwargs):
@@ -49,6 +50,7 @@ class ProgrammingLanguages(models.Model):
 
 class Problems(models.Model):
 	title = models.CharField(max_length=100);
+	filename = models.CharField(max_length=150, default=None, null=True); 
 	slug = AutoSlugField(populate_from='title');
 	plateforms = models.IntegerField(default=0, null=True);
 	datastructures = models.IntegerField(default=0, null=True);
@@ -80,6 +82,7 @@ class problems_datastructures(models.Model):
 
 class Solutions(models.Model):
 	problem_id = models.ForeignKey(Problems, null=True, on_delete=models.CASCADE) 
+	filename = models.CharField(max_length=150, default=None, null=True); 
 	plateforms = models.IntegerField(default=0, null=True);  
 	programminglanguages = models.IntegerField(default=0, null=True);	
 	datastructures = models.IntegerField(default=0, null=True); 

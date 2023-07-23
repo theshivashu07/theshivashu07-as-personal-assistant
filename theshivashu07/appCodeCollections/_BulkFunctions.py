@@ -1,8 +1,8 @@
 
 
 from appCodeCollections.models import *
-
-
+import appCodeCollections._DefaultValueSets as _DefaultValueSets
+import appCodeCollections.impo as IMPO
 
 
 
@@ -15,11 +15,8 @@ def ProblemDataSet(problemID):
 	object.datastructures=[ DataStructures.objects.get(pk=object.datastructure_id) for object in holds ]
 	# object.detailsset=problems_detailssets.objects.filter(problem_id=problemID.id) 		#current_hidden_data 
 
-	# lets get files data, to show-case
-	with open( f"{object.slug}.txt", 'rb' ) as file:
-		# actually below we converting normal-text-data to a binary-data.
-		# object.detailsset=file.read()
-		object.detailsset=file.read().decode("ascii")
+	# problem-assignment - and there is getting problem-file's data!!!
+	IMPO.getProblem(object)
 
 	return object
 
@@ -32,6 +29,10 @@ def SolutionDataSet(problemID,solutionID):
 	# object.plateforms=Plateforms.objects.get(pk=object.plateforms)
 	holds=solutions_datastructures.objects.filter(solution_id=solutionID)
 	object.datastructures=[ DataStructures.objects.get(pk=object.datastructure_id) for object in holds ]     
+
+	# solution-assignment - and there is getting solution-file's data!!!
+	IMPO.getSolution(object)
+
 	return object
 
 
@@ -100,10 +101,8 @@ def AddProblems(request):
 		object.auxiliaryspace=ProblemsAuxiliarySpace
 		object.save()
 
-	# lets create files for problem-input.
-	with open( f"{object.slug}.txt", 'wb' ) as file:
-		# actually below we converting normal-text-data to a binary-data.
-		file.write(ProblemsDetailSet.encode('ascii'))
+	# problem-assignment - and there is build file with its name!!!
+	IMPO.assignProblem(object,ProblemsDataStructures,ProblemsDetailSet)
 
 	return object
 	# return None
@@ -172,6 +171,9 @@ def EditProblems(request,problemID):
 		object.auxiliaryspace=ProblemsAuxiliarySpace
 		object.save()
 
+	# problem-assignment - and there is build file with its name!!!
+	IMPO.assignProblem(object,ProblemsDataStructures,ProblemsDetailSet)
+
 	return object
 	# return None
 
@@ -227,6 +229,9 @@ def AddSolutions(request,problemID):
 				miniobject.delete()
 		object.save()
 
+	# solution-assignment - and there is build file with its name!!!
+	IMPO.assignSolution(object,SolutionsProgrammingLanguage,SolutionsCodeSubmissions)
+
 	return object
 	# return None
 
@@ -280,6 +285,9 @@ def EditSolutions(request,problemID,solutionID):
 				miniobject = solutions_datastructures.objects.get(datastructure_id=id, solution_id=object.id)
 				miniobject.delete()
 		object.save()
+
+	# solution-assignment - and there is build file with its name!!!
+	IMPO.assignSolution(object,SolutionsProgrammingLanguage,SolutionsCodeSubmissions)
 
 	return object
 	# return None
