@@ -1,8 +1,7 @@
 
 
 from appCodeCollections.models import *
-import appCodeCollections._DefaultValueSets as _DefaultValueSets
-import appCodeCollections.impo as IMPO
+import appCodeCollections.collections.BuildFilePaths as BuildFilePaths
 
 
 
@@ -16,7 +15,7 @@ def ProblemDataSet(problemID):
 	# object.detailsset=problems_detailssets.objects.filter(problem_id=problemID.id) 		#current_hidden_data 
 
 	# problem-assignment - and there is getting problem-file's data!!!
-	IMPO.getProblem(object)
+	BuildFilePaths.getProblem(object)
 
 	return object
 
@@ -31,7 +30,7 @@ def SolutionDataSet(problemID,solutionID):
 	object.datastructures=[ DataStructures.objects.get(pk=object.datastructure_id) for object in holds ]     
 
 	# solution-assignment - and there is getting solution-file's data!!!
-	IMPO.getSolution(object)
+	BuildFilePaths.getSolution(object)
 
 	return object
 
@@ -102,7 +101,7 @@ def AddProblems(request):
 		object.save()
 
 	# problem-assignment - and there is build file with its name!!!
-	IMPO.assignProblem(object,ProblemsDataStructures,ProblemsDetailSet)
+	BuildFilePaths.assignProblem(object,ProblemsDataStructures,ProblemsDetailSet)
 
 	return object
 	# return None
@@ -172,7 +171,7 @@ def EditProblems(request,problemID):
 		object.save()
 
 	# problem-assignment - and there is build file with its name!!!
-	IMPO.assignProblem(object,ProblemsDataStructures,ProblemsDetailSet)
+	BuildFilePaths.assignProblem(object,ProblemsDataStructures,ProblemsDetailSet)
 
 	return object
 	# return None
@@ -230,7 +229,7 @@ def AddSolutions(request,problemID):
 		object.save()
 
 	# solution-assignment - and there is build file with its name!!!
-	IMPO.assignSolution(object,SolutionsProgrammingLanguage,SolutionsCodeSubmissions)
+	BuildFilePaths.assignSolution(object,SolutionsProgrammingLanguage,SolutionsCodeSubmissions)
 
 	return object
 	# return None
@@ -287,7 +286,7 @@ def EditSolutions(request,problemID,solutionID):
 		object.save()
 
 	# solution-assignment - and there is build file with its name!!!
-	IMPO.assignSolution(object,SolutionsProgrammingLanguage,SolutionsCodeSubmissions)
+	BuildFilePaths.assignSolution(object,SolutionsProgrammingLanguage,SolutionsCodeSubmissions)
 
 	return object
 	# return None
@@ -318,7 +317,6 @@ def OnlyProblems():
 		if(object.id not in sets):
 			objects.append(object)
 	return objects
-
 
 
 

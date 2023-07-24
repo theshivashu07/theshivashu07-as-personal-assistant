@@ -2,8 +2,8 @@ from django.shortcuts import render,redirect
 from django.http import HttpResponse
 # Create your views here.
 
-import appCodeCollections._BulkFunctions as _BulkFunctions
 from .models import *
+import appCodeCollections.collections.BulkViewFunctions as BulkViewFunctions
 
 
 
@@ -57,7 +57,7 @@ def addProblem(request):
 			return redirect("/codecollections/add-problem/")
 
 		if( request.POST["ProblemsTitle"] and request.POST["ProblemsDetailSet"] ):
-			object = _BulkFunctions.AddProblems(request)																#wantchange___
+			object = BulkViewFunctions.AddProblems(request)																#wantchange___
 		else:
 			print("This is not correct Input's... Reput again!!!")
 		return redirect("/codecollections/problem/"+object.slug+"/")
@@ -78,14 +78,14 @@ def addSolution(request, problemslug):
 	objectProblem=Problems.objects.get(slug=problemslug)
 	if request.method=="POST":
 		if( request.POST["SolutionsCodeSubmissions"] ):
-			objectSolution = _BulkFunctions.AddSolutions(request,objectProblem)
+			objectSolution = BulkViewFunctions.AddSolutions(request,objectProblem)
 		else:
 			print("This is not correct Input's... Reput again!!!")
 		return redirect("/codecollections/problem-solution/"+objectProblem.slug+"/"+str(objectSolution.id)+"/")
 
 	thisisReturningDatabase = {
 		'ProblemsSlug':objectProblem.slug,   #problemslug
-		'ProblemDataSet':_BulkFunctions.ProblemDataSet(objectProblem),
+		'ProblemDataSet':BulkViewFunctions.ProblemDataSet(objectProblem),
 
 		'Plateforms' : Plateforms.objects.all(),
 		'DataStructures' : DataStructures.objects.all(),
@@ -106,9 +106,9 @@ def addProblemAndSolution(request):
 			return redirect("/codecollections/add-problem-solution/")
 
 		if( request.POST["ProblemsTitle"] and request.POST["ProblemsDetailSet"] ):
-			objectProblem = _BulkFunctions.AddProblems(request)																					#wantchange___
+			objectProblem = BulkViewFunctions.AddProblems(request)																					#wantchange___
 			if( request.POST["SolutionsCodeSubmissions"] ):
-				objectSolution = _BulkFunctions.AddSolutions(request,objectProblem)
+				objectSolution = BulkViewFunctions.AddSolutions(request,objectProblem)
 			else:
 				print("We're Discard only Solution... Reput again!!!")
 		else:
@@ -129,14 +129,14 @@ def editProblem(request, problemslug):
 	objectProblem=Problems.objects.get(slug=problemslug)
 	if request.method=="POST":
 		if( request.POST["ProblemsTitle"] and request.POST["ProblemsDetailSet"] ):
-			_BulkFunctions.EditProblems(request,objectProblem)																			#wantchange___
+			BulkViewFunctions.EditProblems(request,objectProblem)																			#wantchange___
 		else:
 			print("This is not correct Input's... Reput again!!!")
 		return redirect("/codecollections/problem/"+objectProblem.slug+"/")
 
 	thisisReturningDatabase = {
 		'ProblemsSlug':problemslug,
-		'ProblemDataSet':_BulkFunctions.ProblemDataSet(objectProblem),
+		'ProblemDataSet':BulkViewFunctions.ProblemDataSet(objectProblem),
 
 		'Plateforms' : Plateforms.objects.all(),
 		'DataStructures' : DataStructures.objects.all(),
@@ -150,15 +150,15 @@ def editSolution(request, problemslug, solutionid):
 	objectSolution=Solutions.objects.get(id=solutionid)
 	if request.method=="POST":
 		if( request.POST["SolutionsCodeSubmissions"] ):
-			_BulkFunctions.EditSolutions(request,objectProblem,objectSolution.id)
+			BulkViewFunctions.EditSolutions(request,objectProblem,objectSolution.id)
 		else:
 			print("This is not correct Input's... Reput again!!!")
 		return redirect("/codecollections/problem-solution/"+objectProblem.slug+"/"+str(objectSolution.id)+"/")
 
 	thisisReturningDatabase = {
 		'ProblemsSlug':problemslug,
-		'ProblemDataSet':_BulkFunctions.ProblemDataSet(objectProblem),
-		'SolutionDataSet':_BulkFunctions.SolutionDataSet(objectProblem,objectSolution.id),
+		'ProblemDataSet':BulkViewFunctions.ProblemDataSet(objectProblem),
+		'SolutionDataSet':BulkViewFunctions.SolutionDataSet(objectProblem,objectSolution.id),
 
 		'Plateforms' : Plateforms.objects.all(),
 		'DataStructures' : DataStructures.objects.all(),
@@ -190,8 +190,8 @@ def ProblemWithSolution(request, problemslug, solutionid):
 	objectProblem=Problems.objects.get(slug=problemslug)
 	# objectSolution=Solutions.objects.get(id=solutionid)
 	thisisReturningDatabase = {
-		'ProblemDataSet':_BulkFunctions.ProblemDataSet(objectProblem),	
-		'SolutionDataSet':_BulkFunctions.SolutionDataSet(objectProblem,solutionid),
+		'ProblemDataSet':BulkViewFunctions.ProblemDataSet(objectProblem),	
+		'SolutionDataSet':BulkViewFunctions.SolutionDataSet(objectProblem,solutionid),
 
 		'Plateforms' : Plateforms.objects.all(),
 		'DataStructures' : DataStructures.objects.all(),
@@ -205,7 +205,7 @@ def openProblem(request, problemslug):
 	objectProblem=Problems.objects.get(slug=problemslug)
 	thisisReturningDatabase = {
 		'ProblemsSlug':problemslug,
-		'ProblemDataSet':_BulkFunctions.ProblemDataSet(objectProblem),
+		'ProblemDataSet':BulkViewFunctions.ProblemDataSet(objectProblem),
 
 		'Plateforms' : Plateforms.objects.all(),
 		'DataStructures' : DataStructures.objects.all(),
@@ -220,7 +220,7 @@ def openProblem(request, problemslug):
 
 def problemsWholeList(request):
 	thisisReturningDatabase = {
-		'AllSolutions':_BulkFunctions.WholeDataSet(),
+		'AllSolutions':BulkViewFunctions.WholeDataSet(),
 
 		'Plateforms' : Plateforms.objects.all(),
 		'DataStructures' : DataStructures.objects.all(),
@@ -236,7 +236,7 @@ def problemsWholeList(request):
 
 def problemsOnly(request):
 	thisisReturningDatabase = {
-		'AllProblems':_BulkFunctions.OnlyProblems(),
+		'AllProblems':BulkViewFunctions.OnlyProblems(),
 
 		'Plateforms' : Plateforms.objects.all(),
 		'DataStructures' : DataStructures.objects.all(),
