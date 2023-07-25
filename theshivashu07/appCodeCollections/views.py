@@ -4,7 +4,7 @@ from django.http import HttpResponse
 
 from .models import *
 import appCodeCollections.collections.BulkViewFunctions as BulkViewFunctions
-
+from django.contrib import messages
 
 
 
@@ -13,26 +13,20 @@ import appCodeCollections.collections.BulkViewFunctions as BulkViewFunctions
 
 
 def index(request):
+	messages.success(request, "Welcome to theCodeCollections's HOME Page!!!")
 	return render(request,"appCodeCollections/index.html");
 
 def edittables(request):
 	if request.method=="POST":
 		comingFrom=request.POST["comingFrom"]
 		comingData=request.POST["comingData"]
-		if(comingFrom=='Plateform'):
-			lock=Plateforms()
+		if(comingFrom in ['Plateform', 'DataStructure', 'ProgrammingLanguage']):
+			lock= ( Plateforms() if(comingFrom=='Plateform') else ( DataStructures() if(comingFrom=='DataStructure') else ProgrammingLanguages() ) )
 			lock.name=comingData;
 			lock.save()
-		elif(comingFrom=='DataStructure'):
-			lock=DataStructures()
-			lock.name=comingData;
-			lock.save()
-		elif(comingFrom=='ProgrammingLanguage'):
-			lock=ProgrammingLanguages()
-			lock.name=comingData;
-			lock.save()
+			messages.success(request, comingData+" added on '"+comingFrom + "' Database.")
 		else:
-			print("Go to somewhere else.....")
+			messages.error(request, "Invalid query, try again!!!")
 		return redirect("/codecollections/edit-tables/")
 
 	thisisReturningDatabase = {
@@ -54,7 +48,10 @@ def addProblem(request):
 	if request.method=="POST":
 		# termination-conditions
 		if(len(Problems.objects.filter(title=request.POST["ProblemsTitle"]))):
-			return redirect("/codecollections/add-problem/")
+			# messages.error(request, "Actually, this name's same problem already exist in the database!!!")
+			return redirect("/codecollections/add-problem/") 
+			
+			return redirect(request, request.path, request.POST) 
 
 		if( request.POST["ProblemsTitle"] and request.POST["ProblemsDetailSet"] ):
 			object = BulkViewFunctions.AddProblems(request)																#wantchange___

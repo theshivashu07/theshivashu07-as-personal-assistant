@@ -69,17 +69,6 @@ class Problems(models.Model):
 		self.slug = slugify(self.title)
 		super().save(*args, **kwargs)
 
-	# dont-use this code, my thought when perticuler problem deleted in future it also delete problem file, but it remove all files without even delete any object!!!
-	# def __del__(self):
-	# 	import os
-	# 	locationwithfilename = DEFAULTs.problems_location + '\\' + self.filename
-	# 	print(locationwithfilename)
-	# 	if os.path.exists(locationwithfilename):
-	# 		os.remove( locationwithfilename )
-	# 		print("Problem's file is also deleted!!!")
-	# 	else:
-	# 		print("Problem's file is already not-exist!!!")
-
 
 
 class problems_plateforms(models.Model):
@@ -110,16 +99,6 @@ class Solutions(models.Model):
 	JoiningDate = models.DateTimeField(auto_now_add=True); 
 	UpdationDate = models.DateTimeField(auto_now=True); 
 
-	# dont-use this code, my thought when perticuler solution deleted in future it also delete solution file, but it remove all files without even delete any object!!!
-	# def __del__(self):
-	# 	import os
-	# 	locationwithfilename = DEFAULTs.solutions_location + '\\' + self.filename
-	# 	print(locationwithfilename)
-	# 	if os.path.exists(locationwithfilename):
-	# 		os.remove( locationwithfilename )
-	# 		print("Problem's file is also deleted!!!")
-	# 	else:
-	# 		print("Problem's file is already not-exist!!!")
 
 
 class solutions_datastructures(models.Model):
