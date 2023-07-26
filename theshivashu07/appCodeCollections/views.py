@@ -49,9 +49,8 @@ def addProblem(request):
 		# termination-conditions
 		if(len(Problems.objects.filter(title=request.POST["ProblemsTitle"]))):
 			# messages.error(request, "Actually, this name's same problem already exist in the database!!!")
-			return redirect("/codecollections/add-problem/") 
-			
-			return redirect(request, request.path, request.POST) 
+			# return redirect(request, request.path, request.POST) 
+			return redirect("/codecollections/add-problem/") 			
 
 		if( request.POST["ProblemsTitle"] and request.POST["ProblemsDetailSet"] ):
 			object = BulkViewFunctions.AddProblems(request)																#wantchange___
