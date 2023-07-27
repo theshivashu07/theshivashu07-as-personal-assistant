@@ -25,8 +25,6 @@ def edittables(request):
 			lock.name=comingData;
 			lock.save()
 			messages.success(request, comingData+" added on '"+comingFrom + "' Database.")
-		else:
-			messages.error(request, "Invalid query, try again!!!")
 		return redirect("/codecollections/edit-tables/")
 
 	thisisReturningDatabase = {
@@ -48,15 +46,19 @@ def addProblem(request):
 	if request.method=="POST":
 		# termination-conditions
 		if(len(Problems.objects.filter(title=request.POST["ProblemsTitle"]))):
-			# messages.error(request, "Actually, this name's same problem already exist in the database!!!")
+			messages.error(request, "Actually, same name's problem already exist in the database!!!")
 			# return redirect(request, request.path, request.POST) 
-			return redirect("/codecollections/add-problem/") 			
+			# return redirect("/codecollections/add-problem/") 			
+			############################################
+			return ?
 
 		if( request.POST["ProblemsTitle"] and request.POST["ProblemsDetailSet"] ):
 			object = BulkViewFunctions.AddProblems(request)																#wantchange___
-		else:
-			print("This is not correct Input's... Reput again!!!")
-		return redirect("/codecollections/problem/"+object.slug+"/")
+			messages.success(request, "New problem '" + object.title +"' is added.")
+			return redirect("/codecollections/problem/"+object.slug+"/")
+		messages.error(request, "Problems 'Title' and 'Statement' is must to add!!!")
+		############################################
+		return ?
 	
 	thisisReturningDatabase = {
 		'Plateforms' : Plateforms.objects.all(),
@@ -75,9 +77,12 @@ def addSolution(request, problemslug):
 	if request.method=="POST":
 		if( request.POST["SolutionsCodeSubmissions"] ):
 			objectSolution = BulkViewFunctions.AddSolutions(request,objectProblem)
-		else:
-			print("This is not correct Input's... Reput again!!!")
-		return redirect("/codecollections/problem-solution/"+objectProblem.slug+"/"+str(objectSolution.id)+"/")
+			messages.success(request, "Problem '" + objectProblem.title +"' solution is added.")
+			return redirect("/codecollections/problem-solution/"+objectProblem.slug+"/"+str(objectSolution.id)+"/")
+		# print("This is not correct Input's... Reput again!!!")
+		messages.error(request, "Solutions 'Code' is must to add!!!")
+		############################################
+		return ?
 
 	thisisReturningDatabase = {
 		'ProblemsSlug':objectProblem.slug,   #problemslug
