@@ -323,5 +323,22 @@ def OnlyProblems():
 
 
 
+def getNewProblemInternalDetails(request):
+	return {
+		'ProblemDataSet' : {
+			'title' : request.POST["ProblemsTitle"],
+			'plateforms' : request.POST.getlist("ProblemsPlateforms"),
+			'datastructures' : request.POST.getlist("ProblemsDataStructures"),
+			'detailsset' : request.POST["ProblemsDetailSet"],
+			'timecomplexity' : request.POST["ProblemsTimeComplexity"],
+			'auxiliaryspace' : request.POST["ProblemsAuxiliarySpace"],
+		},
+
+		'Plateforms' : Plateforms.objects.all(),
+		'DataStructures' : DataStructures.objects.all(),
+		'ProgrammingLanguages' : ProgrammingLanguages.objects.all(),
+	}
+
+
 
 

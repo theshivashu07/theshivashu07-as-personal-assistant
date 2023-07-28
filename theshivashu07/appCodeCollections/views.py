@@ -47,19 +47,17 @@ def addProblem(request):
 		# termination-conditions
 		if(len(Problems.objects.filter(title=request.POST["ProblemsTitle"]))):
 			messages.error(request, "Actually, same name's problem already exist in the database!!!")
-			# return redirect(request, request.path, request.POST) 
-			# return redirect("/codecollections/add-problem/") 			
-			############################################
-			return ?
+			# return redirect("/codecollections/add-problem/")
+			return render(request,"appCodeCollections/Problems-Solutions-Mini-Templates/problem-add.html", thisisReturningDatabase);
 
-		if( request.POST["ProblemsTitle"] and request.POST["ProblemsDetailSet"] ):
+		if( request.POST["ProblemsTitle"] != "" and request.POST["ProblemsDetailSet"] != "" ):
 			object = BulkViewFunctions.AddProblems(request)																#wantchange___
 			messages.success(request, "New problem '" + object.title +"' is added.")
 			return redirect("/codecollections/problem/"+object.slug+"/")
-		messages.error(request, "Problems 'Title' and 'Statement' is must to add!!!")
+		messages.error(request, "Problems 'Title' and 'Statement' is must to add!!!  Return-Back and Re-Submit!!!")
 		############################################
-		return ?
-	
+		# return
+		return render(request,"appCodeCollections/Problems-Solutions-Mini-Templates/problem-add.html", BulkViewFunctions.getNewProblemInternalDetails(request));
 	thisisReturningDatabase = {
 		'Plateforms' : Plateforms.objects.all(),
 		'DataStructures' : DataStructures.objects.all(),
@@ -82,7 +80,7 @@ def addSolution(request, problemslug):
 		# print("This is not correct Input's... Reput again!!!")
 		messages.error(request, "Solutions 'Code' is must to add!!!")
 		############################################
-		return ?
+		# return ? 
 
 	thisisReturningDatabase = {
 		'ProblemsSlug':objectProblem.slug,   #problemslug
@@ -104,17 +102,26 @@ def addProblemAndSolution(request):
 	if request.method=="POST":
 		# termination-conditions
 		if(len(Problems.objects.filter(title=request.POST["ProblemsTitle"]))):
-			return redirect("/codecollections/add-problem-solution/")
+			messages.error(request, "Actually, same name's problem already exist in the database!!!")
+			# return redirect(request, request.path, request.POST) 
+			# return redirect("/codecollections/add-problem-solution/")
+			############################################
+			# return ?
 
-		if( request.POST["ProblemsTitle"] and request.POST["ProblemsDetailSet"] ):
-			objectProblem = BulkViewFunctions.AddProblems(request)																					#wantchange___
-			if( request.POST["SolutionsCodeSubmissions"] ):
-				objectSolution = BulkViewFunctions.AddSolutions(request,objectProblem)
-			else:
-				print("We're Discard only Solution... Reput again!!!")
-		else:
-			print("We're Discard both Problem and Solution... Reput again!!!")
-		return redirect("/codecollections/problem-solution/"+objectProblem.slug+"/"+str(objectSolution.id)+"/")
+		if( request.POST["ProblemsTitle"] != "" and request.POST["ProblemsDetailSet"] != "" ): 
+			objectProblem = BulkViewFunctions.AddProblems(request) 
+			if( request.POST["SolutionsCodeSubmissions"] ): 
+				objectSolution = BulkViewFunctions.AddSolutions(request,objectProblem) 
+				# if problem DONE and solution also DONE 
+				messages.success(request, "Problem '" + objectProblem.title +"' solution is added.")
+				return redirect("/codecollections/problem-solution/"+objectProblem.slug+"/"+str(objectSolution.id)+"/")
+			# if problem DONE but solution NOT
+			messages.success(request, "New problem '" + objectProblem.title +"' is added.")	
+			return redirect("/codecollections/problem/"+objectProblem.slug+"/")
+		# if problem and solution - both false
+		messages.error(request, "Problems 'Title' and 'Statement' is must to add!!!")
+		############################################
+		# return ?
 
 	thisisReturningDatabase = {
 		'Plateforms' : Plateforms.objects.all(),
