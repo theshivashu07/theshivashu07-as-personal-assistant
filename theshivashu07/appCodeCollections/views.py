@@ -44,25 +44,29 @@ def edittables(request):
 def addProblem(request): 
 	# problemID=Problems.objects.get(slug=defaultSlug)
 	if request.method=="POST":
-		# termination-conditions
-		if(len(Problems.objects.filter(title=request.POST["ProblemsTitle"]))):
-			messages.error(request, "Actually, same name's problem already exist in the database!!!")
-			# return redirect("/codecollections/add-problem/")
+
+		# termination-conditions  -  if problem already exist, then we move this to the oroginal problem side...
+		objectProblemLists = Problems.objects.filter(title=request.POST["ProblemsTitle"])
+		if(bool(objectProblemLists)):
+			# we know that their is only one problem exist with same name, thats-it...
+			objectProblem = objectProblemLists[0] 
+			messages.error(request, "Actually, same name's problem already exist in the database!!! See this opened problem...")
+			return redirect("/codecollections/problem/"+objectProblem.slug+"/")
+
+		# what if you put blank your problem's "title" or "detailsset", then we sent back to the same place again...
+		# we'll I'm already managing this, with set 'required' in these field, but always play safe, may I'll be forgrt... 
+		if( request.POST["ProblemsTitle"] == "" or request.POST["ProblemsDetailSet"] == "" ):
+			messages.error(request, "Problems 'Title' and 'Statement' is must to add!!!  Return-Back and Re-Submit!!!")
+			thisisReturningDatabase = BulkViewFunctions.getBaseStructure()
+			thisisReturningDatabase.update( BulkViewFunctions.getbackProblemDetails(request) )
 			return render(request,"appCodeCollections/Problems-Solutions-Mini-Templates/problem-add.html", thisisReturningDatabase);
 
-		if( request.POST["ProblemsTitle"] != "" and request.POST["ProblemsDetailSet"] != "" ):
-			object = BulkViewFunctions.AddProblems(request)																#wantchange___
-			messages.success(request, "New problem '" + object.title +"' is added.")
-			return redirect("/codecollections/problem/"+object.slug+"/")
-		messages.error(request, "Problems 'Title' and 'Statement' is must to add!!!  Return-Back and Re-Submit!!!")
-		############################################
-		# return
-		return render(request,"appCodeCollections/Problems-Solutions-Mini-Templates/problem-add.html", BulkViewFunctions.getNewProblemInternalDetails(request));
-	thisisReturningDatabase = {
-		'Plateforms' : Plateforms.objects.all(),
-		'DataStructures' : DataStructures.objects.all(),
-		'ProgrammingLanguages' : ProgrammingLanguages.objects.all(),
-	}
+		# now this place is the safest place, so now add problem...
+		object = BulkViewFunctions.AddProblems(request)
+		messages.success(request, "New problem '" + object.title +"' is added.")
+		return redirect("/codecollections/problem/"+object.slug+"/")
+
+	thisisReturningDatabase = BulkViewFunctions.getBaseStructure()
 	return render(request,"appCodeCollections/Problems-Solutions-Mini-Templates/problem-add.html", thisisReturningDatabase);
 	# return render(request,"appCodeCollections/404.html");
 
@@ -73,23 +77,20 @@ def addProblem(request):
 def addSolution(request, problemslug):
 	objectProblem=Problems.objects.get(slug=problemslug)
 	if request.method=="POST":
-		if( request.POST["SolutionsCodeSubmissions"] ):
-			objectSolution = BulkViewFunctions.AddSolutions(request,objectProblem)
-			messages.success(request, "Problem '" + objectProblem.title +"' solution is added.")
-			return redirect("/codecollections/problem-solution/"+objectProblem.slug+"/"+str(objectSolution.id)+"/")
-		# print("This is not correct Input's... Reput again!!!")
-		messages.error(request, "Solutions 'Code' is must to add!!!")
-		############################################
-		# return ? 
+		if( request.POST["SolutionsCodeSubmissions"] == "" ):
+			messages.error(request, "Solution's 'code' is must to add!!!")
+			thisisReturningDatabase = BulkViewFunctions.getBaseStructure()
+			thisisReturningDatabase['ProblemDataSet'] = BulkViewFunctions.ProblemDataSet(objectProblem)
+			thisisReturningDatabase.update( BulkViewFunctions.getbackSolutionDetails(request) )
+			return render(request,"appCodeCollections/Problems-Solutions-Mini-Templates/solution-add.html", thisisReturningDatabase);
 
-	thisisReturningDatabase = {
-		'ProblemsSlug':objectProblem.slug,   #problemslug
-		'ProblemDataSet':BulkViewFunctions.ProblemDataSet(objectProblem),
+		# now this place is the safest place, so now add solution...
+		objectSolution = BulkViewFunctions.AddSolutions(request,objectProblem)
+		messages.success(request, "Problem '" + objectProblem.title +"' solution is added.")
+		return redirect("/codecollections/problem-solution/"+objectProblem.slug+"/"+str(objectSolution.id)+"/")
 
-		'Plateforms' : Plateforms.objects.all(),
-		'DataStructures' : DataStructures.objects.all(),
-		'ProgrammingLanguages' : ProgrammingLanguages.objects.all(),
-	}
+	thisisReturningDatabase = BulkViewFunctions.getBaseStructure()
+	thisisReturningDatabase['ProblemDataSet'] = BulkViewFunctions.ProblemDataSet(objectProblem)
 	return render(request,"appCodeCollections/Problems-Solutions-Mini-Templates/solution-add.html", thisisReturningDatabase);
 	# return render(request,"appCodeCollections/404.html");
 
@@ -99,35 +100,42 @@ def addSolution(request, problemslug):
 
 
 def addProblemAndSolution(request):
-	if request.method=="POST":
-		# termination-conditions
-		if(len(Problems.objects.filter(title=request.POST["ProblemsTitle"]))):
-			messages.error(request, "Actually, same name's problem already exist in the database!!!")
-			# return redirect(request, request.path, request.POST) 
-			# return redirect("/codecollections/add-problem-solution/")
-			############################################
-			# return ?
-
-		if( request.POST["ProblemsTitle"] != "" and request.POST["ProblemsDetailSet"] != "" ): 
-			objectProblem = BulkViewFunctions.AddProblems(request) 
-			if( request.POST["SolutionsCodeSubmissions"] ): 
-				objectSolution = BulkViewFunctions.AddSolutions(request,objectProblem) 
-				# if problem DONE and solution also DONE 
-				messages.success(request, "Problem '" + objectProblem.title +"' solution is added.")
-				return redirect("/codecollections/problem-solution/"+objectProblem.slug+"/"+str(objectSolution.id)+"/")
-			# if problem DONE but solution NOT
-			messages.success(request, "New problem '" + objectProblem.title +"' is added.")	
+	if request.method=="POST":		
+		# termination-conditions  -  if problem already exist, then we move this to the oroginal problem side...
+		objectProblemLists = Problems.objects.filter(title=request.POST["ProblemsTitle"])
+		if(bool(objectProblemLists)):
+			# we know that their is only one problem exist with same name, thats-it...
+			objectProblem = objectProblemLists[0] 
+			messages.error(request, "Actually, same name's problem already exist in the database!!! See this opened problem...")
 			return redirect("/codecollections/problem/"+objectProblem.slug+"/")
-		# if problem and solution - both false
-		messages.error(request, "Problems 'Title' and 'Statement' is must to add!!!")
-		############################################
-		# return ?
 
-	thisisReturningDatabase = {
-		'Plateforms' : Plateforms.objects.all(),
-		'DataStructures' : DataStructures.objects.all(),
-		'ProgrammingLanguages' : ProgrammingLanguages.objects.all(),
-	}
+		# what if you put blank your problem's "title" or "detailsset", then we sent back to the same place again...
+		# we'll I'm already managing this, with set 'required' in these field, but always play safe, may I'll be forgrt... 
+		if( request.POST["ProblemsTitle"] == "" or request.POST["ProblemsDetailSet"] == "" ):
+			messages.error(request, "Problems 'Title' and 'Statement' is must to add!!!  Please Re-Submit again!!!")
+			thisisReturningDatabase = BulkViewFunctions.getBaseStructure()
+			thisisReturningDatabase.update( BulkViewFunctions.getbackProblemDetails(request) )
+			thisisReturningDatabase.update( BulkViewFunctions.getbackSolutionDetails(request) )
+			return render(request,"appCodeCollections/Problems-Solutions-Mini-Templates/problem-solution-add.html", thisisReturningDatabase);
+
+		# now this place is the safest place, so now add problem...
+		objectProblem = BulkViewFunctions.AddProblems(request)
+		messages.success(request, "New problem '" + objectProblem.title +"' is added.")
+
+		######################################################################################
+		# SOLUTION's --------------------------------------------------------------------------------------------------------------------------------------------------
+		if( request.POST["SolutionsCodeSubmissions"] == "" ):
+			messages.error(request, "Solution's 'code' is must to add!!! Please fill all fields again...")
+			thisisReturningDatabase = BulkViewFunctions.getBaseStructure()
+			return redirect("/codecollections/add-solution/"+objectProblem.slug+"/")
+			# return render(request,"appCodeCollections/Problems-Solutions-Mini-Templates/solution-add.html", thisisReturningDatabase);
+
+		# now this place is the safest place, so now add solution...
+		objectSolution = BulkViewFunctions.AddSolutions(request,objectProblem)
+		messages.success(request, "Problem '" + objectProblem.title +"' solution is added.")
+		return redirect("/codecollections/problem-solution/"+objectProblem.slug+"/"+str(objectSolution.id)+"/")
+
+	thisisReturningDatabase = BulkViewFunctions.getBaseStructure()
 	return render(request,"appCodeCollections/Problems-Solutions-Mini-Templates/problem-solution-add.html", thisisReturningDatabase);
 	# return render(request,"appCodeCollections/404.html");
 
@@ -142,14 +150,8 @@ def editProblem(request, problemslug):
 			print("This is not correct Input's... Reput again!!!")
 		return redirect("/codecollections/problem/"+objectProblem.slug+"/")
 
-	thisisReturningDatabase = {
-		'ProblemsSlug':problemslug,
-		'ProblemDataSet':BulkViewFunctions.ProblemDataSet(objectProblem),
-
-		'Plateforms' : Plateforms.objects.all(),
-		'DataStructures' : DataStructures.objects.all(),
-		'ProgrammingLanguages' : ProgrammingLanguages.objects.all(),
-	}
+	thisisReturningDatabase = BulkViewFunctions.getBaseStructure()
+	thisisReturningDatabase['ProblemDataSet'] = BulkViewFunctions.ProblemDataSet(objectProblem)
 	return render(request,"appCodeCollections/Problems-Solutions-Mini-Templates/problem-edit.html", thisisReturningDatabase);
 	# return render(request,"appCodeCollections/404.html");
 
@@ -163,15 +165,9 @@ def editSolution(request, problemslug, solutionid):
 			print("This is not correct Input's... Reput again!!!")
 		return redirect("/codecollections/problem-solution/"+objectProblem.slug+"/"+str(objectSolution.id)+"/")
 
-	thisisReturningDatabase = {
-		'ProblemsSlug':problemslug,
-		'ProblemDataSet':BulkViewFunctions.ProblemDataSet(objectProblem),
-		'SolutionDataSet':BulkViewFunctions.SolutionDataSet(objectProblem,objectSolution.id),
-
-		'Plateforms' : Plateforms.objects.all(),
-		'DataStructures' : DataStructures.objects.all(),
-		'ProgrammingLanguages' : ProgrammingLanguages.objects.all(),
-	}
+	thisisReturningDatabase = BulkViewFunctions.getBaseStructure()
+	thisisReturningDatabase['ProblemDataSet'] = BulkViewFunctions.ProblemDataSet(objectProblem)
+	thisisReturningDatabase['SolutionDataSet'] = BulkViewFunctions.SolutionDataSet(objectProblem,objectSolution.id)
 	return render(request,"appCodeCollections/Problems-Solutions-Mini-Templates/solution-edit.html", thisisReturningDatabase);
 	# return render(request,"appCodeCollections/404.html");
 
@@ -196,29 +192,19 @@ def deleteSolution(request, problemslug, solutionid):
 
 def ProblemWithSolution(request, problemslug, solutionid):
 	objectProblem=Problems.objects.get(slug=problemslug)
-	# objectSolution=Solutions.objects.get(id=solutionid)
-	thisisReturningDatabase = {
-		'ProblemDataSet':BulkViewFunctions.ProblemDataSet(objectProblem),	
-		'SolutionDataSet':BulkViewFunctions.SolutionDataSet(objectProblem,solutionid),
 
-		'Plateforms' : Plateforms.objects.all(),
-		'DataStructures' : DataStructures.objects.all(),
-		'ProgrammingLanguages' : ProgrammingLanguages.objects.all(),
-	}
+	thisisReturningDatabase = BulkViewFunctions.getBaseStructure()
+	thisisReturningDatabase['ProblemDataSet'] = BulkViewFunctions.ProblemDataSet(objectProblem)
+	thisisReturningDatabase['SolutionDataSet'] = BulkViewFunctions.SolutionDataSet(objectProblem,solutionid)
 	return render(request,"appCodeCollections/Problems-Solutions-Mini-Templates/problem-solution-show.html", thisisReturningDatabase);
 
 
 
 def openProblem(request, problemslug):
 	objectProblem=Problems.objects.get(slug=problemslug)
-	thisisReturningDatabase = {
-		'ProblemsSlug':problemslug,
-		'ProblemDataSet':BulkViewFunctions.ProblemDataSet(objectProblem),
 
-		'Plateforms' : Plateforms.objects.all(),
-		'DataStructures' : DataStructures.objects.all(),
-		'ProgrammingLanguages' : ProgrammingLanguages.objects.all(),
-	}
+	thisisReturningDatabase = BulkViewFunctions.getBaseStructure()
+	thisisReturningDatabase['ProblemDataSet'] = BulkViewFunctions.ProblemDataSet(objectProblem)
 	return render(request,"appCodeCollections/Problems-Solutions-Mini-Templates/problem-show.html", thisisReturningDatabase);
 	# return render(request,"appCodeCollections/404.html");
 
@@ -227,15 +213,9 @@ def openProblem(request, problemslug):
 
 
 def problemsWholeList(request):
-	thisisReturningDatabase = {
-		'AllSolutions':BulkViewFunctions.WholeDataSet(),
 
-		'Plateforms' : Plateforms.objects.all(),
-		'DataStructures' : DataStructures.objects.all(),
-		'ProgrammingLanguages' : ProgrammingLanguages.objects.all(),
-		'problemslug' : 'problem-number-0001',
-		'solutionid' : 1,
-	}
+	thisisReturningDatabase = BulkViewFunctions.getBaseStructure()
+	thisisReturningDatabase['AllSolutions'] = BulkViewFunctions.WholeDataSet()
 	return render(request,"appCodeCollections/Problems-Solutions-Mini-Templates/wholelist.html", thisisReturningDatabase);
 	# return render(request,"appCodeCollections/404.html");
 
@@ -243,15 +223,9 @@ def problemsWholeList(request):
 
 
 def problemsOnly(request):
-	thisisReturningDatabase = {
-		'AllProblems':BulkViewFunctions.OnlyProblems(),
 
-		'Plateforms' : Plateforms.objects.all(),
-		'DataStructures' : DataStructures.objects.all(),
-		'ProgrammingLanguages' : ProgrammingLanguages.objects.all(),
-		'problemslug' : 'problem-number-0001',
-		'solutionid' : 1,
-	}
+	thisisReturningDatabase = BulkViewFunctions.getBaseStructure()
+	thisisReturningDatabase['AllProblems'] = BulkViewFunctions.OnlyProblems()
 	return render(request,"appCodeCollections/Problems-Solutions-Mini-Templates/onlyproblems.html", thisisReturningDatabase);
 	# return render(request,"appCodeCollections/404.html");
 

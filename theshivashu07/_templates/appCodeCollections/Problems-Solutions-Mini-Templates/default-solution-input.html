@@ -16,18 +16,12 @@
                                         <div class="col-md-12 inputbox" style="margin-bottom:0px; margin-top:30px;">
                                                 <label class="labels"> Data Structure </label>
                                                 <div style="display: flex; overflow-x: scroll; background-color: white; border-radius: 5px; border: 1px solid #d5d5d5; padding: 2px;">
-                                                    {% if DataStructures %}
                                                         {% for object in DataStructures %}
                                                             <div style="flex: none; padding: 5px 10px;">
                                                                 <input type="checkbox" id="SolutionsDataStructures" name="SolutionsDataStructures" value="{{object.id}}"  {% if object in SolutionDataSet.datastructures %} checked {% endif %}>
                                                                 <label for="SolutionsDataStructures"> {{object.name}}</label>
                                                             </div>
                                                         {% endfor %}
-                                                    {% else %}
-                                                        <div style="flex: none; padding: 5px 10px;">
-                                                            <label for="None" style="font-style:italic;color: burlywood;"> <u style='margin-right:5px;font-weight:bold;'>Note:</u>   Now no data-fields are available to select here.</label>
-                                                        </div>
-                                                    {% endif %}
                                                 </div>
                                             <!-- </div> -->
                                         </div>

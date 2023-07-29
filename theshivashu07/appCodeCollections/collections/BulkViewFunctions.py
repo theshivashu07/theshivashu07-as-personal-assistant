@@ -12,7 +12,6 @@ def ProblemDataSet(problemID):
 	object.plateforms=[ Plateforms.objects.get(pk=object.plateform_id) for object in holds ]
 	holds=problems_datastructures.objects.filter(problem_id=problemID.id)
 	object.datastructures=[ DataStructures.objects.get(pk=object.datastructure_id) for object in holds ]
-	# object.detailsset=problems_detailssets.objects.filter(problem_id=problemID.id) 		#current_hidden_data 
 
 	# problem-assignment - and there is getting problem-file's data!!!
 	BuildFilePaths.getProblem(object)
@@ -22,10 +21,7 @@ def ProblemDataSet(problemID):
 
 def SolutionDataSet(problemID,solutionID):
 	object=Solutions.objects.get(id=solutionID)
-	# object=Solutions.objects.filter(id=solutionID)[0]
-	# object=Solutions.objects.filter(problem_id=problemID.id)[0]
 	object.programminglanguages=ProgrammingLanguages.objects.get(pk=object.programminglanguages)
-	# object.plateforms=Plateforms.objects.get(pk=object.plateforms)
 	holds=solutions_datastructures.objects.filter(solution_id=solutionID)
 	object.datastructures=[ DataStructures.objects.get(pk=object.datastructure_id) for object in holds ]     
 
@@ -323,21 +319,47 @@ def OnlyProblems():
 
 
 
-def getNewProblemInternalDetails(request):
-	return {
-		'ProblemDataSet' : {
-			'title' : request.POST["ProblemsTitle"],
-			'plateforms' : request.POST.getlist("ProblemsPlateforms"),
-			'datastructures' : request.POST.getlist("ProblemsDataStructures"),
-			'detailsset' : request.POST["ProblemsDetailSet"],
-			'timecomplexity' : request.POST["ProblemsTimeComplexity"],
-			'auxiliaryspace' : request.POST["ProblemsAuxiliarySpace"],
-		},
-
+def getBaseStructure():
+	thisisReturningDatabase = {
 		'Plateforms' : Plateforms.objects.all(),
 		'DataStructures' : DataStructures.objects.all(),
 		'ProgrammingLanguages' : ProgrammingLanguages.objects.all(),
 	}
+	return thisisReturningDatabase
+
+
+def getbackProblemDetails(request):
+	''' This situations comes when we go to submit new problem, and problem is not good!!! '''
+	thisisReturningDatabase = {
+		'ProblemDataSet' : {
+			'title' : request.POST["ProblemsTitle"],
+			'plateforms' : [ Plateforms.objects.get(id=id) for id in request.POST.getlist("ProblemsPlateforms") ],
+			'datastructures' : [ DataStructures.objects.get(id=id) for id in request.POST.getlist("ProblemsDataStructures") ],
+			'detailsset' : request.POST["ProblemsDetailSet"],
+			'timecomplexity' : request.POST["ProblemsTimeComplexity"],
+			'auxiliaryspace' : request.POST["ProblemsAuxiliarySpace"],
+		}
+	}
+	return thisisReturningDatabase
+
+
+def getbackSolutionDetails(request):
+	''' This situations comes when we go to submit new solution, and solution is not good!!! '''
+	thisisReturningDatabase = {
+		'SolutionDataSet' : {
+			'datastructures' : [ DataStructures.objects.get(id=id) for id in request.POST.getlist("SolutionsDataStructures") ],
+			# 'programminglanguages' :  request.POST.getlist("SolutionsProgrammingLanguage"),
+			'programminglanguages' :  ProgrammingLanguages.objects.get( id=request.POST["SolutionsProgrammingLanguage"] ),
+			'timecomplexity' : request.POST["SolutionsTimeComplexity"],
+			'auxiliaryspace' : request.POST["SolutionsAuxiliarySpace"],
+			'codesubmissions' : request.POST["SolutionsCodeSubmissions"],
+		}
+	}
+	print(thisisReturningDatabase)
+	return thisisReturningDatabase
+
+
+
 
 
 
