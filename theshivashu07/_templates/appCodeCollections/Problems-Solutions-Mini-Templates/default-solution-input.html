@@ -6,7 +6,7 @@
 
 
 
-
+<!-- 
 
                         <div class="row" style="background-color:#fafafa;border-radius:5px;">
                             <form method="POST" action="{{request.path}}">
@@ -23,7 +23,6 @@
                                                             </div>
                                                         {% endfor %}
                                                 </div>
-                                            <!-- </div> -->
                                         </div>
                                         <div class="col-md-12">
                                             <div class="row">
@@ -42,10 +41,6 @@
 
                                                     </select>
                                                 </div>
-                                                <!-- <div class="col-md-6 inputbox">
-                                                    <label class="labels"> Programming Language </label>
-                                                    <input class="codeinputs" type="text" id="SolutionsProgrammingLanguage" value="{{SolutionDataSet.programminglanguages.name}}" name="SolutionsProgrammingLanguage">
-                                                </div> -->
 
                                                 <div class="col-md-3 inputbox">
                                                     <label class="labels"> Time Complexity </label>
@@ -65,11 +60,90 @@
                                     </div>
                                 </div>
                             </form>
-                        </div> <!-- /.row -->
+                        </div> 
+
+
+
+
+ -->
 
 
 
 
 
+
+
+                                <!-- <h3 class="grid-heading codeheading" style="margin-bottom: 10px;">
+                                    <div class="display:flex" style="text-decoration: underline;">
+                                        Problem-Input/Edit-Section
+                                    </div>
+                                </h3> -->
+
+
+
+
+
+                                <!-- <div style="content-visibility: auto; background-color: white; padding: 50px 20px; border-radius: 5px; ">  -->
+                                <div style="content-visibility: auto; background-color: white; padding: 25px 5px; border-radius: 5px; "> 
+
+
+                                <form method="POST" action="{{request.path}}">
+                                {% csrf_token %}
+
+
+                                    <div class="col-md-7">  
+                                        <div class="col-md-12 inputbox" style="padding:0; margin:0;">                                                    
+                                            <!-- <label class="labels" style=""> Enter Your Code </label> -->
+                                            <textarea name="SolutionsCodeSubmissions" id="SolutionsCodeSubmissions" class="codetextarea codeinputs" placeholder="typing..." style="height:388px; background-color:white;">{{SolutionDataSet.codesubmissions}}</textarea>
+                                        </div>
+                                    </div>
+
+
+                                    <div class="col-md-5">  
+                                        <div class="col-md-12 inputbox" style="padding:0; margin:0; padding-left:5px; margin-top:10px;">
+                                            <label class="labels"> Data Structure </label>
+                                            <div style="display: flex; overflow-x: scroll; background-color: white; border-radius: 5px; border: 1px solid #d5d5d5; padding: 2px;">
+
+                                                    {% for object in DataStructures %}
+                                                        <div style="flex: none; padding: 5px 10px;">
+                                                            <input type="checkbox" id="SolutionsDataStructures" name="SolutionsDataStructures" value="{{object.id}}"  {% if object in SolutionDataSet.datastructures %} checked {% endif %}>
+                                                            <label for="SolutionsDataStructures"> {{object.name}}</label>
+                                                        </div>
+                                                    {% endfor %}
+
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-12 inputbox" style="padding:0; margin:0; padding-left:5px; margin-top:10px;">
+                                            <label class="labels"> Programming Language </label>
+                                            <select name="SolutionsProgrammingLanguage" id="SolutionsProgrammingLanguage" class="codeinputs">
+                                                {% if SolutionDataSet.programminglanguages %}
+                                                    {% for object in ProgrammingLanguages %}
+                                                        <option value="{{object.id}}"{% if object.id == SolutionDataSet.programminglanguages.id %} selected {% endif %}>{{object.name}}</option>
+                                                    {% endfor %}
+                                                {% else %}
+                                                    {% for object in ProgrammingLanguages %}
+                                                        <option value="{{object.id}}"{% if object.name == 'Python' %} selected {% endif %}>{{object.name}}</option>
+                                                    {% endfor %}
+                                                {% endif %}
+                                            </select>
+                                        </div>
+                                        <div class="col-md-12 inputbox" style="padding:0; margin:0; padding-left:5px; margin-top:10px;">
+                                            <label class="labels"> Time Complexity </label>
+                                            <input class="codeinputs" type="text" id="SolutionsTimeComplexity" name="SolutionsTimeComplexity" value="{{SolutionDataSet.timecomplexity}}">
+                                        </div>
+                                        <div class="col-md-12 inputbox" style="padding:0; margin:0; padding-left:5px; margin-top:10px;">
+                                            <label class="labels"> Auxiliary Complexity </label>
+                                            <input class="codeinputs" type="text" id="SolutionsAuxiliarySpace" name="SolutionsAuxiliarySpace" value="{{SolutionDataSet.auxiliaryspace}}">
+                                        </div>
+                                        <div class="col-md-12 inputbox" style="padding:0; margin:0; padding:50px 0 10px 0">
+                                            <input class="codeinputs" type="submit" style="background-color:#dd0000; color:white;"> 
+                                        </div>
+                                    </div>
+
+                                </form>
+
+                                
+                                </div>
 
 

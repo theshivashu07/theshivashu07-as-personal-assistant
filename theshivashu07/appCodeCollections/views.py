@@ -99,47 +99,6 @@ def addSolution(request, problemslug):
 
 
 
-def addProblemAndSolution(request):
-	if request.method=="POST":		
-		# termination-conditions  -  if problem already exist, then we move this to the oroginal problem side...
-		objectProblemLists = Problems.objects.filter(title=request.POST["ProblemsTitle"])
-		if(bool(objectProblemLists)):
-			# we know that their is only one problem exist with same name, thats-it...
-			objectProblem = objectProblemLists[0] 
-			messages.error(request, "Actually, same name's problem already exist in the database!!! See this opened problem...")
-			return redirect("/codecollections/problem/"+objectProblem.slug+"/")
-
-		# what if you put blank your problem's "title" or "detailsset", then we sent back to the same place again...
-		# we'll I'm already managing this, with set 'required' in these field, but always play safe, may I'll be forgrt... 
-		if( request.POST["ProblemsTitle"] == "" or request.POST["ProblemsDetailSet"] == "" ):
-			messages.error(request, "Problems 'Title' and 'Statement' is must to add!!!  Please Re-Submit again!!!")
-			thisisReturningDatabase = BulkViewFunctions.getBaseStructure()
-			thisisReturningDatabase.update( BulkViewFunctions.getbackProblemDetails(request) )
-			thisisReturningDatabase.update( BulkViewFunctions.getbackSolutionDetails(request) )
-			return render(request,"appCodeCollections/Problems-Solutions-Mini-Templates/problem-solution-add.html", thisisReturningDatabase);
-
-		# now this place is the safest place, so now add problem...
-		objectProblem = BulkViewFunctions.AddProblems(request)
-		messages.success(request, "New problem '" + objectProblem.title +"' is added.")
-
-		######################################################################################
-		# SOLUTION's --------------------------------------------------------------------------------------------------------------------------------------------------
-		if( request.POST["SolutionsCodeSubmissions"] == "" ):
-			messages.error(request, "Solution's 'code' is must to add!!! Please fill all fields again...")
-			thisisReturningDatabase = BulkViewFunctions.getBaseStructure()
-			return redirect("/codecollections/add-solution/"+objectProblem.slug+"/")
-			# return render(request,"appCodeCollections/Problems-Solutions-Mini-Templates/solution-add.html", thisisReturningDatabase);
-
-		# now this place is the safest place, so now add solution...
-		objectSolution = BulkViewFunctions.AddSolutions(request,objectProblem)
-		messages.success(request, "Problem '" + objectProblem.title +"' solution is added.")
-		return redirect("/codecollections/problem-solution/"+objectProblem.slug+"/"+str(objectSolution.id)+"/")
-
-	thisisReturningDatabase = BulkViewFunctions.getBaseStructure()
-	return render(request,"appCodeCollections/Problems-Solutions-Mini-Templates/problem-solution-add.html", thisisReturningDatabase);
-	# return render(request,"appCodeCollections/404.html");
-
-
 
 def editProblem(request, problemslug):
 	objectProblem=Problems.objects.get(slug=problemslug)
@@ -234,7 +193,8 @@ def problemsOnly(request):
 
 
 def openTestingPage(request):
-	return render(request,"appCodeCollections/Problems-Solutions-Mini-Templates/testingpage.html");
+	thisisReturningDatabase = BulkViewFunctions.getBaseStructure()
+	return render(request,"appCodeCollections/Problems-Solutions-Mini-Templates/testingpage.html", thisisReturningDatabase);
 	# return render(request,"appCodeCollections/404.html");
 
 

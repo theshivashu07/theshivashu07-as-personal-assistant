@@ -13,7 +13,7 @@ urlpatterns=[
 		# when want to add new problem or its solution or both, so we use these urls!!!
 		path('add-problem/',views.addProblem,name='addProblem'),
 		path('add-solution/<slug:problemslug>/',views.addSolution,name='addSolution'),
-		path('add-problem-solution/',views.addProblemAndSolution,name='addProblemAndSolution'),
+		# path('add-problem-solution/',views.addProblemAndSolution,name='addProblemAndSolution'),
 
 		# when wanted to update/edit our problems or solutions, we call these solutions!!!
 		path('edit-problem/<slug:problemslug>/',views.editProblem,name='editProblem'),
