@@ -5,6 +5,7 @@ from autoslug import AutoSlugField
 from django.template.defaultfilters import slugify
 
 import appCodeCollections.collections._default as DEFAULTs
+# from .models import *
 
 
 
@@ -69,6 +70,8 @@ class Problems(models.Model):
 		self.slug = slugify(self.title)
 		super().save(*args, **kwargs)
 
+	def __str__(self):
+		return str(self.id)+". "+self.title
 
 
 class problems_plateforms(models.Model):
@@ -98,6 +101,11 @@ class Solutions(models.Model):
 	explainlevel = models.IntegerField(default=1, null=True); 
 	JoiningDate = models.DateTimeField(auto_now_add=True); 
 	UpdationDate = models.DateTimeField(auto_now=True); 
+
+	def __str__(self):
+		# return self.filename[:7]
+		# return str(self.id)
+		return str(self.problem_id.id)+"-"+str(self.id)+". "+ProgrammingLanguages.objects.get(id=self.programminglanguages).name
 
 
 

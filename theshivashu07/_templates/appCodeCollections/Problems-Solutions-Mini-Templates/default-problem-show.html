@@ -6,8 +6,13 @@
                                     
                                     <div style="content-visibility: auto; background-color: white; padding: 20px; border-radius: 5px; ">
                                         <h3 class="grid-heading codeheading" style="margin-bottom:0;">
-                                            {% if request.path != "/codecollections/add-problem/" and request.path != "/codecollections/add-problem-solution/" %}
+
                                             <div style="float:right;text-align:right;display:inline-flex;">
+                                                <div style="background-color:lightgray; padding:5px; margin:5px; border-radius: 5px;">
+                                                    <a href="/codecollections/add-solution/{{ProblemDataSet.slug}}/" style="color:black; ">
+                                                        <i class="li_bulb"></i>
+                                                    </a>
+                                                </div>
                                                 <div style="background-color:lightgray; padding:5px; margin:5px; border-radius: 5px;">
                                                     <a href="/codecollections/edit-problem/{{ProblemDataSet.slug}}/" style="color:black; ">
                                                         <i class="li_pen"></i>
@@ -19,7 +24,7 @@
                                                     </a>
                                                 </div>
                                             </div>
-                                            {% endif %}
+
                                             <div style="display:flex;">
                                                 101. {{ProblemDataSet.title | default:None}}
                                                 <div style="margin: 10px 10px 0 10px; text-transform: initial; background-color: #ffa500; font-size: 14px; padding: 0 5px; border-radius: 5px; height: fit-content;">

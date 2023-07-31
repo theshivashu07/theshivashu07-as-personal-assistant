@@ -1,11 +1,13 @@
 
 
 
-                                <!-- <h3 class="grid-heading codeheading" style="margin-bottom: 10px;">
-                                    <div class="display:flex" style="text-decoration: underline;">
-                                        Problem-Input/Edit-Section
+                                <!-- <h3 class="grid-heading codeheading" style="margin-bottom: 10px;"> -->
+                                <h3 class="grid-heading codeheading" style="margin-bottom: 0;">
+                                    <!-- <div class="display:flex" style="text-decoration: underline;"> -->
+                                    <div class="display:flex">
+                                        (:    Problem-Input/Edit-Section
                                     </div>
-                                </h3> -->
+                                </h3>
 
 
 
@@ -67,15 +69,29 @@
                                         </div>
 
 
+
+
+                                        {% if 'edit-problem' in request.path %}
+
+                                        
                                         <div class="col-md-4 inputbox" style="padding:50px 0 10px 0; margin:0; padding-left:5px; margin-top:10px;">
-                                            <input class="codeinputs" type="submit" style="background-color:#dd0000; color:white;" value="Submit"> 
+                                            <input class="codeinputs" type="submit" style="background-color:#dd0000; color:white;" name="submit" value="Submit"> 
+                                        </div>
+
+                                        {% else %}
+
+                                        <div class="col-md-4 inputbox" style="padding:50px 0 10px 0; margin:0; padding-left:5px; margin-top:10px;">
+                                            <input class="codeinputs" type="submit" style="background-color:#dd0000; color:white;" name="submit" value="Submit"> 
                                         </div>
                                         <div class="col-md-4 inputbox" style="padding:50px 0 10px 0; margin:0; padding-left:5px; margin-top:10px;">
-                                            <input class="codeinputs" type="submit" style="background-color:#007700; color:white;" value="Submit + Add Solution Too"> 
+                                            <input class="codeinputs" type="submit" style="background-color:#007700; color:white;" name="submit" value="Submit + Add Solution"> 
                                         </div>
                                         <div class="col-md-4 inputbox" style="padding:50px 0 10px 0; margin:0; padding-left:5px; margin-top:10px;">
-                                            <input class="codeinputs" type="submit" style="background-color:#0000ff; color:white;" value="Submit + Add More Problems"> 
+                                            <input class="codeinputs" type="submit" style="background-color:#0000ff; color:white;" name="submit" value="Submit + Add More"> 
                                         </div>
+
+                                        {% endif %}
+
 
 
                                     </div>
