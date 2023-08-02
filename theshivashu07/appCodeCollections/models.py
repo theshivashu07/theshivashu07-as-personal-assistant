@@ -62,6 +62,7 @@ class Problems(models.Model):
 	detailsset = models.CharField(max_length=500, default=None, null=True);				#current_show_data 
 	timecomplexity = models.CharField(max_length=35, default=None, null=True);
 	auxiliaryspace = models.CharField(max_length=35, default=None, null=True);
+	SolutionsCount = models.IntegerField(default=0, null=True);
 	JoiningDate = models.DateTimeField(auto_now_add=True);
 	UpdationDate = models.DateTimeField(auto_now=True);
 
@@ -103,10 +104,7 @@ class Solutions(models.Model):
 	UpdationDate = models.DateTimeField(auto_now=True); 
 
 	def __str__(self):
-		# return self.filename[:7]
-		# return str(self.id)
 		return str(self.problem_id.id)+"-"+str(self.id)+". "+ProgrammingLanguages.objects.get(id=self.programminglanguages).name
-
 
 
 class solutions_datastructures(models.Model):

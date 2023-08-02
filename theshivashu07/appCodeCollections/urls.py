@@ -24,8 +24,9 @@ urlpatterns=[
 		path('delete-solution/<slug:problemslug>/<str:solutionid>/',views.deleteSolution,name='deleteSolution'),
 
 		# these are two specific urls, first is all problem with solution, and second is problems which solution not available!!!
-		path('problems-with-solutions/',views.problemsWholeList,name='problemsWholeList'),
-		path('problems-without-solutions/',views.problemsOnly,name='problemsOnly'),
+		path('problems-with-solutions/',views.fatchProblemsWithOrWithoutSolutions,name='fatchProblemsWithOrWithoutSolutions'),
+		path('problems-without-solutions/',views.fatchProblemsWithOrWithoutSolutions,name='fatchProblemsWithOrWithoutSolutions'),		
+		path('problems-with-or-without-solutions/',views.fatchProblemsWithOrWithoutSolutions,name='fatchProblemsWithOrWithoutSolutions'),
 
 		# here is showing problem, and other solutions only links available, not all solutions shows!!!
 		path('problem/<slug:problemslug>/',views.openProblem,name='openProblem'),
@@ -39,4 +40,4 @@ urlpatterns=[
 
 ]
 
-
+# 

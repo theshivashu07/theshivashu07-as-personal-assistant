@@ -227,6 +227,10 @@ def AddSolutions(request,problemID):
 	# solution-assignment - and there is build file with its name!!!
 	BuildFilePaths.assignSolution(object,SolutionsProgrammingLanguage,SolutionsCodeSubmissions)
 
+	# add-SolutionsCount
+	problemID.SolutionsCount += 1
+	problemID.save()
+
 	return object
 	# return None
 
@@ -293,26 +297,33 @@ def EditSolutions(request,problemID,solutionID):
 
 
 
-def WholeDataSet():
-	objects=Solutions.objects.all()
-	result = list()
-	for object in objects:
-		object.programminglanguages = ProgrammingLanguages.objects.get(id=object.programminglanguages)
-		result.append(object)
-	return result
 
 
-def OnlyProblems():
-	objectsProblems = Problems.objects.all()
-	objectsSolutions = Solutions.objects.all()
-	sets = set()
-	for object in objectsSolutions:
-		sets.add(object.problem_id.id)
-	objects = list()
-	for object in objectsProblems:
-		if(object.id not in sets):
-			objects.append(object)
-	return objects
+
+
+def AllProblemWithOrWithoutSolutions(incoming):
+	def findSolutionObjects(id):
+		templist = list()
+		for object in Solutions.objects.all():
+			if(object.problem_id.id==id):
+				object.programminglanguages = ProgrammingLanguages.objects.get(id=object.programminglanguages).name
+				templist.append(object)
+		return templist
+
+	returnback = dict()
+	for object in Problems.objects.all():
+		tracks = { '__all__':True, '__with__':bool(object.SolutionsCount), '__without__':not bool(object.SolutionsCount) }
+		if tracks[incoming]:
+			solutionsobject = findSolutionObjects(object.id)
+			returnback[object] = solutionsobject
+	return returnback
+
+
+
+
+
+
+
 
 
 

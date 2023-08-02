@@ -9,7 +9,8 @@ problems_location = "_uploads\\appCodeCollections\problems"
 solutions_location = "_uploads\\appCodeCollections\solutions"
 
 
-
+deleted_problems_location = "_uploads\\appCodeCollections\deleted_problems"
+deleted_solutions_location = "_uploads\\appCodeCollections\deleted_solutions"
 
 
 

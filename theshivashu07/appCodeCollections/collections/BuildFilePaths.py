@@ -4,6 +4,10 @@ from appCodeCollections.models import *
 # import appCodeCollections.models as MODELs
 import appCodeCollections.collections._default as DEFAULTs
 
+# this library is helpful for moving files one-place to another-place
+import shutil
+
+import os
 
 
 
@@ -14,7 +18,7 @@ def assignProblem(object,ProblemsDataStructures,wholeStatement):
 	object.save()  #must to save this, so that it also save on the main place.
 	with open( f"{DEFAULTs.problems_location}\\{object.filename}" , 'wb' ) as file: 
 		# actually below we converting normal-text-data to a binary-data.
-		file.write(wholeStatement.encode("ascii",errors="xmlcharrefreplace"))
+		file.write(wholeStatement.encode(encoding="ascii",errors="xmlcharrefreplace"))
 		# file.write(wholeStatement.encode(encoding="ascii",errors="xmlcharrefreplace"))  #original-things
 	return
 
@@ -31,8 +35,9 @@ def getProblem(object):
 	# lets get files data, to show-case
 	with open( f"{DEFAULTs.problems_location}\\{object.filename}" , 'rb' ) as file:
 		# actually below we converting normal-text-data to a binary-data, with line change.
-		object.detailsset=file.read().decode("ascii",errors="xmlcharrefreplace")
-		object.detailsset =  '<br>'.join( object.detailsset.split('\n') )
+		withoutLineChange = file.read().decode("ascii",errors="xmlcharrefreplace")
+		withLineChange=  '<br>'.join( withoutLineChange.split('\n') )
+		object.detailsset=[withLineChange,withoutLineChange]
 	return
 
 def getSolution(object):
@@ -66,6 +71,44 @@ def buildSolutionFilePath(object,SolutionsProgrammingLanguage):
 	filepath += "#" + plObject.name.lower()
 	filepath += plObject.extension
 	return filepath
+
+
+
+
+def editProblems(objectProblem):
+	"""because we already coming to edit-problem, means we have new data, so better thing that I delete old existing file..."""
+	print(f"{DEFAULTs.problems_location}\\{objectProblem.filename}")
+	os.remove(f"{DEFAULTs.problems_location}\\{objectProblem.filename}")
+	return 
+
+def editSolutions(objectSolution):
+	"""because we already coming to edit-solution, means we have new data, so better thing that I delete old existing file..."""
+	print(f"{DEFAULTs.solutions_location}\\{objectSolution.filename}")
+	os.remove(f"{DEFAULTs.solutions_location}\\{objectSolution.filename}")
+	return 
+
+
+
+def deleteProblemsAndSolutions(objectProblem):
+	shutil.move(f"{DEFAULTs.problems_location}\\{objectProblem.filename}", f"{DEFAULTs.deleted_problems_location}\\{objectProblem.filename}")
+	for object in Solutions.objects.all():
+		if(object.problem_id == objectProblem):
+			deleteSolutions(object)
+	print("Problem's All Movements DONE!!!")
+	return 
+
+def deleteSolutions(objectSolution):
+	shutil.move(f"{DEFAULTs.solutions_location}\\{objectSolution.filename}", f"{DEFAULTs.deleted_solutions_location}\\{objectSolution.filename}")
+	print("Solution's All Movements DONE!!!")
+	return 
+
+
+
+
+
+
+
+
 
 
 

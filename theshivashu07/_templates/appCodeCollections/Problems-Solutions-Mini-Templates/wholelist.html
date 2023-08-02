@@ -32,7 +32,7 @@
 
                 <!-- <div class="row">
                     <div class="section-header col-md-12" style="margin: 20px;">
-                        <h2 class="grid-heading codeheading" style="font-weight:bold;"> Problems-Solutions List </h2>
+                        <h2 class="grid-heading codeheading" style="font-weight:bold;"> All Problems List </h2>
                         <span>PATH: "{{request.path}}"</span>
                     </div> 
                 </div>  -->
@@ -40,8 +40,66 @@
                 <div class="row">
                     <div class="col-md-12">
                         <!-- <div class="box-content" style="padding: 50px;"> -->
-                        <div class="box-content" style="padding: 25px;">
-                            <div class="row" style="background-color:#fafafa;border-radius:5px;padding:20px 5px;">
+                        <div class="box-content" style="padding:25px;">
+                            <div class="row" style="background-color:#fafafa;padding:20px 5px;">
+                                <div class="col-md-12"> 
+
+                                        <div class="col-md-12 inputbox" style="padding:25px; background-color:white; border-radius:50px;">
+                                    <form method="POST" action="{{request.path}}">
+                                        {% csrf_token %}
+<table class="table table-hover" style="margin-bottom:10px;">
+    <thead>
+        <tr>
+            <th scope="col">
+<div class="form-check">
+    <label class="form-check-label" for="flexRadioDefault1">
+  <input class="form-check-input" type="radio" name="problemselection" value="problems-with-or-without-solutions" {% if 'problems-with-or-without-solutions' in request.path %} checked {% endif %}>
+    problems-with-or-without-solutions
+    </label>
+</div>
+            </th>
+            <th scope="col">
+<div class="form-check">
+    <label class="form-check-label" for="flexRadioDefault2">
+  <input class="form-check-input" type="radio" name="problemselection" value="problems-with-solutions" {% if 'problems-with-solutions' in request.path %} checked {% endif %}>
+    problems-with-solutions-only
+    </label>
+</div>
+            </th>
+            <th scope="col">
+<div class="form-check">
+    <label class="form-check-label" for="flexRadioDefault3">
+  <input class="form-check-input" type="radio" name="problemselection" value="problems-without-solutions" {% if 'problems-without-solutions' in request.path %} checked {% endif %}>
+    problems-without-solutions-only
+  </label>
+</div>
+            </th>
+            <th scope="col" style="padding-left: 150px;">
+
+
+                                        <!-- <div class="col-md-12 inputbox" style="margin-bottom:0;"> -->
+                                            <input class="codeinputs" type="submit" style="background-color:#dd0000; color:white; padding:5px;" name="submit" value="Submit"> 
+                                            <!-- <button type="button" class="btn btn-secondary btn-sm">Small button</button> -->
+                                        <!-- </div> -->
+
+            </th>
+        </tr>
+    </thead>
+</table>
+
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    <!-- </div> -->
+                <!-- </div> -->
+
+
+
+                    <!-- <div class="col-md-12"> -->
+                        <!-- <div class="box-content" style="padding: 50px;"> -->
+                        <!-- <div class="box-content" style="padding: 100px 20px;"> -->
+                            <div class="row" style="background-color:#fafafa;border-radius:5px;padding:20px 5px; padding-top:30px;">
 
 
 
@@ -50,31 +108,71 @@
 
 
 
-<table class="table">
+<table class="table table-hover">
   <thead>
     <tr>
       <th scope="col">#</th>
       <th scope="col">Problem Name</th>
-      <th scope="col">Solution Language</th>
-      <th scope="col">Time Complexity</th>
-      <th scope="col">Space Complexity</th>
+      <!-- <th scope="col" style="text-align: center;">Solutions Count</th> -->
+      <th scope="col" style="text-align: center;">Solution Language</th>
+      <th scope="col" style="text-align: center;">Time Complexity</th>
+      <th scope="col" style="text-align: center;">Space Complexity</th>
+      <th></th>
     </tr>
   </thead>
   <tbody>
-  	{% for object in AllSolutions %}
-    <tr>
-      <th scope="row">
-        {{ forloop.counter }}.
-        </th>
-      <td scope="row">
-        <a href="/codecollections/problem-solution/{{object.problem_id.slug}}/{{object.id}}/">
-            {{object.problem_id.title}}
-        </td>
-      <td>{{object.programminglanguages.name}}</td>
-      <td>{{object.timecomplexity}}</td>
-      <td>{{object.auxiliaryspace}}</td>
-    </tr>
-    {% endfor %}
+
+        {% for object,objectslist in AllProblemsSolutions.items  %}
+
+            {% with firstloopcounter=forloop.counter %}  
+
+                {% if objectslist %}
+                    {% for object_ in objectslist %}
+                        <tr>
+                            {% if forloop.counter == 1 %}
+                                <th scope="row ">
+                                    {{ firstloopcounter }}
+                                </th>
+                                <td scope="row ">
+                                    <a href="/codecollections/problem/{{object.slug}}/">
+                                        {{object.title}}
+                                    </a> ({{object.SolutionsCount}})
+                                </td>
+                            {% else %}
+                                <th></th>
+                                <td></td>
+                            {% endif %}
+                            <td style="text-align: center;">{{object_.programminglanguages}}</td>
+                            <td style="text-align: center;">{{object_.timecomplexity}}</td>
+                            <td style="text-align: center;">{{object_.auxiliaryspace}}</td>
+                            <td style="text-align: center;">
+                                <a href="/codecollections/problem-solution/{{object.slug}}/{{object_.id}}/">
+                                    open-solution
+                                </a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                {% else %}
+                    <tr>
+                        <th scope="row ">
+                            {{ firstloopcounter }}
+                        </th>
+                        <td scope="row ">
+                            <a href="/codecollections/problem/{{object.slug}}/">
+                                {{object.title}} 
+                            </a> ({{object.SolutionsCount}})
+                        </td>
+                        <td style="text-align: center;">-</td>
+                        <td style="text-align: center;">-</td>
+                        <td style="text-align: center;">-</td>
+                        <td style="text-align: center;">-</td>
+                    </tr>
+                {% endif %}
+
+            {% endwith %}
+
+        {% endfor %}
+
   </tbody>
 </table>
 

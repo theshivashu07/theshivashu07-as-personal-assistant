@@ -4,17 +4,22 @@ from django.http import HttpResponse
 
 from .models import *
 import appCodeCollections.collections.BulkViewFunctions as BulkViewFunctions
+import appCodeCollections.collections.BuildFilePaths as BuildFilePaths
 from django.contrib import messages
+
+
 
 
 
 # def index(request):
 	# return HttpResponse("Hey <b>Shivam Shukla</b>, <b style='font-size:10px'>N your url '@theshivashu07'</b> !!!");
 
-
 def index(request):
-	messages.success(request, "Welcome to theCodeCollections's HOME Page!!!")
 	return render(request,"appCodeCollections/index.html");
+
+
+
+
 
 def edittables(request):
 	if request.method=="POST":
@@ -27,15 +32,9 @@ def edittables(request):
 			messages.success(request, comingData+" added on '"+comingFrom + "' Database.")
 		return redirect("/codecollections/edit-tables/")
 
-	thisisReturningDatabase = {
-		'Plateforms' : Plateforms.objects.all(),
-		'DataStructures' : DataStructures.objects.all(),
-		'ProgrammingLanguages' : ProgrammingLanguages.objects.all(),
-	}
+	thisisReturningDatabase = BulkViewFunctions.getBaseStructure()
 	return render(request,"appCodeCollections/edittables.html", thisisReturningDatabase);
 	# return render(request,"appCodeCollections/404.html");
-
-
 
 
 
@@ -44,14 +43,10 @@ def edittables(request):
 def addProblem(request): 
 	# problemID=Problems.objects.get(slug=defaultSlug)
 	if request.method=="POST":
-
-		print(request)
-		print(request.POST)
-
 		# termination-conditions  -  if problem already exist, then we move this to the oroginal problem side...
 		objectProblemLists = Problems.objects.filter(title=request.POST["ProblemsTitle"])
 		if(bool(objectProblemLists)):
-			# we know that their is only one problem exist with same name, thats-it...
+			# we know that their is already one-problem exist with same name, so redirect on this...
 			objectProblem = objectProblemLists[0] 
 			messages.error(request, "Actually, same name's problem already exist in the database!!! See this opened problem...")
 			return redirect("/codecollections/problem/"+objectProblem.slug+"/")
@@ -60,23 +55,14 @@ def addProblem(request):
 		object = BulkViewFunctions.AddProblems(request)
 		messages.success(request, "New problem '" + object.title +"' is added.")
 
+		# now we redirect our urls, according to pressed submit buttons...
 		getting = request.POST["submit"]
-		print(getting)
-		if(getting == "Submit"):
-			print(1)
-			return redirect("/codecollections/problem/"+object.slug+"/")
-		elif(getting == "Submit + Add Solution"):
-			print(2)
-			return redirect("/codecollections/add-solution/"+object.slug+"/")
-		elif(getting == "Submit + Add More"):
-			print(3)
-			return redirect("/codecollections/add-problem/")
-		else:			
-			messages.error(request, "Must to visit you on code selction, because you do some un-wanted thing.")
-			return redirect("/")
-
-
-		
+		tracks = {  "Submit":"problem/"+object.slug+"/", "Submit + Add Solution":"add-solution/"+object.slug+"/", "Submit + Add More":"add-problem/"  }
+		if(tracks.get(getting,0)):
+			return redirect("/codecollections/"+tracks[getting])
+		# I know only three buttons in the options, but for play safe, I code below, otherwise its never coming situation!!!
+		messages.error(request, "Must to visit you on code section, because you do some un-wanted thing.")
+		return redirect("/")	
 
 	thisisReturningDatabase = BulkViewFunctions.getBaseStructure()
 	return render(request,"appCodeCollections/Problems-Solutions-Mini-Templates/problem-add.html", thisisReturningDatabase);
@@ -153,11 +139,15 @@ def addProblemAndSolution(request):
 '''
 
 
+
+
+
 def editProblem(request, problemslug):
 	objectProblem=Problems.objects.get(slug=problemslug)
 	if request.method=="POST":
 		if( request.POST["ProblemsTitle"] and request.POST["ProblemsDetailSet"] ):
-			BulkViewFunctions.EditProblems(request,objectProblem)																			#wantchange___
+			BuildFilePaths.editProblems(objectProblem)
+			BulkViewFunctions.EditProblems(request,objectProblem)	
 		else:
 			print("This is not correct Input's... Reput again!!!")
 		return redirect("/codecollections/problem/"+objectProblem.slug+"/")
@@ -167,11 +157,13 @@ def editProblem(request, problemslug):
 	return render(request,"appCodeCollections/Problems-Solutions-Mini-Templates/problem-edit.html", thisisReturningDatabase);
 	# return render(request,"appCodeCollections/404.html");
 
+
 def editSolution(request, problemslug, solutionid):
 	objectProblem=Problems.objects.get(slug=problemslug)
 	objectSolution=Solutions.objects.get(id=solutionid)
 	if request.method=="POST":
 		if( request.POST["SolutionsCodeSubmissions"] ):
+			BuildFilePaths.editSolutions(objectSolution)
 			BulkViewFunctions.EditSolutions(request,objectProblem,objectSolution.id)
 		else:
 			print("This is not correct Input's... Reput again!!!")
@@ -186,13 +178,27 @@ def editSolution(request, problemslug, solutionid):
 
 
 
+
 def deleteProblem(request, problemslug):
 	objectProblem=Problems.objects.get(slug=problemslug)
+	# move files to another folders for problem as-well-as its solutions
+	BuildFilePaths.deleteProblemsAndSolutions(objectProblem)
+
+	# after all tasks performing, delete this
 	objectProblem.delete()
 	return redirect("/codecollections/problems-with-solutions/")
 
+
 def deleteSolution(request, problemslug, solutionid):
 	objectSolution=Solutions.objects.get(id=solutionid)
+	# move files to another folders for solutions
+	BuildFilePaths.deleteSolutions(objectSolution)
+
+	# update-SolutionsCount
+	objectSolution.problem_id.SolutionsCount -= 1
+	objectSolution.problem_id.save()
+
+	# after all tasks performing, delete this
 	objectSolution.delete()
 	return redirect("/codecollections/problems-with-solutions/")
 
@@ -224,33 +230,42 @@ def openProblem(request, problemslug):
 
 
 
-def problemsWholeList(request):
 
+def fatchProblemsWithOrWithoutSolutions(request):
+	if request.method=="POST":
+		return redirect("/codecollections/"+ request.POST["problemselection"] +"/")
+	tracks = {  
+		'/codecollections/problems-with-or-without-solutions/':'__all__', 
+		'/codecollections/problems-with-solutions/':'__with__', 
+		'/codecollections/problems-without-solutions/':'__without__'  
+	}
 	thisisReturningDatabase = BulkViewFunctions.getBaseStructure()
-	thisisReturningDatabase['AllSolutions'] = BulkViewFunctions.WholeDataSet()
+	thisisReturningDatabase['AllProblemsSolutions'] = BulkViewFunctions.AllProblemWithOrWithoutSolutions(tracks[request.path])
 	return render(request,"appCodeCollections/Problems-Solutions-Mini-Templates/wholelist.html", thisisReturningDatabase);
-	# return render(request,"appCodeCollections/404.html");
-
-
-
-
-def problemsOnly(request):
-
-	thisisReturningDatabase = BulkViewFunctions.getBaseStructure()
-	thisisReturningDatabase['AllProblems'] = BulkViewFunctions.OnlyProblems()
-	return render(request,"appCodeCollections/Problems-Solutions-Mini-Templates/onlyproblems.html", thisisReturningDatabase);
-	# return render(request,"appCodeCollections/404.html");
 
 
 
 
 
 def openTestingPage(request):
+	# thisisReturningDatabase = BulkViewFunctions.getBaseStructure()
+	# return render(request,"appCodeCollections/Problems-Solutions-Mini-Templates/testingpage.html", thisisReturningDatabase);
+	return render(request,"appCodeCollections/404.html");
 
-	thisisReturningDatabase = BulkViewFunctions.getBaseStructure()
-	thisisReturningDatabase['AllSolutions'] = BulkViewFunctions.WholeDataSet()
-	return render(request,"appCodeCollections/Problems-Solutions-Mini-Templates/testingpage.html", thisisReturningDatabase);
-	# return render(request,"appCodeCollections/404.html");
+
+
+ 
+
+
+
+
+
+
+
+
+
+
+
 
 
 
