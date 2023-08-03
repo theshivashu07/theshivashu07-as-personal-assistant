@@ -12,6 +12,9 @@ def ProblemDataSet(problemID):
 	object.plateforms=[ Plateforms.objects.get(pk=object.plateform_id) for object in holds ]
 	holds=problems_datastructures.objects.filter(problem_id=problemID.id)
 	object.datastructures=[ DataStructures.objects.get(pk=object.datastructure_id) for object in holds ]
+	holds=problems_dsasheetlist.objects.filter(problem_id=problemID.id)
+	object.dsasheetlist=[ DSAsSheetsLists.objects.get(pk=object.dsasheetlist_id) for object in holds ]
+	object.subproblem = SubProblems.objects.filter(problem_id=problemID.id)
 
 	# problem-assignment - and there is getting problem-file's data!!!
 	BuildFilePaths.getProblem(object)
@@ -23,7 +26,8 @@ def SolutionDataSet(problemID,solutionID):
 	object=Solutions.objects.get(id=solutionID)
 	object.programminglanguages=ProgrammingLanguages.objects.get(pk=object.programminglanguages)
 	holds=solutions_datastructures.objects.filter(solution_id=solutionID)
-	object.datastructures=[ DataStructures.objects.get(pk=object.datastructure_id) for object in holds ]     
+	object.datastructures=[ DataStructures.objects.get(pk=object.datastructure_id) for object in holds ] 
+	object.attachments = SolutionsAttachments.objects.filter(solution_id=solutionID)
 
 	# solution-assignment - and there is getting solution-file's data!!!
 	BuildFilePaths.getSolution(object)
@@ -39,6 +43,7 @@ def AddProblems(request):
 	ProblemsTitle=request.POST["ProblemsTitle"]
 	ProblemsPlateforms=request.POST.getlist("ProblemsPlateforms")
 	ProblemsDataStructures=request.POST.getlist("ProblemsDataStructures")
+	ProblemsDSAsSheetsLists=request.POST.getlist("ProblemsDSAsSheetsLists")
 	ProblemsDetailSet=request.POST["ProblemsDetailSet"]
 	ProblemsTimeComplexity=request.POST["ProblemsTimeComplexity"]
 	ProblemsAuxiliarySpace=request.POST["ProblemsAuxiliarySpace"]
@@ -84,6 +89,23 @@ def AddProblems(request):
 				miniobject.delete()
 		object.save()
 
+	if(ProblemsDSAsSheetsLists):
+		object.dsasheetlist=len(ProblemsDSAsSheetsLists)
+		holds = [ str(object.dsasheetlist_id) for object in problems_dsasheetlist.objects.filter(problem_id=object.id) ]
+		for id in ProblemsDSAsSheetsLists:
+			if(id in holds):
+				holds.remove(id)
+			else:
+				miniobject=problems_dsasheetlist()
+				miniobject.problem_id=object
+				miniobject.dsasheetlist_id=id
+				miniobject.save()
+		else:
+			for id in holds:
+				miniobject = problems_dsasheetlist.objects.get(dsasheetlist_id=id, problem_id=object.id)
+				miniobject.delete()
+		object.save()
+
 	if(ProblemsDetailSet):
 		object.detailsset=ProblemsDetailSet
 		object.save()
@@ -109,6 +131,7 @@ def EditProblems(request,problemID):
 	ProblemsTitle=request.POST["ProblemsTitle"]
 	ProblemsPlateforms=request.POST.getlist("ProblemsPlateforms")
 	ProblemsDataStructures=request.POST.getlist("ProblemsDataStructures")
+	ProblemsDSAsSheetsLists=request.POST.getlist("ProblemsDSAsSheetsLists")
 	ProblemsDetailSet=request.POST["ProblemsDetailSet"]
 	ProblemsTimeComplexity=request.POST["ProblemsTimeComplexity"]
 	ProblemsAuxiliarySpace=request.POST["ProblemsAuxiliarySpace"]
@@ -154,6 +177,23 @@ def EditProblems(request,problemID):
 				miniobject.delete()
 		object.save()
 
+	if(ProblemsDSAsSheetsLists):
+		object.dsasheetlist=len(ProblemsDSAsSheetsLists)
+		holds = [ str(object.dsasheetlist_id) for object in problems_dsasheetlist.objects.filter(problem_id=object.id) ]
+		for id in ProblemsDSAsSheetsLists:
+			if(id in holds):
+				holds.remove(id)
+			else:
+				miniobject=problems_dsasheetlist()
+				miniobject.problem_id=object
+				miniobject.dsasheetlist_id=id
+				miniobject.save()
+		else:
+			for id in holds:
+				miniobject = problems_dsasheetlist.objects.get(dsasheetlist_id=id, problem_id=object.id)
+				miniobject.delete()
+		object.save()
+
 	if(ProblemsDetailSet):
 		object.detailsset=ProblemsDetailSet
 		object.save()
@@ -175,10 +215,11 @@ def EditProblems(request,problemID):
 
 def AddSolutions(request,problemID):
 	# when you want to ADD Solution...
+	SolutionsLink=request.POST["SolutionsLink"]
+	SolutionsNote=request.POST["SolutionsNote"]
+	SolutionsShownTitle=request.POST["SolutionsShownTitle"]
 	SolutionsDataStructures=request.POST.getlist("SolutionsDataStructures")
 	SolutionsProgrammingLanguage=request.POST["SolutionsProgrammingLanguage"]
-	# SolutionsPlateforms=request.POST.get("SolutionsPlateforms")
-	# SolutionsPlateforms=request.POST["SolutionsPlateforms"]
 	SolutionsTimeComplexity=request.POST["SolutionsTimeComplexity"]
 	SolutionsAuxiliarySpace=request.POST["SolutionsAuxiliarySpace"]
 	SolutionsCodeSubmissions=request.POST["SolutionsCodeSubmissions"]
@@ -224,6 +265,17 @@ def AddSolutions(request,problemID):
 				miniobject.delete()
 		object.save()
 
+	# must that you putted any one data-structure...
+	if(SolutionsLink or SolutionsShownTitle or SolutionsNote):
+		object.attachments=1
+		object.save()
+		tempobject = SolutionsAttachments()
+		tempobject.solution_id = object
+		tempobject.link = SolutionsLink
+		tempobject.note = SolutionsNote
+		tempobject.showntitle = SolutionsShownTitle
+		tempobject.save()
+
 	# solution-assignment - and there is build file with its name!!!
 	BuildFilePaths.assignSolution(object,SolutionsProgrammingLanguage,SolutionsCodeSubmissions)
 
@@ -237,6 +289,9 @@ def AddSolutions(request,problemID):
 
 def EditSolutions(request,problemID,solutionID):
 	# when you want to EDIT Solution...
+	SolutionsLink=request.POST["SolutionsLink"]
+	SolutionsNote=request.POST["SolutionsNote"]
+	SolutionsShownTitle=request.POST["SolutionsShownTitle"]
 	SolutionsDataStructures=request.POST.getlist("SolutionsDataStructures")
 	SolutionsProgrammingLanguage=request.POST["SolutionsProgrammingLanguage"]
 	# SolutionsPlateforms=request.POST["SolutionsPlateforms"]
@@ -255,9 +310,17 @@ def EditSolutions(request,problemID,solutionID):
 		object.programminglanguages=SolutionsProgrammingLanguage
 		object.save()
 
-	# if(SolutionsPlateforms):
-	# 	object.plateforms=SolutionsPlateforms
-	# 	object.save()
+	# must that you putted any one data-structure...
+	if(SolutionsLink or SolutionsShownTitle or SolutionsNote):
+		tempobjects = SolutionsAttachments.objects.filter(solution_id=solutionID)
+		object.attachments=len(tempobjects)
+		object.save()
+		tempobject = tempobjects[0]
+		tempobject.solution_id = object
+		tempobject.link = SolutionsLink
+		tempobject.note = SolutionsNote
+		tempobject.showntitle = SolutionsShownTitle
+		tempobject.save() 
 
 	if(SolutionsTimeComplexity):
 		object.timecomplexity=SolutionsTimeComplexity
@@ -335,6 +398,7 @@ def getBaseStructure():
 		'Plateforms' : Plateforms.objects.all(),
 		'DataStructures' : DataStructures.objects.all(),
 		'ProgrammingLanguages' : ProgrammingLanguages.objects.all(),
+		'DSAsSheetsLists' : DSAsSheetsLists.objects.all(),
 	}
 	return thisisReturningDatabase
 

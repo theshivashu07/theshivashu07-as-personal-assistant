@@ -38,7 +38,17 @@
                                                     {% endif %}
                                                 </div>
                                             </div>
-                                            <div style="border-radius:2px;font-size:12px;margin-top:-5px;">
+                                            <div style="border-radius:2px;font-size:16px; margin:-10px 0 10px 0;">
+                                                {% if ProblemDataSet.subproblem %}
+                                                    <b style="color:black; margin-right: 10px; text-decoration:underline;">Sub-Name's</b>  
+                                                    {% for object in ProblemDataSet.subproblem %}
+                                                        <b class="tags2" style="background-color:#dddddd; color:white;">{{object.title}}</b>
+                                                    {% endfor %}
+                                                {% endif %}
+                                            </div>
+
+
+                                            <div style="border-radius:2px;font-size:12px;">
                                                 <b style="color:black; margin-right: 10px;">Related Tagged Data Structure's : </b>
                                                 {% if ProblemDataSet.datastructures %}
                                                     {% for object in ProblemDataSet.datastructures %}
@@ -48,6 +58,17 @@
                                                     <b class="tags2">None</b>
                                                 {% endif %}
                                             </div>
+                                            <div style="border-radius:2px;font-size:12px;">
+                                                <b style="color:black; margin-right: 10px;">Related Tagged DSA Sheet/List  : </b>
+                                                {% if ProblemDataSet.dsasheetlist %}
+                                                    {% for object in ProblemDataSet.dsasheetlist %}
+                                                        <b class="tags2">{{object.name}}</b>
+                                                    {% endfor %}
+                                                {% else %}
+                                                    <b class="tags2">None</b>
+                                                {% endif %}
+                                            </div>
+                                            
                                         </h3>
 
 

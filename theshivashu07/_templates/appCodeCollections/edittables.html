@@ -147,7 +147,41 @@
                                             </ul>
                                         </div>
                                     </div>
+                                </div> <!-- /.col-md-12 -->
+                            </div> <!-- /.row -->
 
+                            <hr>
+
+                            <div class="row" style="background-color:#fafafa;border-radius:5px;padding:20px 5px;">
+                                <div class="col-md-12">
+                                    <h3 class="codeheading" style="margin-bottom:0;font-weight:normal;color:#484848;font-size:20px;">
+                                        SHOW - DSA Sheets & Lists
+                                    </h3>
+                                    <div class="col-md-12" style="padding:0;">
+                                        <div class="col-md-12 inputbox" style="background-color:black;border-radius:5px; margin:0;">
+                                            <ul style="list-style: decimal-leading-zero;padding:25px 50px;">
+                                                <div>
+                                                    {% for dataset in DSAsSheetsLists %}
+                                                        <li style="background-color: #222222;padding:0 10px; margin-bottom:1px;"> <label class="labels" style=""> {{dataset.name}} </label> </li>
+                                                    {% endfor %}
+                                                </div>
+                                                <div style="padding: 5px 0px;">
+                                                    <li> 
+                                                        <form method="POST" action="{{request.path}}">
+                                                        {% csrf_token %}
+                                                            <div style="display: flex;">
+                                                                <input  type="hidden" name="comingFrom" value="DSASheetList"> 
+                                                                <input class="codeinputs" name="comingName" type="text" placeholder="Enter given Name!!" style="width:90%; margin-right:2px;" required> 
+                                                                <input class="codeinputs" name="comingBy" type="text" placeholder="Enter given BY? Detailed!!!" style="width:90%; margin-right:2px;" required> 
+                                                                <input class="codeinputs" name="comingReference" type="text" placeholder="Enter given Reference Link!!!" style="width:90%; margin-right:2px;" required> 
+                                                                <input class="codeinputs" type="submit" style="width:10%; background-color:darkred; color:white;"> 
+                                                            </div>
+                                                        </form>
+                                                    </li>
+                                                </div>
+                                            </ul>
+                                        </div>
+                                    </div>
                                 </div> <!-- /.col-md-12 -->
                             </div> <!-- /.row -->
                         </div> <!-- /.box-content -->

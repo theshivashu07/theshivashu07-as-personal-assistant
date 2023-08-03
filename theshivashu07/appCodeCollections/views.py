@@ -24,12 +24,17 @@ def index(request):
 def edittables(request):
 	if request.method=="POST":
 		comingFrom=request.POST["comingFrom"]
-		comingData=request.POST["comingData"]
-		if(comingFrom in ['Plateform', 'DataStructure', 'ProgrammingLanguage']):
-			lock= ( Plateforms() if(comingFrom=='Plateform') else ( DataStructures() if(comingFrom=='DataStructure') else ProgrammingLanguages() ) )
-			lock.name=comingData;
+		tracks = { 'Plateform':Plateforms(), 'DataStructure':DataStructures(), 'ProgrammingLanguage':ProgrammingLanguages(), 'DSASheetList':DSAsSheetsLists() }
+		if(comingFrom in tracks):
+			lock= tracks[comingFrom]
+			if(comingFrom == 'DSASheetList'):
+				lock.name = request.POST["comingName"]
+				lock.by = request.POST["comingBy"]
+				lock.reference = request.POST["comingReference"]
+			else:
+				lock.name=request.POST["comingData"]
 			lock.save()
-			messages.success(request, comingData+" added on '"+comingFrom + "' Database.")
+			messages.success(request, lock.name+" added on '"+comingFrom + "' Database.")
 		return redirect("/codecollections/edit-tables/")
 
 	thisisReturningDatabase = BulkViewFunctions.getBaseStructure()

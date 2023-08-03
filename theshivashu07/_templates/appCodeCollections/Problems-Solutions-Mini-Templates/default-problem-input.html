@@ -22,7 +22,7 @@
                                     <div class="col-md-6">  
                                         <div class="col-md-12 inputbox" style="padding:0; margin:0;">
                                             <!-- <label class="labels" style=""> Enter Details </label> -->
-                                            <textarea name="ProblemsDetailSet" id="ProblemsDetailSet" class="codetextarea codeinputs" placeholder="typing..." style="height:388px; background-color:white;">{{ProblemDataSet.detailsset.1}}</textarea>
+                                            <textarea name="ProblemsDetailSet" id="ProblemsDetailSet" class="codetextarea codeinputs" placeholder="typing..." style="height:470px; background-color:white;">{{ProblemDataSet.detailsset.1}}</textarea>
                                         </div>
                                     </div>
 
@@ -58,14 +58,27 @@
 
                                             </div>
                                         </div>
+                                        <div class="col-md-12 inputbox" style="padding:0; margin: 0; margin-top:10px;">       
+                                            <label class="labels"> Select DSA Sheet/List </label>
+                                            <div style="padding-left:5px;display:flex;overflow-x: scroll; background-color: white; border-radius: 5px; border: 1px solid #d5d5d5; padding: 2px;">
+
+                                                    {% for object in DSAsSheetsLists %}
+                                                        <div style="flex: none; padding: 5px 10px;">
+                                                            <input type="checkbox" id="ProblemsDSAsSheetsLists" name="ProblemsDSAsSheetsLists" value="{{object.id}}" {% if object in ProblemDataSet.dsasheetlist %} checked {% endif %}>
+                                                            <label for="ProblemsDSAsSheetsLists"> {{object.name}}</label>
+                                                        </div>
+                                                    {% endfor %}
+
+                                            </div>
+                                        </div>
 
                                         <div class="col-md-6 inputbox" style="padding:0; margin:0; padding-right:5px; margin-top:10px;">
                                             <label class="labels" style=""> Expected Time Complexity </label>
-                                            <input class="codeinputs" type="text" id="ProblemsTimeComplexity" name="ProblemsTimeComplexity" placeholder="typing..." style="" value="{{ ProblemDataSet.timecomplexity }}">
+                                            <input class="codeinputs" type="text" id="ProblemsTimeComplexity" name="ProblemsTimeComplexity" placeholder="typing..." value="{{ ProblemDataSet.timecomplexity }}">
                                         </div>
                                         <div class="col-md-6 inputbox" style="padding:0; margin:0; padding-left:5px; margin-top:10px;">
                                             <label class="labels" style=""> Expected Auxiliary Space </label>
-                                            <input class="codeinputs" type="text" id="ProblemsAuxiliarySpace" name="ProblemsAuxiliarySpace" placeholder="typing..." style="" value="{{ ProblemDataSet.auxiliaryspace }}">
+                                            <input class="codeinputs" type="text" id="ProblemsAuxiliarySpace" name="ProblemsAuxiliarySpace" placeholder="typing..." value="{{ ProblemDataSet.auxiliaryspace }}">
                                         </div>
 
 

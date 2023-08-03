@@ -32,7 +32,7 @@
                                     <div class="col-md-7">  
                                         <div class="col-md-12 inputbox" style="padding:0; margin:0;">                                                    
                                             <!-- <label class="labels" style=""> Enter Your Code </label> -->
-                                            <textarea name="SolutionsCodeSubmissions" id="SolutionsCodeSubmissions" class="codetextarea codeinputs" placeholder="typing..." style="height:388px; background-color:white;">{{SolutionDataSet.codesubmissions}}</textarea>
+                                            <textarea name="SolutionsCodeSubmissions" id="SolutionsCodeSubmissions" class="codetextarea codeinputs" placeholder="typing..." style="height:525px; background-color:white;">{{SolutionDataSet.codesubmissions}}</textarea>
                                         </div>
                                     </div>
 
@@ -66,13 +66,27 @@
                                                 {% endif %}
                                             </select>
                                         </div>
-                                        <div class="col-md-12 inputbox" style="padding:0; margin:0; padding-left:5px; margin-top:10px;">
-                                            <label class="labels"> Time Complexity </label>
-                                            <input class="codeinputs" type="text" id="SolutionsTimeComplexity" name="SolutionsTimeComplexity" value="{{SolutionDataSet.timecomplexity}}">
+
+                                        <div class="col-md-6 inputbox" style="padding:0; margin:0; padding-left:5px; margin-top:10px;">
+                                            <label class="labels"> Given Link's </label>
+                                            <input class="codeinputs" type="text" id="SolutionsLink" name="SolutionsLink" placeholder="typing..." value="{{SolutionDataSet.attachments.0.link}}" style="border-radius:5px 0 0 5px;">
                                         </div>
-                                        <div class="col-md-12 inputbox" style="padding:0; margin:0; padding-left:5px; margin-top:10px;">
+                                        <div class="col-md-6 inputbox" style="padding:0; margin:0; margin-top:10px;">
+                                            <label class="labels"> Given Link's </label>
+                                            <input class="codeinputs" type="text" id="SolutionsShownTitle" name="SolutionsShownTitle" placeholder="typing..." value="{{SolutionDataSet.attachments.0.showntitle}}" style="border-radius:0 5px 5px 0;">
+                                        </div>
+                                        <div class="col-md-12 inputbox" style="padding:0; margin:0; padding-left:5px; margin-top:10px;">                                               
+                                            <label class="labels" style=""> Given Note's </label>
+                                            <textarea name="SolutionsNote" id="SolutionsNote" class="codetextarea codeinputs" placeholder="typing..." style="height:100px; background-color:white;">{{SolutionDataSet.attachments.0.note}}</textarea>
+                                        </div>
+
+                                        <div class="col-md-6 inputbox" style="padding:0; margin:0; padding-left:5px; margin-top:10px;">
+                                            <label class="labels"> Time Complexity </label>
+                                            <input class="codeinputs" type="text" id="SolutionsTimeComplexity" name="SolutionsTimeComplexity" placeholder="typing..." value="{{SolutionDataSet.timecomplexity}}">
+                                        </div>
+                                        <div class="col-md-6 inputbox" style="padding:0; margin:0; padding-left:5px; margin-top:10px;">
                                             <label class="labels"> Auxiliary Complexity </label>
-                                            <input class="codeinputs" type="text" id="SolutionsAuxiliarySpace" name="SolutionsAuxiliarySpace" value="{{SolutionDataSet.auxiliaryspace}}">
+                                            <input class="codeinputs" type="text" id="SolutionsAuxiliarySpace" name="SolutionsAuxiliarySpace" placeholder="typing..." value="{{SolutionDataSet.auxiliaryspace}}">
                                         </div>
                                         <div class="col-md-12 inputbox" style="padding:0; margin:0; padding:50px 0 10px 0">
                                             <input class="codeinputs" type="submit" style="background-color:#dd0000; color:white;"> 

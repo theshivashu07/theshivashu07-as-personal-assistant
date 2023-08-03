@@ -42,11 +42,17 @@ class ProgrammingLanguages(models.Model):
 	def __str__(self):
 		return "Added a new Programming Language : "+self.name+".";
 
-
-
-
-
-
+class DSAsSheetsLists(models.Model):
+	name = models.CharField(max_length=100);
+	slug = AutoSlugField(populate_from='name');
+	by = models.CharField(max_length=100, default=None, null=True);
+	reference = models.CharField(max_length=200, default=None, null=True);
+	# this function save name's slug automatically...
+	def save(self, *args, **kwargs):
+		self.slug = slugify(self.name)
+		super().save(*args, **kwargs)
+	def __str__(self):
+		return "Added a new DSAsSheetsLists : "+self.name+".";
 
 
 
@@ -58,19 +64,20 @@ class Problems(models.Model):
 	slug = AutoSlugField(populate_from='title');
 	plateforms = models.IntegerField(default=0, null=True);
 	datastructures = models.IntegerField(default=0, null=True);
-	# detailsset = models.IntegerField(default=0, null=True);												#current_hidden_data 
-	detailsset = models.CharField(max_length=500, default=None, null=True);				#current_show_data 
+	dsasheetlist = models.IntegerField(default=0, null=True);
+	subproblem = models.IntegerField(default=0, null=True);
+	# detailsset = models.IntegerField(default=0, null=True);
+	detailsset = models.CharField(max_length=500, default=None, null=True); 
 	timecomplexity = models.CharField(max_length=35, default=None, null=True);
 	auxiliaryspace = models.CharField(max_length=35, default=None, null=True);
 	SolutionsCount = models.IntegerField(default=0, null=True);
 	JoiningDate = models.DateTimeField(auto_now_add=True);
-	UpdationDate = models.DateTimeField(auto_now=True);
+	UpdationDate = models.DateTimeField(auto_now=True); 
 
 	# this function save title's slug automatically...
 	def save(self, *args, **kwargs):
 		self.slug = slugify(self.title)
 		super().save(*args, **kwargs)
-
 	def __str__(self):
 		return str(self.id)+". "+self.title
 
@@ -83,8 +90,24 @@ class problems_datastructures(models.Model):
 	problem_id = models.ForeignKey(Problems, null=True, on_delete=models.CASCADE)
 	datastructure_id = models.IntegerField(default=None, null=True);
 
-# class problems_detailssets(models.Model):																						#current_hidden_data 
-	# problem_id = models.ForeignKey(Problems, null=True, on_delete=models.CASCADE)			#current_hidden_data 
+class problems_dsasheetlist(models.Model):
+	problem_id = models.ForeignKey(Problems, null=True, on_delete=models.CASCADE)
+	dsasheetlist_id = models.IntegerField(default=None, null=True);
+
+
+class SubProblems(models.Model):
+	problem_id = models.ForeignKey(Problems, null=True, on_delete=models.CASCADE)
+	title = models.CharField(max_length=100);
+	slug = AutoSlugField(populate_from='title');
+
+	# this function save title's slug automatically...
+	def save(self, *args, **kwargs):
+		self.slug = slugify(self.title)
+		super().save(*args, **kwargs)
+	def __str__(self):
+		return "Problem '"+self.problem_id.title+"'s sub problem '"+self.title+"' is added.";
+
+
 
 
 
@@ -96,19 +119,41 @@ class Solutions(models.Model):
 	plateforms = models.IntegerField(default=0, null=True);  
 	programminglanguages = models.IntegerField(default=0, null=True);	
 	datastructures = models.IntegerField(default=0, null=True); 
+	attachments = models.IntegerField(default=0, null=True); 
 	codesubmissions =models.CharField(max_length=1000, default=None, null=True); 
 	timecomplexity = models.CharField(max_length=35, default=None, null=True); 
 	auxiliaryspace = models.CharField(max_length=35, default=None, null=True); 
 	explainlevel = models.IntegerField(default=1, null=True); 
 	JoiningDate = models.DateTimeField(auto_now_add=True); 
 	UpdationDate = models.DateTimeField(auto_now=True); 
-
 	def __str__(self):
 		return str(self.problem_id.id)+"-"+str(self.id)+". "+ProgrammingLanguages.objects.get(id=self.programminglanguages).name
-
 
 class solutions_datastructures(models.Model):
 	solution_id = models.ForeignKey(Solutions, null=True, on_delete=models.CASCADE)
 	datastructure_id = models.IntegerField(default=None, null=True);
+
+class SolutionsAttachments(models.Model):
+	solution_id = models.ForeignKey(Solutions, null=True, on_delete=models.CASCADE) 
+	showntitle = models.CharField(max_length=200, default=None, null=True); 
+	link = models.CharField(max_length=200, default=None, null=True); 
+	note = models.CharField(max_length=1000, default=None, null=True); 
+	# def __str__(self):
+		# return str(self.solution_id.problem_id.id)+"-"+str(self.solution_id.id)+". "+ProgrammingLanguages.objects.get(id=self.solution_id.programminglanguages).name+"'s Attachments added."
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
