@@ -229,6 +229,7 @@ def AddSolutions(request,problemID):
 
 	object.problem_id=problemID
 	object.codesubmissions=SolutionsCodeSubmissions
+	object.problem_id.SolutionsContinueCount += 1 
 	object.save()
 
 	if(SolutionsProgrammingLanguage):

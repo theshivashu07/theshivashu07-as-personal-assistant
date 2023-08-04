@@ -70,7 +70,8 @@ class Problems(models.Model):
 	detailsset = models.CharField(max_length=500, default=None, null=True); 
 	timecomplexity = models.CharField(max_length=35, default=None, null=True);
 	auxiliaryspace = models.CharField(max_length=35, default=None, null=True);
-	SolutionsCount = models.IntegerField(default=0, null=True);
+	SolutionsCount = models.IntegerField(default=0, null=True);   # It indicates, this problem's how much solutions are here right now???
+	SolutionsContinueCount = models.IntegerField(default=0, null=True);  # It indicates, this problem's how much solution's we push till now, deleted+existing.
 	JoiningDate = models.DateTimeField(auto_now_add=True);
 	UpdationDate = models.DateTimeField(auto_now=True); 
 
@@ -125,9 +126,10 @@ class Solutions(models.Model):
 	auxiliaryspace = models.CharField(max_length=35, default=None, null=True); 
 	explainlevel = models.IntegerField(default=1, null=True); 
 	JoiningDate = models.DateTimeField(auto_now_add=True); 
-	UpdationDate = models.DateTimeField(auto_now=True); 
+	UpdationDate = models.DateTimeField(auto_now=True); 	
 	def __str__(self):
 		return str(self.problem_id.id)+"-"+str(self.id)+". "+ProgrammingLanguages.objects.get(id=self.programminglanguages).name
+
 
 class solutions_datastructures(models.Model):
 	solution_id = models.ForeignKey(Solutions, null=True, on_delete=models.CASCADE)

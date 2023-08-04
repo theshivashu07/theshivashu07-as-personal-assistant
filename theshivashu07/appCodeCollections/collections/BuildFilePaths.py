@@ -62,7 +62,7 @@ def buildProblemFilePath(object,ProblemsDataStructures):
 	return filepath
 
 def buildSolutionFilePath(object,SolutionsProgrammingLanguage):
-	# wents like ---> "0001-01 - remove-duplicates-from-an-unsorted-linked-list - #python.py"
+	# wents like ---> "0001-00001 - remove-duplicates-from-an-unsorted-linked-list - #python.py"
 	filepath = str(object.problem_id.id).zfill(4) + '-'
 	filepath += str(object.id).zfill(2) + ' - '
 	filepath += object.problem_id.slug + ' - '
