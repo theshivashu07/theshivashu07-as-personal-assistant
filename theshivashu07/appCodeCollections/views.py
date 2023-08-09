@@ -15,7 +15,7 @@ from django.contrib import messages
 	# return HttpResponse("Hey <b>Shivam Shukla</b>, <b style='font-size:10px'>N your url '@theshivashu07'</b> !!!"); 
 
 def index(request):  
-	return render(request,"appCodeCollections/index.html"); 
+	return render(request,"appCodeCollections/index.html");   
 
 
 
