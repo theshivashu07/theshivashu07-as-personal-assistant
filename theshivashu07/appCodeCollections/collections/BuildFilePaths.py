@@ -62,9 +62,9 @@ def buildProblemFilePath(object,ProblemsDataStructures):
 	return filepath
 
 def buildSolutionFilePath(object,SolutionsProgrammingLanguage):
-	# wents like ---> "0001-00001 - remove-duplicates-from-an-unsorted-linked-list - #python.py"
+	# wents like ---> "0001-000001 - remove-duplicates-from-an-unsorted-linked-list - #python.py"
 	filepath = str(object.problem_id.id).zfill(4) + '-'
-	filepath += str(object.id).zfill(2) + ' - '
+	filepath += str(object.id).zfill(6) + ' - '
 	filepath += object.problem_id.slug + ' - '
 	# here is we know that one solution have only one programming language, so there is simple...
 	plObject = ProgrammingLanguages.objects.get(id=SolutionsProgrammingLanguage)

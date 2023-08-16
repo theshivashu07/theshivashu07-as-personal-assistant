@@ -1,5 +1,4 @@
 
-
 #User function Template for python3
 class Solution:
     #Function to count inversions in the array.
