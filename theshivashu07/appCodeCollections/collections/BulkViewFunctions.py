@@ -314,9 +314,11 @@ def EditSolutions(request,problemID,solutionID):
 	# must that you putted any one data-structure...
 	if(SolutionsLink or SolutionsShownTitle or SolutionsNote):
 		tempobjects = SolutionsAttachments.objects.filter(solution_id=solutionID)
-		object.attachments=len(tempobjects)
+		# what if in the first time I'm not assign any attechments, then if edit time we add, then it create problem, so wrote below two lines code like this...
+		object.attachments= len(tempobjects) if(len(tempobjects)) else 1
+		tempobject = tempobjects[0] if(len(tempobjects)) else SolutionsAttachments()
 		object.save()
-		tempobject = tempobjects[0]
+		
 		tempobject.solution_id = object
 		tempobject.link = SolutionsLink
 		tempobject.note = SolutionsNote
