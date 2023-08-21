@@ -26,15 +26,15 @@
                                                 </div>
                                             </div>
 
-                                            <div style="display:flex;">
+                                            <div style="display:flex; font-size:90%;">
                                                 Solution Number - 0{{SolutionDataSet.explainlevel}}
-                                                <div style="margin: 10px 10px 0 10px; text-transform: initial; background-color: #ffa500; font-size: 12px; padding: 0 5px; border-radius: 5px; height: fit-content;">
+                                                <div style="margin:4px 0px 0px 4px;text-transform: initial;background-color:#ffa500; font-size:50%; padding:3px 10px; border-radius:10px; height:fit-content; min-width:fit-content;">
                                                     Using
                                                     <b class="tags1">{{ SolutionDataSet.programminglanguages.name | default:None }}</b>
                                                 </div>
                                             </div>
-                                            <div style="border-radius:2px;font-size:12px;margin-top:-5px;">
-                                                <b style="color:#1c1c1c; margin-right: 10px;">Related Tagged Data Structure's : </b>
+                                            <div style="border-radius:2px;font-size:12px; margin:2px;">
+                                                <b style="color:#1c1c1c; margin-right: 10px;">Tagged-Data-Structure's : </b>
                                                 {% if SolutionDataSet.datastructures %}
                                                     {% for object in SolutionDataSet.datastructures %}
                                                         <b class="tags2">{{object.name}}</b>
@@ -46,7 +46,7 @@
                                         </h3>
                                     
                                         <div>
-                                            <textarea name="SolutionsCodeSubmissions" id="SolutionsCodeSubmissions" class="codetextarea codeinputs" placeholder="typing..." style="margin-top:20px; max-width: -webkit-fill-available; background-color: #f4f4f4; border-radius: 5px 5px 0 0; min-height:250px;" readonly >{{SolutionDataSet.codesubmissions | default:None}}
+                                            <textarea name="SolutionsCodeSubmissions" id="SolutionsCodeSubmissions" class="codetextarea codeinputs" placeholder="typing..." style="margin-top:20px; max-width: -webkit-fill-available; background-color: #f4f4f4; border-radius: 5px 5px 0 0; min-height:250px; line-height: normal;" readonly >{{SolutionDataSet.codesubmissions | default:None}}
                                             </textarea>
                                         </div>
                                         <div class="paragraph" style="border-radius: 0 0 5px 5px; padding: 10px; border: 1px solid #d5d5d5;">

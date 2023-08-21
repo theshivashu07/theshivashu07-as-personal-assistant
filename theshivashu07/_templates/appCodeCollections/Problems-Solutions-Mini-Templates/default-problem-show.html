@@ -25,9 +25,9 @@
                                                 </div>
                                             </div>
 
-                                            <div style="display:flex;">
+                                            <div style="display:flex; font-size:90%;">
                                                 101. {{ProblemDataSet.title | default:None}}
-                                                <div style="margin: 10px 10px 0 10px; text-transform: initial; background-color: #ffa500; font-size: 14px; padding: 0 5px; border-radius: 5px; height: fit-content;">
+                                                <div style="margin:4px 0px 0px 4px;text-transform: initial;background-color:#ffa500; font-size:50%; padding:3px 10px; border-radius:10px; height:fit-content; min-width:fit-content;">
                                                     Powered by 
                                                     {% if ProblemDataSet.plateforms %}
                                                         {% for object in ProblemDataSet.plateforms %}
@@ -38,18 +38,18 @@
                                                     {% endif %}
                                                 </div>
                                             </div>
-                                            <div style="border-radius:2px;font-size:16px; margin:-10px 0 10px 0;">
+                                            <div style="border-radius:2px;font-size:16px; margin-bottom:10px;">
                                                 {% if ProblemDataSet.subproblem %}
                                                     <b style="color:black; margin-right: 10px; text-decoration:underline;">Sub-Name's</b>  
                                                     {% for object in ProblemDataSet.subproblem %}
-                                                        <b class="tags2" style="background-color:#dddddd; color:white;">{{object.title}}</b>
+                                                        <b class="tags2" style="background-color:#454545; color:white; font-size:90%;">{{object.title}}</b>
                                                     {% endfor %}
                                                 {% endif %}
                                             </div>
 
 
-                                            <div style="border-radius:2px;font-size:12px;">
-                                                <b style="color:black; margin-right: 10px;">Related Tagged Data Structure's : </b>
+                                            <div style="border-radius:2px;font-size:12px; margin:2px;">
+                                                <b style="color:black; margin-right: 10px;">Tagged-Data-Structure's : </b>
                                                 {% if ProblemDataSet.datastructures %}
                                                     {% for object in ProblemDataSet.datastructures %}
                                                         <b class="tags2">{{object.name}}</b>
@@ -58,8 +58,8 @@
                                                     <b class="tags2">None</b>
                                                 {% endif %}
                                             </div>
-                                            <div style="border-radius:2px;font-size:12px;">
-                                                <b style="color:black; margin-right: 10px;">Related Tagged DSA Sheet/List  : </b>
+                                            <div style="border-radius:2px;font-size:12px; margin:2px;">
+                                                <b style="color:black; margin-right: 10px;">Tagged-DSA-Sheet's/List's : </b>
                                                 {% if ProblemDataSet.dsasheetlist %}
                                                     {% for object in ProblemDataSet.dsasheetlist %}
                                                         <b class="tags2">{{object.name}}</b>
