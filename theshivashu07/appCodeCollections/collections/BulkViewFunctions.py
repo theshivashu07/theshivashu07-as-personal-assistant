@@ -16,6 +16,9 @@ def ProblemDataSet(problemID):
 	object.dsasheetlist=[ DSAsSheetsLists.objects.get(pk=object.dsasheetlist_id) for object in holds ]
 	object.subproblem = SubProblems.objects.filter(problem_id=problemID.id)
 
+	object.links=problems_links.objects.filter(problem_id=problemID.id)
+	# object.links=[ DataStructures.objects.get(pk=object.datastructure_id) for object in holds ]
+
 	# problem-assignment - and there is getting problem-file's data!!!
 	BuildFilePaths.getProblem(object)
 
@@ -27,7 +30,7 @@ def SolutionDataSet(problemID,solutionID):
 	object.programminglanguages=ProgrammingLanguages.objects.get(pk=object.programminglanguages)
 	holds=solutions_datastructures.objects.filter(solution_id=solutionID)
 	object.datastructures=[ DataStructures.objects.get(pk=object.datastructure_id) for object in holds ] 
-	object.attachments = SolutionsAttachments.objects.filter(solution_id=solutionID)
+	object.attachments = SolutionAndSolutionsAttachments.objects.filter(solution_id=solutionID)
 
 	# solution-assignment - and there is getting solution-file's data!!!
 	BuildFilePaths.getSolution(object)

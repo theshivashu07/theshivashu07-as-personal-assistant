@@ -5,25 +5,46 @@
                                     
                                     
                                     <div style="content-visibility: auto; background-color: white; padding: 20px; border-radius: 5px; ">
-                                        <h3 class="grid-heading codeheading" style="margin-bottom:0;">
+                                        <h3 class="grid-heading codeheading" style="margin-bottom:0;contain: content;">
 
-                                            <div style="float:right;text-align:right;display:inline-flex;">
-                                                <div style="background-color:lightgray; padding:5px; margin:5px; border-radius: 5px;">
-                                                    <a href="/codecollections/add-solution/{{ProblemDataSet.slug}}/" style="color:black; ">
-                                                        <i class="li_bulb"></i>
-                                                    </a>
+
+
+                                            <div style="float:right;text-align:right;display:grid;">
+
+                                                <div style="float:right;text-align:right;display:inline-flex;">
+                                                    <div style="background-color:lightgray; padding:5px; margin:5px; border-radius: 5px;">
+                                                        <a href="/codecollections/add-solution/{{ProblemDataSet.slug}}/" style="color:black; ">
+                                                            <i class="li_bulb"></i>
+                                                        </a>
+                                                    </div>
+                                                    <div style="background-color:lightgray; padding:5px; margin:5px; border-radius: 5px;">
+                                                        <a href="/codecollections/edit-problem/{{ProblemDataSet.slug}}/" style="color:black; ">
+                                                            <i class="li_pen"></i>
+                                                        </a>
+                                                    </div>
+                                                    <div style="background-color:lightgray; padding:5px; margin:5px; border-radius:5px;">
+                                                        <a href="/codecollections/delete-problem/{{ProblemDataSet.slug}}/" style="color:black; ">
+                                                            <i class="li_trash"></i>
+                                                        </a>
+                                                    </div>
                                                 </div>
-                                                <div style="background-color:lightgray; padding:5px; margin:5px; border-radius: 5px;">
-                                                    <a href="/codecollections/edit-problem/{{ProblemDataSet.slug}}/" style="color:black; ">
-                                                        <i class="li_pen"></i>
-                                                    </a>
-                                                </div>
-                                                <div style="background-color:lightgray; padding:5px; margin:5px; border-radius:5px;">
-                                                    <a href="/codecollections/delete-problem/{{ProblemDataSet.slug}}/" style="color:black; ">
-                                                        <i class="li_trash"></i>
-                                                    </a>
-                                                </div>
+
+
+                                                {% if ProblemDataSet.plateforms %}
+                                                    <div style="float:right;text-align:right;display:inline-flex;">
+                                                        {% for object in ProblemDataSet.links %}
+                                                            <div style="background-color:{{object.plateform_id.bgcolor | default:'lightgray'}}; padding:5px; margin:2px; border-radius:50px; font-size:70%; border-left: groove; border-right: ridge;">
+                                                                <a href="{{object.link | default:'#'}}" style="color:{{object.plateform_id.color | default:'black'}};">
+                                                                    {{object.text  |  default:object.problem_id.title }}
+                                                                </a>
+                                                            </div>
+                                                        {% endfor %}
+                                                    </div>
+                                                {% endif %}
+
                                             </div>
+
+
 
                                             <div style="display:flex; font-size:90%;">
                                                 101. {{ProblemDataSet.title | default:None}}

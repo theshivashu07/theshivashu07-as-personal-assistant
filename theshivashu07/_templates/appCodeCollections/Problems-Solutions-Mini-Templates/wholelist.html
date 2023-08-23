@@ -44,10 +44,10 @@
                             <div class="row" style="background-color:#fafafa;padding:20px 5px;">
                                 <div class="col-md-12"> 
 
-                                        <div class="col-md-12 inputbox" style="padding:25px; background-color:white; border-radius:50px;">
+                                        <div class="col-md-12 inputbox" style="background-color:white; border-radius:10px;">
                                     <form method="POST" action="{{request.path}}">
                                         {% csrf_token %}
-<table class="table table-hover" style="margin-bottom:10px;">
+<table class="table table-hover" style="margin-bottom:0; font-size:90%;">
     <thead>
         <tr>
             <th scope="col">
@@ -109,7 +109,7 @@
 
 
 <table class="table table-hover">
-  <thead>
+  <thead style="background-color: beige;">
     <tr>
       <th scope="col">#</th>
       <th scope="col">Problem Name</th>
@@ -128,7 +128,7 @@
 
                 {% if objectslist %}
                     {% for object_ in objectslist %}
-                        <tr>
+                        <tr style="line-height:10px;" >
                             {% if forloop.counter == 1 %}
                                 <th scope="row ">
                                     {{ firstloopcounter }}
