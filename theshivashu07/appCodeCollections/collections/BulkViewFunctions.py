@@ -131,6 +131,7 @@ def AddProblems(request):
 
 def EditProblems(request,problemID):
 	# when you want to EDIT Problems...
+
 	ProblemsTitle=request.POST["ProblemsTitle"]
 	ProblemsPlateforms=request.POST.getlist("ProblemsPlateforms")
 	ProblemsDataStructures=request.POST.getlist("ProblemsDataStructures")
@@ -274,7 +275,7 @@ def AddSolutions(request,problemID):
 		object.attachments=1
 		object.save()
 		tempobject = SolutionsAttachments()
-		tempobject.solution_id = object
+		tempobject.problem_id = problemID
 		tempobject.link = SolutionsLink
 		tempobject.note = SolutionsNote
 		tempobject.showntitle = SolutionsShownTitle
@@ -322,7 +323,7 @@ def EditSolutions(request,problemID,solutionID):
 		tempobject = tempobjects[0] if(len(tempobjects)) else SolutionsAttachments()
 		object.save()
 		
-		tempobject.solution_id = object
+		tempobject.problem_id = problemID
 		tempobject.link = SolutionsLink
 		tempobject.note = SolutionsNote
 		tempobject.showntitle = SolutionsShownTitle

@@ -155,8 +155,9 @@ textarea {
 }
 
 body {
+  font-family: "Roboto Slab", serif;
 /*  font-family: "Roboto", sans-serif;*/
-  font-family: Georgia,serif;
+/*  font-family: Georgia,serif;*/
   font-size: .89em;
   line-height: 1.75;
   color: #777777;
@@ -178,7 +179,7 @@ a:hover {
 }
 
 h1, h2, h3, h4, h5, h6 {
-/*  font-family: "Roboto Slab", serif;*/
+  font-family: "Roboto Slab", serif;
   color: #2c2c2c;
 }
 
@@ -1380,6 +1381,7 @@ ul.archive-list li h3 {
   font-size: 20px;
   font-weight: 300;
   font-family: "Roboto", sans-serif;
+/*  font-family: "Roboto Slab", serif;*/
 }
 ul.archive-list li h3 a {
   color: #777777;

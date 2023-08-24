@@ -73,24 +73,8 @@
                         <!-- <li><a href="#" class="fa fa-rss"></a></li>  -->
                     </ul>
 
-            <div class="main-header" style="padding: 10px 20px; background-color:#fafafa; border:none;">
-                <div class="row">
-
-                    <!-- <div class="main-header-left col-md-1 col-sm-1 col-xs-1"> -->
-                    <div class="main-header-left">
-                        <a id="search-icon" class="btn-left fa fa-search" href="#search-overlay"></a>
-                        <div id="search-overlay">
-                            <a href="#search-overlay" class="close-search"><i class="fa fa-times-circle"></i></a>
-                            <div class="search-form-holder">
-                                <h2>Type keywords and hit enter</h2>
-                                <form id="search-form" action="#">
-                                    <input type="search" name="s" placeholder="" autocomplete="off">
-                                </form>
-                            </div>
-                        </div>
-                        <!-- <a href="#" class="btn-left arrow-left fa fa-angle-left"></a> -->
-                        <!-- <a href="#" class="btn-left arrow-right fa fa-angle-right"></a> -->
-                    </div> 
+            <div class="main-header" style="padding: 10px 15px; background-color:#fafafa; border:none;">
+                <div class="row" style="justify-content: right;">
 
                     <!-- <div class="menu-wrapper col-md-11 col-sm-11 col-xs-11"> -->
                     <div class="menu-wrapper">
@@ -106,6 +90,23 @@
                             <li {% if '/defaultsections/' in request.path %} class="active" {% endif %}><a href="/defaultsections/" style="border:none;display:contents;">DEFAULT</a></li>
                         </ul>
                     </div> 
+
+                    <!-- <div class="main-header-left col-md-1 col-sm-1 col-xs-1"> -->
+                    <div class="main-header-left" style="margin-left: 20px;">
+                        <a id="search-icon" class="btn-left fa fa-search" href="#search-overlay"></a>
+                        <div id="search-overlay">
+                            <a href="#search-overlay" class="close-search"><i class="fa fa-times-circle"></i></a>
+                            <div class="search-form-holder">
+                                <h2>Type keywords and hit enter</h2>
+                                <form id="search-form" action="#">
+                                    <input type="search" name="s" placeholder="" autocomplete="off">
+                                </form>
+                            </div>
+                        </div>
+                        <!-- <a href="#" class="btn-left arrow-left fa fa-angle-left"></a> -->
+                        <!-- <a href="#" class="btn-left arrow-right fa fa-angle-right"></a> -->
+                    </div> 
+
                 </div>
             </div>
 

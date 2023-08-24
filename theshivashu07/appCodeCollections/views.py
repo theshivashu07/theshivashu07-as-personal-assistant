@@ -150,7 +150,7 @@ def addProblemAndSolution(request):
 def editProblem(request, problemslug):
 	objectProblem=Problems.objects.get(slug=problemslug)
 	if request.method=="POST":
-		if( request.POST["ProblemsTitle"] and request.POST["ProblemsDetailSet"] ):
+		if( request.POST["ProblemsTitle"] ):
 			BuildFilePaths.editProblems(objectProblem)
 			BulkViewFunctions.EditProblems(request,objectProblem)	
 		else:

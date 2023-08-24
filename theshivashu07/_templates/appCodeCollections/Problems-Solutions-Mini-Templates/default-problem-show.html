@@ -34,8 +34,8 @@
                                                     <div style="float:right;text-align:right;display:inline-flex;">
                                                         {% for object in ProblemDataSet.links %}
                                                             <div style="background-color:{{object.plateform_id.bgcolor | default:'lightgray'}}; padding:5px; margin:2px; border-radius:50px; font-size:70%; border-left: groove; border-right: ridge;">
-                                                                <a href="{{object.link | default:'#'}}" style="color:{{object.plateform_id.color | default:'black'}};">
-                                                                    {{object.text  |  default:object.problem_id.title }}
+                                                                <a href="{{object.link | default:'#'}}" target="_blank" style="color:{{object.plateform_id.color | default:'black'}};">
+                                                                    {{object.text  |  default:object.plateform_id.name.0 }}
                                                                 </a>
                                                             </div>
                                                         {% endfor %}
@@ -95,7 +95,6 @@
 
 
                                         <div style="margin-top: 30px;">
-                                            {% if ProblemDataSet.detailsset %}
 
                                                     <div class="paragraph" style="padding: 20px 5px;">
 
@@ -105,31 +104,22 @@
 
                                                     </div>
 
-                                            {% else %}
+
+
+
+                                            {% if ProblemDataSet.timecomplexity == None and ProblemDataSet.auxiliaryspace == None %}
+
                                                 <div class="paragraph">
                                                     <p>
-                                                        ....................................................................
-                                                        <br>
-                                                        ....................................................................
-                                                        <br>
-                                                        ....................................................................
-                                                        <br>
-                                                        ....................................................................
-                                                        <br>
-                                                        ....................................................................
-                                                        <br>
+                                                        <b>Expected Time Complexity:</b> {{ProblemDataSet.timecomplexity  | default:None}}.
                                                     </p>
+                                                    <p>
+                                                       <b>Expected Auxiliary Space:</b> {{ProblemDataSet.auxiliaryspace  | default:None}}.
+                                                   </p>
                                                 </div>
+
                                             {% endif %}
 
-                                            <div class="paragraph">
-                                                <p>
-                                                    <b>Expected Time Complexity:</b> {{ProblemDataSet.timecomplexity  | default:None}}.
-                                                </p>
-                                                <p>
-                                                   <b>Expected Auxiliary Space:</b> {{ProblemDataSet.auxiliaryspace  | default:None}}.
-                                               </p>
-                                            </div>
                                         </div>
                                     </div>
 
