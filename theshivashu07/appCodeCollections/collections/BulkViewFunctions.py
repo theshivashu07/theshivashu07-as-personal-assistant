@@ -274,12 +274,19 @@ def AddSolutions(request,problemID):
 	if(SolutionsLink or SolutionsShownTitle or SolutionsNote):
 		object.attachments=1
 		object.save()
+		# add-solutionsattachments
 		tempobject = SolutionsAttachments()
 		tempobject.problem_id = problemID
 		tempobject.link = SolutionsLink
 		tempobject.note = SolutionsNote
 		tempobject.showntitle = SolutionsShownTitle
 		tempobject.save()
+		# add-solutionandsolutionsattachments
+		thisobject=SolutionAndSolutionsAttachments()
+		thisobject.problem_id = problemID
+		thisobject.solution_id = object
+		thisobject.solutionattachments_id = tempobject
+		thisobject.save()
 
 	# solution-assignment - and there is build file with its name!!!
 	BuildFilePaths.assignSolution(object,SolutionsProgrammingLanguage,SolutionsCodeSubmissions)
@@ -290,6 +297,8 @@ def AddSolutions(request,problemID):
 
 	return object
 	# return None
+
+
 
 
 def EditSolutions(request,problemID,solutionID):
@@ -317,17 +326,35 @@ def EditSolutions(request,problemID,solutionID):
 
 	# must that you putted any one data-structure...
 	if(SolutionsLink or SolutionsShownTitle or SolutionsNote):
-		tempobjects = SolutionsAttachments.objects.filter(solution_id=solutionID)
-		# what if in the first time I'm not assign any attechments, then if edit time we add, then it create problem, so wrote below two lines code like this...
-		object.attachments= len(tempobjects) if(len(tempobjects)) else 1
-		tempobject = tempobjects[0] if(len(tempobjects)) else SolutionsAttachments()
-		object.save()
-		
-		tempobject.problem_id = problemID
-		tempobject.link = SolutionsLink
-		tempobject.note = SolutionsNote
-		tempobject.showntitle = SolutionsShownTitle
-		tempobject.save() 
+		tempobjects = SolutionAndSolutionsAttachments.objects.filter( problem_id=problemID,solution_id=solutionID )
+
+		print(tempobjects)
+		if(not tempobjects):   # if-not-exist, then-create-it
+			object.attachments=1
+			object.save()
+			# add-solutionsattachments 
+			tempobject = SolutionsAttachments()
+			tempobject.problem_id = problemID
+			tempobject.link = SolutionsLink
+			tempobject.note = SolutionsNote
+			tempobject.showntitle = SolutionsShownTitle
+			tempobject.save()
+			# add-solutionandsolutionsattachments 
+			thisobject=SolutionAndSolutionsAttachments()
+			thisobject.problem_id = problemID
+			thisobject.solution_id = object
+			thisobject.solutionattachments_id = tempobject
+			thisobject.save()
+		else:  # but-if-exist, then-only-update-it
+			object.attachments= len(tempobjects)
+			object.save()
+			# update-solutionsattachments 
+			tempobject = tempobjects[0].solutionattachments_id
+			tempobject.problem_id = problemID
+			tempobject.link = SolutionsLink
+			tempobject.note = SolutionsNote
+			tempobject.showntitle = SolutionsShownTitle
+			tempobject.save() 
 
 	if(SolutionsTimeComplexity):
 		object.timecomplexity=SolutionsTimeComplexity

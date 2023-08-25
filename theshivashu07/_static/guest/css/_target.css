@@ -84,8 +84,8 @@
     font-weight: bold;
     font-size: 15px;
     color: currentColor;
-/*    font-family: math;*/
-    font-family: "Roboto Slab", serif;
+    font-family: math;
+/*    font-family: "Roboto Slab", serif;*/
     border-radius: 4px;
 }
 
