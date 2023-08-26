@@ -4,6 +4,26 @@ from appCodeCollections.models import *
 import appCodeCollections.collections.BuildFilePaths as BuildFilePaths
 
 
+def ProblemDataSet(problemID):
+	object=Problems.objects.get(id=problemID.id)
+	holds=problems_plateforms.objects.filter(problem_id=problemID.id)
+	object.plateforms=[ Plateforms.objects.get(pk=object.plateform_id) for object in holds ]
+	holds=problems_datastructures.objects.filter(problem_id=problemID.id)
+	object.datastructures=[ DataStructures.objects.get(pk=object.datastructure_id) for object in holds ]
+	holds=problems_dsasheetlist.objects.filter(problem_id=problemID.id)
+	object.dsasheetlist=[ DSAsSheetsLists.objects.get(pk=object.dsasheetlist_id) for object in holds ]
+	object.subproblem = SubProblems.objects.filter(problem_id=problemID.id)
+	object.links=problems_links.objects.filter(problem_id=problemID.id)
+	# object.links=[ DataStructures.objects.get(pk=object.datastructure_id) for object in holds ]
+
+	# problem-assignment - and there is getting problem-file's data!!!
+	BuildFilePaths.getProblem(object)
+
+	# object.SolutionsContinueCount = Solutions.objects.filter(problem_id=problemID)
+	# for object in object.SolutionsContinueCount:
+	# 	object.programminglanguages=ProgrammingLanguages.objects.get(pk=object.programminglanguages)
+
+	return object
 
 
 def ProblemDataSet(problemID):
@@ -15,9 +35,12 @@ def ProblemDataSet(problemID):
 	holds=problems_dsasheetlist.objects.filter(problem_id=problemID.id)
 	object.dsasheetlist=[ DSAsSheetsLists.objects.get(pk=object.dsasheetlist_id) for object in holds ]
 	object.subproblem = SubProblems.objects.filter(problem_id=problemID.id)
-
 	object.links=problems_links.objects.filter(problem_id=problemID.id)
-	# object.links=[ DataStructures.objects.get(pk=object.datastructure_id) for object in holds ]
+	# object.links=[ DataStructures.objects.get(pk=object.datastructure_id) for object in holds ]	
+
+	object.SolutionsContinueCount = [ object for object in Solutions.objects.filter(problem_id=problemID) ]
+	for object_ in object.SolutionsContinueCount:
+		object_.programminglanguages=ProgrammingLanguages.objects.get(pk=object_.programminglanguages)	
 
 	# problem-assignment - and there is getting problem-file's data!!!
 	BuildFilePaths.getProblem(object)

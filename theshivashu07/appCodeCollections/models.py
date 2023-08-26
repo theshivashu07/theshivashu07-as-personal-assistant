@@ -126,9 +126,9 @@ class SubProblems(models.Model):
 
 class Solutions(models.Model):
 	problem_id = models.ForeignKey(Problems, null=True, on_delete=models.CASCADE) 
-	filename = models.CharField(max_length=150, default=None, null=True); 
-	plateforms = models.IntegerField(default=0, null=True);  
-	programminglanguages = models.IntegerField(default=0, null=True);	
+	filename = models.CharField(max_length=150, default=None, null=True); 						
+	plateforms = models.IntegerField(default=0, null=True);  													# not must field
+	programminglanguages = models.IntegerField(default=0, null=True);								# add as ForeignKey 
 	datastructures = models.IntegerField(default=0, null=True); 
 	attachments = models.IntegerField(default=0, null=True); 
 	codesubmissions =models.CharField(max_length=1000, default=None, null=True); 

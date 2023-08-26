@@ -255,14 +255,30 @@ def fatchProblemsWithOrWithoutSolutions(request):
 def openTestingPage(request):
 	# thisisReturningDatabase = BulkViewFunctions.getBaseStructure()
 	# return render(request,"appCodeCollections/Problems-Solutions-Mini-Templates/testingpage.html", thisisReturningDatabase);
-	return render(request,"appCodeCollections/404.html");
+	return render(request,"appCodeCollections/Problems-Solutions-Mini-Templates/wholelist.html");
+	# return render(request,"appCodeCollections/404.html");
 
 
 
  
 
 
+def allProblemsLists(request):
 
+	thisisReturningDatabase = BulkViewFunctions.getBaseStructure()
+	holds = list()
+	for object in Problems.objects.all():
+		## below two lines are we apply when we have doubt that maybe we delete solutions by Admin, because on that situation SolutionsCount not have actual solution's count
+		# object.SolutionsCount = len(Solutions.objects.filter(problem_id=object))
+		# object.save() 
+		object.links = dict() 
+		object.links['problemslink'] = problems_links.objects.filter(problem_id=object)
+		object.links['solutionslink'] = SolutionsAttachments.objects.filter(problem_id=object)
+		holds.append(object)
+	thisisReturningDatabase['ProblemDataSet'] = holds
+	# thisisReturningDatabase['SolutionDataSet'] = BulkViewFunctions.SolutionDataSet(objectProblem,solutionid)
+	return render(request,"appCodeCollections/Problems-Solutions-Mini-Templates/wholeproblems.html", thisisReturningDatabase);
+	# return render(request,"appCodeCollections/404.html");
 
 
 

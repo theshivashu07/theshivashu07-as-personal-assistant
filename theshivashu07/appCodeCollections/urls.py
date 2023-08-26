@@ -28,6 +28,8 @@ urlpatterns=[
 		path('problems-without-solutions/',views.fatchProblemsWithOrWithoutSolutions,name='fatchProblemsWithOrWithoutSolutions'),		
 		path('problems-with-or-without-solutions/',views.fatchProblemsWithOrWithoutSolutions,name='fatchProblemsWithOrWithoutSolutions'),
 
+		path('problems/',views.allProblemsLists,name='allProblemsLists'),
+
 		# here is showing problem, and other solutions only links available, not all solutions shows!!!
 		path('problem/<slug:problemslug>/',views.openProblem,name='openProblem'),
 

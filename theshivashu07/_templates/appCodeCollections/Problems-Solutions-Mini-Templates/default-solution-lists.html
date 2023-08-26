@@ -1,0 +1,95 @@
+
+
+
+
+        <div class="content-wrapper" style="padding:0">
+            <div class="inner-container container" style="width: auto;">
+
+                <!-- <div class="row">
+                    <div class="section-header col-md-12" style="margin: 20px;">
+                        <h2 class="grid-heading codeheading" style="font-weight:bold;"> All Problems List </h2>
+                        <span>PATH: "{{request.path}}"</span>
+                    </div> 
+                </div>  -->
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <!-- <div class="box-content" style="padding: 50px;"> -->
+                        <div class="box-content" style="padding:25px;">
+                    <!-- </div> -->
+                <!-- </div> -->
+
+
+
+                    <!-- <div class="col-md-12"> -->
+                        <!-- <div class="box-content" style="padding: 50px;"> -->
+                        <!-- <div class="box-content" style="padding: 100px 20px;"> -->
+                            <div class="row" style="background-color:#fafafa;border-radius:5px;padding:20px 5px; padding-top:30px;">
+
+
+
+                                <div class="col-md-12"> 
+
+
+
+
+<table class="table table-hover">
+  <thead style="background-color: beige;">
+    <tr>
+      <th scope="col">#</th>
+      <!-- <th scope="col">Problem Name</th> -->
+      <!-- <th scope="col" style="text-align: center;">Solutions Count</th> -->
+      <th scope="col" style="text-align: center;">Solution Language</th>
+      <th scope="col" style="text-align: center;">Time Complexity</th>
+      <th scope="col" style="text-align: center;">Space Complexity</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+
+        {% for object in ProblemDataSet.SolutionsContinueCount  %}
+
+                        <tr style="line-height:10px;" >
+                            <th scope="row ">
+                                {{ forloop.counter }}
+                            </th>
+                            <td style="text-align: center;">{{object.programminglanguages.name}}</td>
+                            <td style="text-align: center;">{{object.timecomplexity}}</td>
+                            <td style="text-align: center;">{{object.auxiliaryspace}}</td>
+                            <td style="text-align: center;">
+                                <a href="/codecollections/problem-solution/{{object.problem_id.slug}}/{{object.id}}/">
+                                    open-solution
+                                </a>
+                            </td>
+                        </tr>
+
+        {% endfor %}
+
+  </tbody>
+</table>
+
+
+
+                                </div> <!-- /.col-md-12 -->
+                            </div> <!-- /.row -->
+                        </div> <!-- /.box-content -->
+                    </div> <!-- /.col-md-12 -->
+                </div> <!-- /.row -->
+            </div>  <!-- /.inner-content -->
+        </div> <!-- /.content-wrapper -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
