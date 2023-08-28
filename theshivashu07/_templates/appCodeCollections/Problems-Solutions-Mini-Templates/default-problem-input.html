@@ -28,6 +28,7 @@
 
 
                                     <div class="col-md-6" >  
+
                                         <div class="col-md-12 inputbox" style="padding:0; margin:0;">
                                             <label class="labels" style=""> Enter Problem Title </label>
                                             <input class="codeinputs" type="text" id="ProblemsTitle" name="ProblemsTitle" placeholder="typing..." value="{{ ProblemDataSet.title }}" style="">
@@ -108,6 +109,59 @@
 
 
                                     </div>
+
+
+
+
+
+
+<div class="col-md-12 inputbox" style="background-color:white; border-radius:10px;">
+
+
+<table class="table">
+        <thead style="background-color: beige;">
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col" style="padding-left: 20px;">Select Plateform(*)</th>
+              <th scope="col" style="padding-left: 20px;">Add Links(*)</th>
+              <th scope="col" style="padding-left: 20px;">Add Text Optional</th>
+            </tr>
+        </thead>
+        <tbody>
+
+                    {% for c in '0123' %}
+
+                        <tr>
+                            <th scope="row " style="padding: 25px 5px 0 5px;">
+                                {{ forloop.counter }}.
+                            </th>
+                            <td style="padding: 20px 5px 0 5px;">
+                                <!-- <input class="codeinputs" type="text" id="plateformslinkstexts-{{ forloop.counter }}" name="plateformslinkstexts" placeholder="typing..." value="{{ ProblemDataSet.plateformslinkstexts.0 | default:'' }}"> -->
+                                  <select  class="codeinputs" id="plateformslinkstexts-{{ forloop.counter }}" name="plateformslinkstexts" >
+                                        <option class="codeinputs" value="">None</option>
+                                    {% for object in Plateforms %}
+                                        <option class="codeinputs" value="{{object.id}}">{{object.name}}</option>
+                                    {% endfor %}
+                                  </select>
+                            </td>
+                            <td style="padding: 20px 5px 0 5px;">
+                                <input class="codeinputs" type="text" id="plateformslinkstexts-{{ forloop.counter }}" name="plateformslinkstexts" placeholder="typing..." value="{{ ProblemDataSet.plateformslinkstexts.1 | default:'' }}">
+                            </td>
+                            <td style="padding: 20px 5px 0 5px;">
+                                <input class="codeinputs" type="text" id="plateformslinkstexts-{{ forloop.counter }}" name="plateformslinkstexts" placeholder="typing..." value="{{ ProblemDataSet.plateformslinkstexts.2 | default:'' }}">
+                            </td>
+                        </tr>
+
+                    {% endfor %}
+
+        </tbody>
+</table>
+
+
+</div>
+
+
+
 
 
                                 </form>

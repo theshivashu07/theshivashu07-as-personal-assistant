@@ -27,142 +27,70 @@
 
 
 
-        <div class="content-wrapper" style="padding:0;min-height: 550px;">
-            <div class="inner-container container">
-
-                <!-- <div class="row">
-                    <div class="section-header col-md-12" style="margin: 20px;">
-                        <h2 class="grid-heading codeheading" style="font-weight:bold;"> Show's Section</h2>
-                        <span>PATH: "{{request.path}}"</span>
-                    </div> 
-                </div>  -->
-
-                <div class="row">
-                    <div class="col-md-12">
 
 
+<table class="table table-hover">
+
+    <form method="POST" action="{{request.path}}">
+        {% csrf_token %}
+
+        <thead style="background-color: beige;">
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col" >Select Plateform(*)</th>
+              <th scope="col" >Add Links(*)</th>
+              <th scope="col" >Add Text Optional</th>
+            </tr>
+        </thead>
 
 
-                        <!-- <div class="box-content" style="padding: 50px;"> -->
-                        <div class="box-content" style="padding: 100px 25px;">
-                            <div class="row" style="background-color:#fafafa;border-radius:5px;padding:20px 5px;">
+        <tbody>
 
-                                <div class="col-md-4"> 
+                    {% for c in '0123' %}
 
+                        <tr>
+                            <th scope="row " style="padding-top: 18px;">
+                                {{ forloop.counter }}.
+                            </th>
+                            <td>
+                                <!-- <input class="codeinputs" type="text" id="plateformslinkstexts-{{ forloop.counter }}" name="plateformslinkstexts" placeholder="typing..." value="{{ ProblemDataSet.plateformslinkstexts.0 | default:'' }}"> -->
+                                  <select  class="codeinputs" id="plateformslinkstexts-{{ forloop.counter }}" name="plateformslinkstexts" >
+                                        <option class="codeinputs" value="">None</option>
+                                    {% for object in Plateforms %}
+                                        <option class="codeinputs" value="{{object.id}}">{{object.name}}</option>
+                                    {% endfor %}
+                                  </select>
+                            </td>
+                            <td>
+                                <input class="codeinputs" type="text" id="plateformslinkstexts-{{ forloop.counter }}" name="plateformslinkstexts" placeholder="typing..." value="{{ ProblemDataSet.plateformslinkstexts.1 | default:'' }}">
+                            </td>
+                            <td>
+                                <input class="codeinputs" type="text" id="plateformslinkstexts-{{ forloop.counter }}" name="plateformslinkstexts" placeholder="typing..." value="{{ ProblemDataSet.plateformslinkstexts.2 | default:'' }}">
+                            </td>
+                        </tr>
 
+                    {% endfor %}
 
-                                    <h3 class="codeheading" style="margin-bottom:0;font-weight:normal;color:#484848;font-size:20px;">
-                                        SHOW - Programming Language's
-                                    </h3>
-                                    <div class="col-md-12" style="padding:0;">
-                                        <div class="col-md-12 inputbox" style="background-color:black;border-radius:5px; margin:0;">
-                                            <ul style="list-style: decimal-leading-zero;padding:25px;">
-                                                <div>
-                                                    {% for dataset in ProgrammingLanguages %}
-                                                        <li style="background-color: #222222;padding:0 10px; margin-bottom:1px;"> 
-                                                            <label class="labels" style=""> {{dataset.name}} </label> 
-                                                        </li>
-                                                    {% endfor %}
-                                                </div>
-                                                <div style="padding: 5px 0px;">
-                                                    <li> 
-                                                        <form method="POST" action="{{request.path}}">
-                                                        {% csrf_token %}
-                                                            <div style="display: flex;">
-                                                                <!-- <input  type="hidden" name="comingFrom" value="Programming Language">  -->
-                                                                <input  type="hidden" name="comingFrom" value="ProgrammingLanguage"> 
-                                                                <!-- <input  type="hidden" name="comingFrom" value="programminglanguage">  -->
-                                                                <input class="codeinputs" name="comingData" type="text" placeholder="Enter new Programming Language!!" style="width:90%; margin-right:2px;" required>
-                                                                <!-- <input class="codeinputs" type="submit" style="width:10%; background-color:darkred; color:white;">  -->
-                                                                <input class="codeinputs" type="submit" style="width:35%; background-color:darkred; color:white;"> 
-                                                            </div>
-                                                        </form>
-                                                    </li>
-                                                </div>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </div>
+        </tbody>
 
-                                <div class="col-md-4">
-                                    <h3 class="codeheading" style="margin-bottom:0;font-weight:normal;color:#484848;font-size:20px;">
-                                        SHOW - Data Structure's
-                                    </h3>
-                                    <div class="col-md-12" style="padding:0;">
-                                        <div class="col-md-12 inputbox" style="background-color:black;border-radius:5px; margin:0;">
-                                            <ul style="list-style: decimal-leading-zero;padding:25px;">
-                                                <div>
-                                                    {% for dataset in DataStructures %}
-                                                        <li style="background-color: #222222;padding:0 10px; margin-bottom:1px;"> <label class="labels" style=""> {{dataset.name}} </label> </li>
-                                                    {% endfor %}
-                                                </div>
-                                                <div style="padding: 5px 0px;">
-                                                    <li> 
-                                                        <form method="POST" action="{{request.path}}">
-                                                        {% csrf_token %}
-                                                            <div style="display: flex;">
-                                                                <!-- <input  type="hidden" name="comingFrom" value="Data Structures">  -->
-                                                                <input  type="hidden" name="comingFrom" value="DataStructure"> 
-                                                                <!-- <input  type="hidden" name="comingFrom" value="datastructures">  -->
-                                                                <input class="codeinputs" name="comingData" type="text" placeholder="Enter new Data Structure!!" style="width:90%; margin-right:2px;" required> 
-                                                                <!-- <input class="codeinputs" type="submit" style="width:10%; background-color:darkred; color:white;">  -->
-                                                                <input class="codeinputs" type="submit" style="width:35%; background-color:darkred; color:white;"> 
-                                                            </div>
-                                                        </form>
-                                                    </li>
-                                                </div>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </div>
+        <input type="Submit">
 
-                                <div class="col-md-4">
-                                    <h3 class="codeheading" style="margin-bottom:0;font-weight:normal;color:#484848;font-size:20px;">
-                                        SHOW - Plateform's
-                                    </h3>
-                                    <div class="col-md-12" style="padding:0;">
-                                        <div class="col-md-12 inputbox" style="background-color:black;border-radius:5px; margin:0;">
-                                            <ul style="list-style: decimal-leading-zero;padding:25px;">
-                                                <div>
-                                                    {% for dataset in Plateforms %}
-                                                        <li style="background-color: #222222;padding:0 10px; margin-bottom:1px;"> <label class="labels" style=""> {{dataset.name}} </label> </li>
-                                                    {% endfor %}
-                                                </div>
-                                                <div style="padding: 5px 0px;">
-                                                    <li> 
-                                                        <form method="POST" action="{{request.path}}">
-                                                        {% csrf_token %}
-                                                            <div style="display: flex;">
-                                                                <!-- <input  type="hidden" name="comingFrom" value="Plateform">  -->
-                                                                <input  type="hidden" name="comingFrom" value="Plateform">
-                                                                <!-- <input  type="hidden" name="comingFrom" value="plateform">  -->
-                                                                <input class="codeinputs" name="comingData" type="text" placeholder="Enter new Plateform!!" style="width:90%; margin-right:2px;" required> 
-                                                                <!-- <input class="codeinputs" type="submit" style="width:10%; background-color:darkred; color:white;">  -->
-                                                                <input class="codeinputs" type="submit" style="width:35%; background-color:darkred; color:white;"> 
-                                                            </div>
-                                                        </form>
-                                                    </li>
-                                                </div>
-                                            </ul>
-                                        </div>
-                                    </div>
+    </form>
 
-                                </div> <!-- /.col-md-12 -->
-                            </div> <!-- /.row -->
-                        </div> <!-- /.box-content -->
-
-
-
-
-                    </div> <!-- /.col-md-12 -->
-                </div> <!-- /.row -->
-            </div>  <!-- /.inner-content -->
-        </div> <!-- /.content-wrapper -->
+</table>
 
 
 
 
 {% endblock %}
+
+
+
+
+
+
+
+
 
 
 
