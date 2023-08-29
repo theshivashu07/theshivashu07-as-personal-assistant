@@ -29,30 +29,33 @@
 
 
 
-<table class="table table-hover">
+
+
+<div class="col-md-12 inputbox" style="background-color:white; border-radius:10px;">
+
+
+<table class="table">
 
     <form method="POST" action="{{request.path}}">
         {% csrf_token %}
 
         <thead style="background-color: beige;">
             <tr>
-              <th scope="col">#</th>
-              <th scope="col" >Select Plateform(*)</th>
-              <th scope="col" >Add Links(*)</th>
-              <th scope="col" >Add Text Optional</th>
+              <th scope="col" style="padding-left: 20px; width:10%;">#</th>
+              <th scope="col" style="padding-left: 20px; width:28%;">Select Plateform(*)</th>
+              <th scope="col" style="padding-left: 20px; width:40%;">Add Links(*)</th>
+              <th scope="col" style="padding-left: 20px; width:22%;">Add Text Optional</th>
             </tr>
         </thead>
-
-
         <tbody>
 
                     {% for c in '0123' %}
 
                         <tr>
-                            <th scope="row " style="padding-top: 18px;">
+                            <th scope="row " style="padding: 25px 10px 0 10px;">
                                 {{ forloop.counter }}.
                             </th>
-                            <td>
+                            <td style="padding: 20px 5px 0 5px;">
                                 <!-- <input class="codeinputs" type="text" id="plateformslinkstexts-{{ forloop.counter }}" name="plateformslinkstexts" placeholder="typing..." value="{{ ProblemDataSet.plateformslinkstexts.0 | default:'' }}"> -->
                                   <select  class="codeinputs" id="plateformslinkstexts-{{ forloop.counter }}" name="plateformslinkstexts" >
                                         <option class="codeinputs" value="">None</option>
@@ -61,10 +64,10 @@
                                     {% endfor %}
                                   </select>
                             </td>
-                            <td>
+                            <td style="padding: 20px 5px 0 5px;">
                                 <input class="codeinputs" type="text" id="plateformslinkstexts-{{ forloop.counter }}" name="plateformslinkstexts" placeholder="typing..." value="{{ ProblemDataSet.plateformslinkstexts.1 | default:'' }}">
                             </td>
-                            <td>
+                            <td style="padding: 20px 5px 0 5px;">
                                 <input class="codeinputs" type="text" id="plateformslinkstexts-{{ forloop.counter }}" name="plateformslinkstexts" placeholder="typing..." value="{{ ProblemDataSet.plateformslinkstexts.2 | default:'' }}">
                             </td>
                         </tr>
@@ -73,11 +76,17 @@
 
         </tbody>
 
+
+
         <input type="Submit">
 
     </form>
-
 </table>
+
+
+</div>
+
+
 
 
 

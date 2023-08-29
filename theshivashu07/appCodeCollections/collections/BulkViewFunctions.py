@@ -73,6 +73,7 @@ def AddProblems(request):
 	ProblemsDetailSet=request.POST["ProblemsDetailSet"]
 	ProblemsTimeComplexity=request.POST["ProblemsTimeComplexity"]
 	ProblemsAuxiliarySpace=request.POST["ProblemsAuxiliarySpace"]
+	ProblemsLinks=request.POST["ProblemsLinks"]
 
 	# object = Problems.objects.get(pk=problemID.id)  
 	object = Problems()
@@ -146,6 +147,8 @@ def AddProblems(request):
 
 	# problem-assignment - and there is build file with its name!!!
 	BuildFilePaths.assignProblem(object,ProblemsDataStructures,ProblemsDetailSet)
+
+	BuildFilePaths.addLinks(object,ProblemsLinks)
 
 	return object
 	# return None
