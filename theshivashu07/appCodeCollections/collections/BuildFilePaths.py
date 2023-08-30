@@ -108,7 +108,7 @@ def deleteSolutions(objectSolution):
 
 
 
-def addLinks(objectProblem,ProblemsLinks)
+def addLinks(objectProblem,ProblemsLinks):
 	get = [ ch for ch in ProblemsLinks if(ch!='') ]
 	if(get):
 		for i in range(0,len(ProblemsLinks),3):
@@ -121,7 +121,7 @@ def addLinks(objectProblem,ProblemsLinks)
 				object_.text = ProblemsLinks[2+i]
 				object_.save()
 
-def getLinks(objectProblem)
+def getLinks(objectProblem):
 	objects = problems_links.objects.get(id=objectProblem) 
 	datalist = list() 
 	for object in objects: 
