@@ -73,7 +73,7 @@ def AddProblems(request):
 	ProblemsDetailSet=request.POST["ProblemsDetailSet"]
 	ProblemsTimeComplexity=request.POST["ProblemsTimeComplexity"]
 	ProblemsAuxiliarySpace=request.POST["ProblemsAuxiliarySpace"]
-	ProblemsLinks=request.POST["ProblemsLinks"]
+	ProblemsLinks=request.POST.getlist("ProblemsLinks")
 
 	# object = Problems.objects.get(pk=problemID.id)  
 	object = Problems()

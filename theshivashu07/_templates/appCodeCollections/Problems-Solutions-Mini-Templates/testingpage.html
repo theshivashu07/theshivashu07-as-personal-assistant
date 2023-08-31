@@ -24,67 +24,131 @@
 
 
 
+        <div class="content-wrapper" style="padding:0 min-height: 550px;">
+            <div class="inner-container container" style="background-color:#fafafa; min-width:1260px;">
+
+                <!-- <div class="row">
+                    <div class="section-header col-md-12" style="margin: 20px;">
+                        <h2 class="grid-heading codeheading" style="font-weight:bold;"> Home-Sweet-Home </h2>
+                        <span>PATH: "{{request.path}}"</span>
+                    </div> 
+                </div>  -->
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <!-- <div class="box-content" style="padding: 50px;"> -->
+                        <div class="box-content" style="padding: 100px 25px;">
+                            <div class="row" style="background-color:#fafafa;border-radius:5px;padding:20px 5px;">
+
+                                <div class="col-md-12"> 
+
+
+
+                    <div class="col-md-6 service-item service-left">
+                        <div class="box-content">
+                            <div class="service-icon">
+                                <i class="li_data"></i>
+                            </div>
+                            <div class="service-content">
+                                <h4>
+                                    <a href="/codecollections/problems-with-solutions/"> 
+                                        All Problems-Solutions 
+                                    </a>
+                                </h4>
+                                <p>This section is to see all problem's which <b class="blue">one</b> or <b class="green">plus plus</b> solution available. Not matter in Python or C++ or else programming language. <b class="blue">#allproblemswithsolutions</b></p>  
+                            </div>
+                        </div> <!-- /.box-content -->
+                    </div> <!-- /.service-item -->
+                    <div class="col-md-6 service-item service-right">
+                        <div class="box-content">
+                            <div class="service-icon">
+                                <i class="li_data"></i>
+                            </div>
+                            <div class="service-content">
+                                <h4>
+                                    <a href="/codecollections/problems-without-solutions/"> 
+                                        All Problems Only
+                                    </a>
+                                </h4>
+                                <p>This section is important, because if we only make a problem, but forgot to add its solution, or may intentionally left, then all such problems are here. <b class="blue">#problemsonly</b></p>
+                            </div>
+                        </div> <!-- /.box-content -->
+                    </div> <!-- /.service-item -->
+
+                    <div class="col-md-6 service-item service-left">
+                        <div class="box-content">
+                            <div class="service-icon">
+                                <i class="li_pen"></i>
+                            </div>
+                            <div class="service-content">
+                                <h4>
+                                    <a href="/codecollections/add-problem/"> 
+                                        Add Problem
+                                    </a>
+                                </h4>
+                                <p>If you want to <b class="blue">add</b> <b class="green">new problem</b> then add this immidiate. But don't repeate already available problem again. I solve problem's many-name issue as-soon-as-possible. <b class="blue">#addnow</b></p>
+                            </div>
+                        </div> <!-- /.box-content -->
+                    </div> <!-- /.service-item -->
+                    <div class="col-md-6 service-item service-right">
+                        <div class="box-content">
+                            <div class="service-icon">
+                                <i class="li_search"></i>
+                            </div>
+                            <div class="service-content">
+                                <h4>
+                                    <a href="#"> 
+                                        Search Problems
+                                    </a>
+                                </h4>
+                                <p>Okay, so all problems are available there when you search. And yess no matter its with solution or without. We show you problems with there status of availability. <b class="blue">#findnow</b></p>
+                            </div>
+                        </div> <!-- /.box-content -->
+                    </div> <!-- /.service-item -->
+
+                    <div class="col-md-6 service-item service-left">
+                        <div class="box-content">
+                            <div class="service-icon">
+                                <i class="li_like"></i>
+                            </div>
+                            <div class="service-content">
+                                <h4>
+                                    <a href="#"> 
+                                        Sincerely Supporting
+                                    </a>
+                                </h4>
+                                <p>A supporting letter is a personally written document that explains the writer's support for a person, cause or idea. You can write a letter of support for an individual. <b class="blue">#support</b></p>
+                            </div>
+                        </div> <!-- /.box-content -->
+                    </div> <!-- /.service-item -->
+                    <div class="col-md-6 service-item service-right">
+                        <div class="box-content">
+                            <div class="service-icon">
+                                <i class="li_study"></i>
+                            </div>
+                            <div class="service-content">
+                                <h4>
+                                    <a href="#"> 
+                                        Learning New Things  
+                                    </a>
+                                </h4>
+                                <p>Learning keeps your mind engaged and body active. It helps you get new and knowledge-based perspectives on the world around you. <b class="blue">#newthing #learnsomethingnew</b> </p>
+                            </div>
+                        </div> <!-- /.box-content -->
+                    </div> <!-- /.service-item -->
 
 
 
 
+                                </div> <!-- /.col-md-12 -->
+                            </div> <!-- /.row -->
+                        </div> <!-- /.box-content -->
+                    </div> <!-- /.col-md-12 -->
+                </div> <!-- /.row -->
+            </div>  <!-- /.inner-content -->
+        </div> <!-- /.content-wrapper -->
 
 
-
-<div class="col-md-12 inputbox" style="background-color:white; border-radius:10px;">
-
-
-<table class="table">
-
-    <form method="POST" action="{{request.path}}">
-        {% csrf_token %}
-
-        <thead style="background-color: beige;">
-            <tr>
-              <th scope="col" style="padding-left: 20px; width:10%;">#</th>
-              <th scope="col" style="padding-left: 20px; width:28%;">Select Plateform(*)</th>
-              <th scope="col" style="padding-left: 20px; width:40%;">Add Links(*)</th>
-              <th scope="col" style="padding-left: 20px; width:22%;">Add Text Optional</th>
-            </tr>
-        </thead>
-        <tbody>
-
-                    {% for c in '0123' %}
-
-                        <tr>
-                            <th scope="row " style="padding: 25px 10px 0 10px;">
-                                {{ forloop.counter }}.
-                            </th>
-                            <td style="padding: 20px 5px 0 5px;">
-                                <!-- <input class="codeinputs" type="text" id="plateformslinkstexts-{{ forloop.counter }}" name="plateformslinkstexts" placeholder="typing..." value="{{ ProblemDataSet.plateformslinkstexts.0 | default:'' }}"> -->
-                                  <select  class="codeinputs" id="plateformslinkstexts-{{ forloop.counter }}" name="plateformslinkstexts" >
-                                        <option class="codeinputs" value="">None</option>
-                                    {% for object in Plateforms %}
-                                        <option class="codeinputs" value="{{object.id}}">{{object.name}}</option>
-                                    {% endfor %}
-                                  </select>
-                            </td>
-                            <td style="padding: 20px 5px 0 5px;">
-                                <input class="codeinputs" type="text" id="plateformslinkstexts-{{ forloop.counter }}" name="plateformslinkstexts" placeholder="typing..." value="{{ ProblemDataSet.plateformslinkstexts.1 | default:'' }}">
-                            </td>
-                            <td style="padding: 20px 5px 0 5px;">
-                                <input class="codeinputs" type="text" id="plateformslinkstexts-{{ forloop.counter }}" name="plateformslinkstexts" placeholder="typing..." value="{{ ProblemDataSet.plateformslinkstexts.2 | default:'' }}">
-                            </td>
-                        </tr>
-
-                    {% endfor %}
-
-        </tbody>
-
-
-
-        <input type="Submit">
-
-    </form>
-</table>
-
-
-</div>
 
 
 

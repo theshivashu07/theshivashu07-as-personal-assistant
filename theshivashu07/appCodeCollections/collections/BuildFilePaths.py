@@ -109,17 +109,16 @@ def deleteSolutions(objectSolution):
 
 
 def addLinks(objectProblem,ProblemsLinks):
-	get = [ ch for ch in ProblemsLinks if(ch!='') ]
-	if(get):
-		for i in range(0,len(ProblemsLinks),3):
-			templist = ProblemsLinks[i:i+3]
-			if(templist[0]!=''):
-				object_ = problems_links()
-				object_.problem_id = objectProblem
-				object_.plateform_id = Plateforms.objects.get(id=ProblemsLinks[0+i])
-				object_.link = ProblemsLinks[1+i]
-				object_.text = ProblemsLinks[2+i]
-				object_.save()
+	print(objectProblem,ProblemsLinks)
+	for i in range(0,len(ProblemsLinks),3):
+		plateform_id,link,text=ProblemsLinks[i:i+3]
+		if(plateform_id!='' and link!=''): 
+			object = problems_links()
+			object.problem_id = objectProblem
+			object.plateform_id = Plateforms.objects.get(id=plateform_id)
+			object.link = link
+			object.text = text
+			object.save()
 
 def getLinks(objectProblem):
 	objects = problems_links.objects.get(id=objectProblem) 
