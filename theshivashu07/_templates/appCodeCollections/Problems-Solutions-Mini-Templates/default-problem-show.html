@@ -4,36 +4,52 @@
 
                                     
                                     
-                                    <div style="content-visibility: auto; background-color: white; padding: 20px; border-radius: 5px; ">
-                                        <h3 class="grid-heading codeheading" style="margin-bottom:0;contain: content;">
+                                    <div style="content-visibility: auto; background-color: white; padding: 40px 20px; border-radius: 5px; ">
+                                        <h3 class="grid-heading codeheading" style="margin-bottom:0;">
 
 
-
+                                            <!-- <div style="float:right;text-align:right;margin-left:10px;"> -->
                                             <div style="float:right;text-align:right;display:grid;">
 
-                                                <div style="float:right;text-align:right;display:inline-flex;">
-                                                    <div style="background-color:lightgray; padding:5px; margin:5px; border-radius: 5px;">
-                                                        <a href="/codecollections/add-solution/{{ProblemDataSet.slug}}/" style="color:black; ">
-                                                            <i class="li_bulb"></i>
-                                                        </a>
-                                                    </div>
-                                                    <div style="background-color:lightgray; padding:5px; margin:5px; border-radius: 5px;">
-                                                        <a href="/codecollections/edit-problem/{{ProblemDataSet.slug}}/" style="color:black; ">
-                                                            <i class="li_pen"></i>
-                                                        </a>
-                                                    </div>
-                                                    <div style="background-color:lightgray; padding:5px; margin:5px; border-radius:5px;">
-                                                        <a href="/codecollections/delete-problem/{{ProblemDataSet.slug}}/" style="color:black; ">
-                                                            <i class="li_trash"></i>
-                                                        </a>
-                                                    </div>
+                                                <div style="margin-bottom:5px;">
+                                                <!-- <div style="float:right;text-align:right;display:inline-flex;"> -->
+
+
+
+<div class="btn-group">
+  <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false" style="background-color:black; color:orange; border-color:orange;">
+    Actions
+  </button>
+  <ul class="dropdown-menu dropdown-menu-end">
+    <li>
+        <a href="/codecollections/edit-problem/{{ProblemDataSet.slug}}/" style="color:black; display: flex;">
+            Edit Problem
+        </a>
+    </li>
+    <li>
+        <a href="/codecollections/delete-problem/{{ProblemDataSet.slug}}/" style="color:black; display: flex;">
+            Delete Problem
+        </a>
+    </li>
+    <li>
+        <hr class="dropdown-divider">
+    </li>
+    <li>
+        <a href="/codecollections/add-solution/{{ProblemDataSet.slug}}/" style="color:black; display: flex;">
+            Add Solutions
+        </a>
+    </li>
+  </ul>
+</div>
+
                                                 </div>
 
 
+                                                <div style="float:right;text-align:right;display:inline-flex;">
                                                 {% if ProblemDataSet.plateforms %}
                                                     <div style="float:right;text-align:right;display:inline-flex;">
                                                         {% for object in ProblemDataSet.links %}
-                                                            <div style="background-color:{{object.plateform_id.bgcolor | default:'lightgray'}}; padding:5px; margin:2px; border-radius:50px; font-size:70%; border-left: groove; border-right: ridge;">
+                                                            <div style="background-color:{{object.plateform_id.bgcolor | default:'lightgray'}}; padding:5px; margin:1px; border-radius:50px; font-size:70%; border-left: groove; border-right: ridge;">
                                                                 <a href="{{object.link | default:'#'}}" target="_blank" style="color:{{object.plateform_id.color | default:'black'}};">
                                                                     {{object.text  |  default:object.plateform_id.name.0 }}
                                                                 </a>
@@ -43,6 +59,7 @@
                                                 {% endif %}
 
                                             </div>
+                                        </div>
 
 
 
@@ -96,7 +113,7 @@
 
                                         <div style="margin-top: 30px;">
 
-                                                    <div class="paragraph" style="padding: 20px 5px;">
+                                                    <div class="paragraph" style="padding: 20px 10px; background-color:#fbfbfb;">
 
                                                             <p>
                                                                 {{ProblemDataSet.detailsset.0  |  safe}}
@@ -107,9 +124,9 @@
 
 
 
-                                            {% if ProblemDataSet.timecomplexity == None and ProblemDataSet.auxiliaryspace == None %}
+                                            {% if ProblemDataSet.timecomplexity != None or ProblemDataSet.auxiliaryspace != None %}
 
-                                                <div class="paragraph">
+                                                <div class="paragraph" style="padding: 20px 10px; background-color:#fbfbfb;">
                                                     <p>
                                                         <b>Expected Time Complexity:</b> {{ProblemDataSet.timecomplexity  | default:None}}.
                                                     </p>
