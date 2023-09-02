@@ -1,0 +1,5 @@
+
+
+def function(array):
+        pass
+
