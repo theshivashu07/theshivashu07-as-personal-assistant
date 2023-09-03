@@ -21,7 +21,7 @@ def index(request):
 
 
 
-def edittables(request):
+def edittables(request): 
 	if request.method=="POST":
 		comingFrom=request.POST["comingFrom"]
 		tracks = { 'Plateform':Plateforms(), 'DataStructure':DataStructures(), 'ProgrammingLanguage':ProgrammingLanguages(), 'DSASheetList':DSAsSheetsLists() }
