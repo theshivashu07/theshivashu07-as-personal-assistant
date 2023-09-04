@@ -755,7 +755,8 @@ a.btn-left:hover, .top-header .social-top ul li a:hover, .main-header .menu-wrap
 }
 
 .box-content {
-  background: white;
+/*  background: white;*/
+  background: #fdfdfd;
   padding: 25px;
   overflow: hidden;
 }

@@ -253,16 +253,8 @@ def fatchProblemsWithOrWithoutSolutions(request):
 
 
 def openTestingPage(request):
-	problemslug="kadanes-algorithm"
-	objectProblem=Problems.objects.get(slug=problemslug)
-
-	thisisReturningDatabase = BulkViewFunctions.getBaseStructure()
-	thisisReturningDatabase['ProblemDataSet'] = BulkViewFunctions.ProblemDataSet(objectProblem)
-	return render(request,"appCodeCollections/Problems-Solutions-Mini-Templates/testingpage.html",thisisReturningDatabase);
-	# thisisReturningDatabase = BulkViewFunctions.getBaseStructure()
 	# return render(request,"appCodeCollections/Problems-Solutions-Mini-Templates/testingpage.html", thisisReturningDatabase);
-	# return render(request,"appCodeCollections/Problems-Solutions-Mini-Templates/wholelist.html");
-	# return render(request,"appCodeCollections/404.html");
+	return render(request,"appCodeCollections/404.html");
 
 
 
