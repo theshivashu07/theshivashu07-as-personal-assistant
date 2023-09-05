@@ -23,6 +23,9 @@ urlpatterns=[
 		path('delete-problem/<slug:problemslug>/',views.deleteProblem,name='deleteProblem'),
 		path('delete-solution/<slug:problemslug>/<str:solutionid>/',views.deleteSolution,name='deleteSolution'),
 
+		path('add-problem-links/<slug:problemslug>/',views.addProblemsLinks,name='addProblemsLinks'),
+		path('add-solution-attachments/<slug:problemslug>/<str:solutionid>/',views.addSolutionsAttachments,name='addSolutionsAttachments'),
+
 		# these are two specific urls, first is all problem with solution, and second is problems which solution not available!!!
 		path('problems-with-solutions/',views.fatchProblemsWithOrWithoutSolutions,name='fatchProblemsWithOrWithoutSolutions'),
 		path('problems-without-solutions/',views.fatchProblemsWithOrWithoutSolutions,name='fatchProblemsWithOrWithoutSolutions'),		

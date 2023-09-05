@@ -4,6 +4,7 @@ from appCodeCollections.models import *
 import appCodeCollections.collections.BuildFilePaths as BuildFilePaths
 
 
+'''
 def ProblemDataSet(problemID):
 	object=Problems.objects.get(id=problemID.id)
 	holds=problems_plateforms.objects.filter(problem_id=problemID.id)
@@ -24,6 +25,7 @@ def ProblemDataSet(problemID):
 	# 	object.programminglanguages=ProgrammingLanguages.objects.get(pk=object.programminglanguages)
 
 	return object
+'''
 
 
 def ProblemDataSet(problemID):
@@ -73,7 +75,6 @@ def AddProblems(request):
 	ProblemsDetailSet=request.POST["ProblemsDetailSet"]
 	ProblemsTimeComplexity=request.POST["ProblemsTimeComplexity"]
 	ProblemsAuxiliarySpace=request.POST["ProblemsAuxiliarySpace"]
-	ProblemsLinks=request.POST.getlist("ProblemsLinks")
 
 	# object = Problems.objects.get(pk=problemID.id)  
 	object = Problems()
@@ -147,8 +148,6 @@ def AddProblems(request):
 
 	# problem-assignment - and there is build file with its name!!!
 	BuildFilePaths.assignProblem(object,ProblemsDataStructures,ProblemsDetailSet)
-
-	BuildFilePaths.addLinks(object,ProblemsLinks)
 
 	return object
 	# return None
@@ -245,9 +244,6 @@ def EditProblems(request,problemID):
 
 def AddSolutions(request,problemID):
 	# when you want to ADD Solution...
-	SolutionsLink=request.POST["SolutionsLink"]
-	SolutionsNote=request.POST["SolutionsNote"]
-	SolutionsShownTitle=request.POST["SolutionsShownTitle"]
 	SolutionsDataStructures=request.POST.getlist("SolutionsDataStructures")
 	SolutionsProgrammingLanguage=request.POST["SolutionsProgrammingLanguage"]
 	SolutionsTimeComplexity=request.POST["SolutionsTimeComplexity"]
@@ -295,24 +291,6 @@ def AddSolutions(request,problemID):
 				miniobject = solutions_datastructures.objects.get(datastructure_id=id, solution_id=object.id)
 				miniobject.delete()
 		object.save()
-
-	# must that you putted any one data-structure...
-	if(SolutionsLink or SolutionsShownTitle or SolutionsNote):
-		object.attachments=1
-		object.save()
-		# add-solutionsattachments
-		tempobject = SolutionsAttachments()
-		tempobject.problem_id = problemID
-		tempobject.link = SolutionsLink
-		tempobject.note = SolutionsNote
-		tempobject.showntitle = SolutionsShownTitle
-		tempobject.save()
-		# add-solutionandsolutionsattachments
-		thisobject=SolutionAndSolutionsAttachments()
-		thisobject.problem_id = problemID
-		thisobject.solution_id = object
-		thisobject.solutionattachments_id = tempobject
-		thisobject.save()
 
 	# solution-assignment - and there is build file with its name!!!
 	BuildFilePaths.assignSolution(object,SolutionsProgrammingLanguage,SolutionsCodeSubmissions)

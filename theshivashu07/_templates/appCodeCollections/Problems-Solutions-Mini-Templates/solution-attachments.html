@@ -1,0 +1,188 @@
+
+{% extends 'guest/_master.html' %}
+
+
+
+
+{% block tcontent %}
+</>  |  Add Solution Attachments
+{% endblock %}
+
+
+
+{% block headerplusplus %}
+
+{% include 'appCodeCollections/_header.html' %}
+
+{% endblock %}
+
+
+
+
+
+{% block childcontent %}
+
+
+
+
+
+
+        <div class="content-wrapper" style="padding:0; min-height: 550px; background-color:#fafafa;">
+            <div class="inner-container container" style="background-color:#fafafa; min-width:1260px;">
+
+                <!-- <div class="row">
+                    <div class="section-header col-md-12" style="margin: 20px;">
+                        <h2 class="grid-heading codeheading" style="font-weight:bold;"> Add-Problem</h2>
+                        <span>PATH: "{{request.path}}"</span>
+                    </div> 
+                </div>  -->
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <!-- <div class="box-content" style="padding: 50px;"> -->
+                        <!-- <div class="box-content" style="padding: 100px 25px;"> -->
+                            <div class="row" style="background-color:#fafafa;border-radius:5px;padding:20px 5px;">
+                                <!-- <div class="col-md-12">  -->
+
+
+
+
+
+
+
+
+
+
+                            <div style="content-visibility: auto; background-color: white; padding: 25px 0; border-radius: 5px;"> 
+
+
+
+                                <!-- <h3 class="grid-heading codeheading" style="margin-bottom: 0; margin-left: 15px; ">
+                                    <div class="display:flex">
+                                        (:   Solution-Input/Edit-Section
+                                    </div>
+                                </h3> -->
+
+
+
+                                <!-- <div style="content-visibility: auto; background-color: white; padding: 50px 20px; border-radius: 5px; ">  -->
+                                <div style="content-visibility: auto; background-color: white; padding: 25px 5px;"> 
+
+
+                                <form method="POST" action="{{request.path}}">
+                                {% csrf_token %}
+
+
+
+<div class="col-md-12 inputbox" style="background-color:white; border-radius:10px;">
+
+
+    <table class="table table-borderless">
+
+            <thead style="background-color: beige;">
+                <tr>
+                  <th scope="col" style="padding-left: 20px; width:5%;">#</th>
+                  <!-- <th scope="col" style="padding-left: 20px; width:30%;">Select Plateform(*)</th> -->
+                  <th scope="col" style="padding-left: 20px; width:26%;">Add Shown Title(*)</th>
+                  <th scope="col" style="padding-left: 20px; width:34%;">Add Links(*)</th>
+                  <th scope="col" style="padding-left: 20px; width:40%;">Add Note</th>
+                </tr>
+            </thead>
+
+            <tbody>
+
+                        <!-- value|yesno:"yeah,no,maybe" -->
+                        {% for object in SolutionAttachments|default:'0123' %}
+                            <tr>
+                                <th scope="row " style="padding: 18px 0 0 20px;">
+                                    {{ forloop.counter }}.
+                                </th>
+                                <td style="padding: 10px 5px 0 5px;">
+                                    <input class="codeinputs" type="text" id="SolutionsAttachments-{{ forloop.counter }}" name="SolutionsAttachments" placeholder="Self/GFG/Leetcode/Love/Striver's Solution" value="{{ object.1 | default:'' }}"  style="height:35px;" {% if object.1 %} disabled {% endif %}>
+                                </td>
+                                <td style="padding: 10px 5px 0 5px;">
+                                    <input class="codeinputs" type="text" id="SolutionsAttachments-{{ forloop.counter }}" name="SolutionsAttachments" placeholder="https://theshivashu07.com/personal/{{ forloop.counter }}" value="{{ object.2 | default:'' }}" style="height:35px; "  {% if object.1 %} disabled {% endif %}>
+                                </td>
+                                <td style="padding: 10px 5px 0 5px;">
+                                    <input class="codeinputs" type="text" id="SolutionsAttachments-{{ forloop.counter }}" name="SolutionsAttachments" placeholder="typing..." value="{{ object.3 | default:'' }}" style="height:35px;"  {% if object.1 %} disabled {% endif %}>
+                                </td>
+                            </tr>
+
+                        {% endfor %}
+
+
+
+
+                                 <!-- there is no ways to fix this below line using 'with' -->
+                                 <!-- counter == SolutionDataSet.attachments|default:'0123' | length | add:1  -->
+
+                                <tr>
+                                    <th scope="row " style="padding: 18px 0 0 20px;">
+                                        <!-- {{ counter }}. -->
+                                        {{ SolutionDataSet.attachments|default:'0123' | length | add:1 }}
+                                    </th>
+                                    <td style="padding: 10px 5px 0 5px;">
+                                        <input class="codeinputs" type="text" id="SolutionsAttachments-{{ SolutionDataSet.attachments|default:'0123' | length | add:1 }}" name="SolutionsAttachments" placeholder="Self/GFG/Leetcode/Love/Striver's Solution" value=""   style="height:35px;" >
+                                          <!-- <select  class="codeinputs" id="SolutionsAttachments-{{ counter }}" name="SolutionsAttachments" style="height:35px;">
+                                                <option class="codeinputs" value="">None</option>
+                                            {% for object in Plateforms %}
+                                                <option class="codeinputs" value="{{object.id}}" >{{object.name}}</option>
+                                            {% endfor %}
+                                          </select> -->
+                                    </td>
+                                    <td style="padding: 10px 5px 0 5px;">
+                                        <input class="codeinputs" type="text" id="SolutionsAttachments-{{ SolutionDataSet.attachments|default:'0123' | length | add:1 }}" name="SolutionsAttachments" placeholder="https://theshivashu07.com/personal/{{ SolutionDataSet.attachments|default:'0123' | length | add:1 }}" value="" style="height:35px;">
+                                    </td>
+                                    <td style="padding: 10px 5px 0 5px;">
+                                        <input class="codeinputs" type="text" id="SolutionsAttachments-{{ SolutionDataSet.attachments|default:'0123' | length | add:1 }}" name="SolutionsAttachments" placeholder="typing..." value="" style="height:35px;">
+                                    </td>
+                                </tr>
+
+
+
+
+            </tbody>
+    </table>
+
+
+</div>
+
+
+
+
+
+                                        <div class="col-md-12 inputbox" style="padding:20px; margin: 0; padding-left: 1100px;">
+                                            <input class="codeinputs" type="submit" style="background-color:#dd0000; color:white;" name="submit" value="Submit"> 
+                                        </div>
+
+
+
+
+
+
+                                </form>
+
+                                </div>
+
+                            </div>
+
+
+
+                                <!-- </div> <!-- /.col-md-12 --> 
+                            </div> <!-- /.row -->
+                        <!-- </div> <!-- /.box-content --> 
+                    </div> <!-- /.col-md-12 -->
+                </div> <!-- /.row -->
+            </div>  <!-- /.inner-content -->
+        </div> <!-- /.content-wrapper -->
+
+
+
+
+
+
+
+{% endblock %}
+
+
+

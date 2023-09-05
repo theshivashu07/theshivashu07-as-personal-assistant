@@ -213,6 +213,51 @@ def deleteSolution(request, problemslug, solutionid):
 
 
 
+
+
+
+def addProblemsLinks(request, problemslug):
+	objectProblem=Problems.objects.get(slug=problemslug)
+	if request.method=="POST":
+		ProblemsLinks=request.POST.getlist("ProblemsLinks")
+		BuildFilePaths.addLinks(objectProblem,ProblemsLinks)
+		return redirect(f"/codecollections/problem/{objectProblem.slug}/")
+
+	thisisReturningDatabase = BulkViewFunctions.getBaseStructure()
+	thisisReturningDatabase['ProblemDataSet'] = BulkViewFunctions.ProblemDataSet(objectProblem)
+	thisisReturningDatabase['ProblemLinks'] = BuildFilePaths.getLinks(objectProblem)
+	print(thisisReturningDatabase['ProblemLinks'])
+	# return redirect("/codecollections/problem-links/", thisisReturningDatabase)
+	return render(request,"appCodeCollections/Problems-Solutions-Mini-Templates/problem-links.html", thisisReturningDatabase);
+
+
+def addSolutionsAttachments(request, problemslug, solutionid):
+	objectProblem=Problems.objects.get(slug=problemslug)
+	objectSolution=Solutions.objects.get(id=solutionid)
+	if request.method=="POST":
+		SolutionsAttachments=request.POST.getlist("SolutionsAttachments")
+		BuildFilePaths.addAttachments(objectProblem,objectSolution,SolutionsAttachments)
+		return redirect(f"/codecollections/problem-solution/{objectProblem.slug}/{objectSolution.id}")
+
+	thisisReturningDatabase = BulkViewFunctions.getBaseStructure()
+	thisisReturningDatabase['ProblemDataSet'] = BulkViewFunctions.ProblemDataSet(objectProblem)
+	thisisReturningDatabase['SolutionDataSet'] = BulkViewFunctions.SolutionDataSet(objectProblem,objectSolution.id)
+	thisisReturningDatabase['SolutionAttachments'] = BuildFilePaths.getAttachments(objectProblem,objectSolution)
+	print(thisisReturningDatabase['SolutionAttachments'])
+	# return redirect("/codecollections/solution-attachments/", thisisReturningDatabase)
+	return render(request,"appCodeCollections/Problems-Solutions-Mini-Templates/solution-attachments.html", thisisReturningDatabase);
+
+
+
+
+
+
+
+
+
+
+
+
 def ProblemWithSolution(request, problemslug, solutionid):
 	objectProblem=Problems.objects.get(slug=problemslug)
 

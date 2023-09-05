@@ -122,59 +122,6 @@
 
 
 
-
-
-<div class="col-md-12 inputbox" style="background-color:white; border-radius:10px;">
-
-
-<table class="table table-borderless">
-
-        <thead style="background-color: beige;">
-            <tr>
-              <th scope="col" style="padding-left: 20px; width:5%;">#</th>
-              <th scope="col" style="padding-left: 20px; width:30%;">Select Plateform(*)</th>
-              <th scope="col" style="padding-left: 20px; width:40%;">Add Links(*)</th>
-              <th scope="col" style="padding-left: 20px; width:25%;">Add Text (#1or2'Words)</th>
-            </tr>
-        </thead>
-        <tbody>
-
-                    {% for c in '01234' %}
-
-                        <tr>
-                            <th scope="row " style="padding: 18px 0 0 20px;">
-                                {{ forloop.counter }}.
-                            </th>
-                            <td style="padding: 10px 5px 0 5px;">
-                                <!-- <input class="codeinputs" type="text" id="ProblemsLinks-{{ forloop.counter }}" name="ProblemsLinks" placeholder="typing..." value="{{ ProblemDataSet.plateformslinkstexts.0 | default:'' }}"> -->
-                                  <select  class="codeinputs" id="ProblemsLinks-{{ forloop.counter }}" name="ProblemsLinks" style="height:35px;">
-                                        <option class="codeinputs" value="">None</option>
-                                    {% for object in Plateforms %}
-                                        <option class="codeinputs" value="{{object.id}}" >{{object.name}}</option>
-                                    {% endfor %}
-                                  </select>
-                            </td>
-                            <td style="padding: 10px 5px 0 5px;">
-                                <input class="codeinputs" type="text" id="ProblemsLinks-{{ forloop.counter }}" name="ProblemsLinks" placeholder="https://theshivashu07.com/personal/{{ forloop.counter }}" value="{{ ProblemDataSet.plateformslinkstexts.1 | default:'' }}" style="height:35px;">
-                            </td>
-                            <td style="padding: 10px 5px 0 5px;">
-                                <input class="codeinputs" type="text" id="ProblemsLinks-{{ forloop.counter }}" name="ProblemsLinks" placeholder="S or SH" value="{{ ProblemDataSet.plateformslinkstexts.2 | default:'' }}" style="height:35px;">
-                            </td>
-                        </tr>
-
-                    {% endfor %}
-                    <tr></tr>
-
-        </tbody>
-</table>
-
-
-</div>
-
-
-
-
-
                                 </form>
 
                                 </div>

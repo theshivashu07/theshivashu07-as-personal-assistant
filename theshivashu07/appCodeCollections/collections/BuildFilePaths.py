@@ -109,7 +109,6 @@ def deleteSolutions(objectSolution):
 
 
 def addLinks(objectProblem,ProblemsLinks):
-	print(objectProblem,ProblemsLinks)
 	for i in range(0,len(ProblemsLinks),3):
 		plateform_id,link,text=ProblemsLinks[i:i+3]
 		if(plateform_id!='' and link!=''): 
@@ -119,12 +118,47 @@ def addLinks(objectProblem,ProblemsLinks):
 			object.link = link
 			object.text = text
 			object.save()
+	return 
 
 def getLinks(objectProblem):
-	objects = problems_links.objects.get(id=objectProblem) 
+	objects = problems_links.objects.filter(problem_id=objectProblem) 
 	datalist = list() 
 	for object in objects: 
-		datalist.append( [object.plateform_id, object.plateform_id, object.link, object.text] ) 
+		datalist.append( [object.problem_id, object.plateform_id, object.link, object.text] ) 
 	return datalist 
+
+
+
+def addAttachments(objectProblem,objectSolution,ProblemsLinks):
+	print(objectProblem,objectSolution,ProblemsLinks)
+	for i in range(0,len(ProblemsLinks),3):
+		showntitle,link,note=ProblemsLinks[i:i+3]
+		if(showntitle!='' and link!=''): 
+			object = SolutionsAttachments()
+			object.problem_id = objectProblem
+			object.showntitle = showntitle
+			object.link = link
+			object.note = note
+			object.save()
+			newobject = SolutionAndSolutionsAttachments()
+			newobject.problem_id = objectProblem
+			newobject.solution_id = objectSolution
+			newobject.solutionattachments_id = object
+			newobject.save()
+	return 
+
+def getAttachments(objectProblem,objectSolution):
+	objects = SolutionAndSolutionsAttachments.objects.filter(solution_id=objectSolution) 
+	datalist = list() 
+	for object in objects: 
+		object = object.solutionattachments_id
+		datalist.append( [object.problem_id, object.showntitle, object.link, object.note] ) 
+	return datalist 
+
+
+
+
+
+
 
 
