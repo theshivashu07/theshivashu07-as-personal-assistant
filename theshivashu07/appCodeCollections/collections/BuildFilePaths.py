@@ -77,13 +77,11 @@ def buildSolutionFilePath(object,SolutionsProgrammingLanguage):
 
 def editProblems(objectProblem):
 	"""because we already coming to edit-problem, means we have new data, so better thing that I delete old existing file..."""
-	print(f"{DEFAULTs.problems_location}\\{objectProblem.filename}")
 	os.remove(f"{DEFAULTs.problems_location}\\{objectProblem.filename}")
 	return 
 
 def editSolutions(objectSolution):
 	"""because we already coming to edit-solution, means we have new data, so better thing that I delete old existing file..."""
-	print(f"{DEFAULTs.solutions_location}\\{objectSolution.filename}")
 	os.remove(f"{DEFAULTs.solutions_location}\\{objectSolution.filename}")
 	return 
 
@@ -94,12 +92,10 @@ def deleteProblemsAndSolutions(objectProblem):
 	for object in Solutions.objects.all():
 		if(object.problem_id == objectProblem):
 			deleteSolutions(object)
-	print("Problem's All Movements DONE!!!")
 	return 
 
 def deleteSolutions(objectSolution):
 	shutil.move(f"{DEFAULTs.solutions_location}\\{objectSolution.filename}", f"{DEFAULTs.deleted_solutions_location}\\{objectSolution.filename}")
-	print("Solution's All Movements DONE!!!")
 	return 
 
 
@@ -130,7 +126,6 @@ def getLinks(objectProblem):
 
 
 def addAttachments(objectProblem,objectSolution,ProblemsLinks):
-	print(objectProblem,objectSolution,ProblemsLinks)
 	for i in range(0,len(ProblemsLinks),3):
 		showntitle,link,note=ProblemsLinks[i:i+3]
 		if(showntitle!='' and link!=''): 

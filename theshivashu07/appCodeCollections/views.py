@@ -226,7 +226,6 @@ def addProblemsLinks(request, problemslug):
 	thisisReturningDatabase = BulkViewFunctions.getBaseStructure()
 	thisisReturningDatabase['ProblemDataSet'] = BulkViewFunctions.ProblemDataSet(objectProblem)
 	thisisReturningDatabase['ProblemLinks'] = BuildFilePaths.getLinks(objectProblem)
-	print(thisisReturningDatabase['ProblemLinks'])
 	# return redirect("/codecollections/problem-links/", thisisReturningDatabase)
 	return render(request,"appCodeCollections/Problems-Solutions-Mini-Templates/problem-links.html", thisisReturningDatabase);
 
@@ -243,7 +242,6 @@ def addSolutionsAttachments(request, problemslug, solutionid):
 	thisisReturningDatabase['ProblemDataSet'] = BulkViewFunctions.ProblemDataSet(objectProblem)
 	thisisReturningDatabase['SolutionDataSet'] = BulkViewFunctions.SolutionDataSet(objectProblem,objectSolution.id)
 	thisisReturningDatabase['SolutionAttachments'] = BuildFilePaths.getAttachments(objectProblem,objectSolution)
-	print(thisisReturningDatabase['SolutionAttachments'])
 	# return redirect("/codecollections/solution-attachments/", thisisReturningDatabase)
 	return render(request,"appCodeCollections/Problems-Solutions-Mini-Templates/solution-attachments.html", thisisReturningDatabase);
 

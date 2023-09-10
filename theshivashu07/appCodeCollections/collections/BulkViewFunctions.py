@@ -332,7 +332,6 @@ def EditSolutions(request,problemID,solutionID):
 	if(SolutionsLink or SolutionsShownTitle or SolutionsNote):
 		tempobjects = SolutionAndSolutionsAttachments.objects.filter( problem_id=problemID,solution_id=solutionID )
 
-		print(tempobjects)
 		if(not tempobjects):   # if-not-exist, then-create-it
 			object.attachments=1
 			object.save()
@@ -468,7 +467,6 @@ def getbackSolutionDetails(request):
 			'codesubmissions' : request.POST["SolutionsCodeSubmissions"],
 		}
 	}
-	print(thisisReturningDatabase)
 	return thisisReturningDatabase
 
 

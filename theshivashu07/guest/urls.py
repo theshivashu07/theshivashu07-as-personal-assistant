@@ -17,6 +17,10 @@ urlpatterns=[
 		path('defaultsections/',views.default_sections,name='default_sections'), 
 
 		# path('index/',views.index,name='index'),
+
+
+
+
 ]
 
 
