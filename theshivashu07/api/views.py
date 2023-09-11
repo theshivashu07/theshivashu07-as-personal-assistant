@@ -7,8 +7,10 @@ import appCodeCollections.collections.BulkViewFunctions as BulkViewFunctions
 import appCodeCollections.collections.BuildFilePaths as BuildFilePaths
 from django.contrib import messages
 
+from appCodeCollections.serializers import ProblemsSerializer
 
-from django.http import JsonResponse
+from rest_framework.renderers import JSONRenderer
+from django.http import HttpResponse,JsonResponse
 import json
 
 
@@ -21,25 +23,31 @@ def problem(request,id=None):
 				'error' : 'You not provide id here!!!'
 		})
 
-	get = Problems.objects.filter(id=id)   #or, pk
-	if(not get):
+	problems = Problems.objects.filter(id=id)   #or, pk
+
+
+def problem(request,id=None):
+	if ( id==None ):
+		return JsonResponse({
+				'error' : 'You not provide id here!!!'
+		})
+
+	permit = bool(Problems.objects.filter(id=id))   #or, pk
+	print(permit)
+	if(not permit):
 		return JsonResponse({
 				'message' : 'This id is not available in the problem database.'
 		})
 
-	print(Problems.objects.get(id=id))
-	return JsonResponse({
-			'dataset' : json.loads(Problems.objects.get(id=id))
-	})
+	problem = Problems.objects.get(id=id)
+	serializer = ProblemsSerializer(problem)
+	return JsonResponse(serializer.data,safe=False)
  
 
 def problems(request):
-	data =  [ {1:'shivam', 2 : 'shri'}, {'a':'Aparna', 'r':'Renu'} ]
-	data = Problems.objects.values_list('title')
-	data = Problems.objects.values()
-	return JsonResponse({
-			'dataset' : json.loads(data)
-	})
+	problems = Problems.objects.all()
+	serializer = ProblemsSerializer(problems,many=True)
+	return JsonResponse(serializer.data,safe=False)
  
 
 
