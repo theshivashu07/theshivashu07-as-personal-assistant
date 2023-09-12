@@ -149,9 +149,26 @@
 
 
 
+                                        <div class="col-md-6 inputbox" style="padding:20px; margin: 0; "> 
+                                            <label class="labels" style=""> Add Another's </label> 
+                                            <!-- <input class="codeinputs" type="text" id="ProblemsTitle" name="ProblemsTitle" placeholder="typing..." value="" style=""> --> 
+                                            <select class="codeinputs" name="SolutionsAnotherAttachments" id="SolutionsAnotherAttachments"> 
+                                              <option value="">None</option> 
 
+                                              {% for object in SolutionAnotherAttachments %}
+                                                    <option value="{{object.id}}">{{object.showntitle}}</option> 
+                                              {% endfor %}
 
-                                        <div class="col-md-12 inputbox" style="padding:20px; margin: 0; padding-left: 1100px;">
+                                              <!--  <option value="saab">Saab</option> 
+                                              <option value="mercedes">Mercedes</option> 
+                                              <option value="audi">Audi</option>  --> 
+                                            </select> 
+                                        </div> 
+
+                                        <div class="col-md-6 inputbox" style="padding:20px; margin: 0; ">
+                                            <input class="codeinputs" type="submit" style="background-color:#dd0000; color:white;" name="submit" value="Submit"> 
+                                        </div>
+                                        <div class="col-md-6 inputbox" style="padding:20px; margin: 0; padding-left: 500px;">
                                             <input class="codeinputs" type="submit" style="background-color:#dd0000; color:white;" name="submit" value="Submit"> 
                                         </div>
 

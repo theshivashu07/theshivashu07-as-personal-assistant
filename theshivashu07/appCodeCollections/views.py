@@ -236,12 +236,17 @@ def addSolutionsAttachments(request, problemslug, solutionid):
 	if request.method=="POST":
 		SolutionsAttachments=request.POST.getlist("SolutionsAttachments")
 		BuildFilePaths.addAttachments(objectProblem,objectSolution,SolutionsAttachments)
+
+		SolutionsAnotherAttachments=request.POST["SolutionsAnotherAttachments"]
+		if SolutionsAnotherAttachments!="":
+			BuildFilePaths.addAnotherAttachments(objectProblem,objectSolution,SolutionsAnotherAttachments)		
 		return redirect(f"/codecollections/problem-solution/{objectProblem.slug}/{objectSolution.id}")
 
 	thisisReturningDatabase = BulkViewFunctions.getBaseStructure()
 	thisisReturningDatabase['ProblemDataSet'] = BulkViewFunctions.ProblemDataSet(objectProblem)
 	thisisReturningDatabase['SolutionDataSet'] = BulkViewFunctions.SolutionDataSet(objectProblem,objectSolution.id)
 	thisisReturningDatabase['SolutionAttachments'] = BuildFilePaths.getAttachments(objectProblem,objectSolution)
+	thisisReturningDatabase['SolutionAnotherAttachments'] = BuildFilePaths.getAnotherAttachments(objectProblem,objectSolution)
 	# return redirect("/codecollections/solution-attachments/", thisisReturningDatabase)
 	return render(request,"appCodeCollections/Problems-Solutions-Mini-Templates/solution-attachments.html", thisisReturningDatabase);
 
