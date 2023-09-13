@@ -158,7 +158,8 @@ def addAnotherAttachments(objectProblem,objectSolution,SolutionsAnotherAttachmen
 	object.problem_id = objectProblem
 	object.solution_id = objectSolution
 	object.solutionattachments_id = getted
-	# object.save()
+	object.save()
+	print(object)
 	print(getted, SolutionsAnotherAttachments)
 	return 
 
@@ -166,7 +167,7 @@ def getAnotherAttachments(objectProblem,objectSolution):
 	# getted = SolutionsAttachments.objects.filter(problem_id=objectProblem) 
 	# listOfAttachments = set()
 	objects = SolutionAndSolutionsAttachments.objects.filter(problem_id=objectProblem) 
-	listOf = set( [ object.solutionattachments_id for object in objects if object.solution_id == objectSolution ]  )
+	listOf = set( [ object.solutionattachments_id for object in objects if object.solution_id == objectSolution ] )
 	datalist = list() 
 	for object in objects: 
 		# print(object.solution_id, objectSolution, object.solution_id != objectSolution)
