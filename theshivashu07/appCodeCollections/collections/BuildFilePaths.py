@@ -164,16 +164,22 @@ def addAnotherAttachments(objectProblem,objectSolution,SolutionsAnotherAttachmen
 	return 
 
 def getAnotherAttachments(objectProblem,objectSolution):
+	objects = SolutionsAttachments.objects.filter(problem_id=objectProblem) 
+	SASA = SolutionAndSolutionsAttachments.objects.filter(problem_id=objectProblem) 
+	listOf = set(  object.solutionattachments_id for object in SASA if object.solution_id == objectSolution  ) 
+
+
+
 	# getted = SolutionsAttachments.objects.filter(problem_id=objectProblem) 
 	# listOfAttachments = set()
-	objects = SolutionAndSolutionsAttachments.objects.filter(problem_id=objectProblem) 
-	listOf = set( [ object.solutionattachments_id for object in objects if object.solution_id == objectSolution ] )
+	#objects = SolutionAndSolutionsAttachments.objects.filter(problem_id=objectProblem) 
+	#listOf = set( [ object.solutionattachments_id for object in objects if object.solution_id == objectSolution ] )
 	datalist = list() 
 	for object in objects: 
 		# print(object.solution_id, objectSolution, object.solution_id != objectSolution)
 		# print(object.solution_id.id, objectSolution.id, object.solution_id != objectSolution)
-		if object.solutionattachments_id not in listOf:
-			datalist.append( object.solutionattachments_id ) 
+		if object.id not in listOf:
+			datalist.append( object ) 
 	return datalist 
 
 

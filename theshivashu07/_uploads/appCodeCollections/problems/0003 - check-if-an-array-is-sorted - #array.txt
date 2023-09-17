@@ -1,0 +1,24 @@
+
+
+We are given an array containing n elements. Our task is to check whether the array is sorted in ascending (non-decreasing/increasing) order or not. 
+
+
+Examples:
+
+Input: arr[] = {8, 12, 15} 
+Output: Yes    // Since all elements are in ascending order
+
+Input: arr[] = {8, 10, 10, 12} 
+Output: Yes    // Since all elements are in ascending order (elements may be repeated)
+
+Input: arr[] = {10, 10} 
+Output: Yes    // Equal values are considered sorted
+
+Input: arr[] = {100} 
+Output: Yes    // Single element is considered as sorted
+
+Input: arr[] = {100, 20 ,200} 
+Output: No     // Elements are not in ascending order
+
+Input: arr[] = {200, 100} 
+Output: No     // Since we are checking an array to be sorted in ascending order  
