@@ -1,0 +1,12 @@
+
+
+Given an array arr[ ] of size n, the task is to find the largest element's index in the given array. Remember there is indexing starting from 1, and if the largest number's multiple copies are available then return the initial one index.
+ 
+Example-1: 
+Input: arr[]={10, 20, 4},  n=3
+Output: 2
+ 
+Example-2: 
+Input: arr[]={22, 100, 20, 45, 100, 8},  n=6
+Output: 5
+

@@ -307,9 +307,6 @@ def AddSolutions(request,problemID):
 
 def EditSolutions(request,problemID,solutionID):
 	# when you want to EDIT Solution...
-	SolutionsLink=request.POST["SolutionsLink"]
-	SolutionsNote=request.POST["SolutionsNote"]
-	SolutionsShownTitle=request.POST["SolutionsShownTitle"]
 	SolutionsDataStructures=request.POST.getlist("SolutionsDataStructures")
 	SolutionsProgrammingLanguage=request.POST["SolutionsProgrammingLanguage"]
 	# SolutionsPlateforms=request.POST["SolutionsPlateforms"]
@@ -327,37 +324,6 @@ def EditSolutions(request,problemID,solutionID):
 	if(SolutionsProgrammingLanguage):
 		object.programminglanguages=SolutionsProgrammingLanguage
 		object.save()
-
-	# must that you putted any one data-structure...
-	if(SolutionsLink or SolutionsShownTitle or SolutionsNote):
-		tempobjects = SolutionAndSolutionsAttachments.objects.filter( problem_id=problemID,solution_id=solutionID )
-
-		if(not tempobjects):   # if-not-exist, then-create-it
-			object.attachments=1
-			object.save()
-			# add-solutionsattachments 
-			tempobject = SolutionsAttachments()
-			tempobject.problem_id = problemID
-			tempobject.link = SolutionsLink
-			tempobject.note = SolutionsNote
-			tempobject.showntitle = SolutionsShownTitle
-			tempobject.save()
-			# add-solutionandsolutionsattachments 
-			thisobject=SolutionAndSolutionsAttachments()
-			thisobject.problem_id = problemID
-			thisobject.solution_id = object
-			thisobject.solutionattachments_id = tempobject
-			thisobject.save()
-		else:  # but-if-exist, then-only-update-it
-			object.attachments= len(tempobjects)
-			object.save()
-			# update-solutionsattachments 
-			tempobject = tempobjects[0].solutionattachments_id
-			tempobject.problem_id = problemID
-			tempobject.link = SolutionsLink
-			tempobject.note = SolutionsNote
-			tempobject.showntitle = SolutionsShownTitle
-			tempobject.save() 
 
 	if(SolutionsTimeComplexity):
 		object.timecomplexity=SolutionsTimeComplexity

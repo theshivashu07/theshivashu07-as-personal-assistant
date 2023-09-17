@@ -1,5 +1,0 @@
-
-
-def function(array):
-        pass
-
