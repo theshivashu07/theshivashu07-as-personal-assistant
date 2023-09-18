@@ -115,7 +115,7 @@
                                                         {% if object.solutionattachments_id.link %}
                                                             <b style="text-decoration:underline; ">Link:</b> <a href="{{object.solutionattachments_id.link}}" target="_blank" style="color:blue;">{{object.solutionattachments_id.showntitle  |  default:'Open Given Link'}} 🔗</a>
                                                         {% else %}
-                                                            <b style="text-decoration:underline; ">Link:</b> <a style="color: blue;"> Link Not Available 🔗</a>
+                                                            <b style="text-decoration:underline; ">Link:</b> <a style="color: blue;"> {% if object.solutionattachments_id.showntitle %} {{object.solutionattachments_id.showntitle}}  |  {% endif %} Link Not Available 🔗</a>
                                                         {% endif %}
                                                         <br>
                                                            <b style="text-decoration:underline; ">Note:</b> {{object.solutionattachments_id.note  | default:None}}

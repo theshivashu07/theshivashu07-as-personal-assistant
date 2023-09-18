@@ -1,0 +1,18 @@
+Given an array, return true or false according to situations. Actually, there is the same problem with many variations of conditions available, which we have given below. So see those very carefully and then code for those. Thank You.
+
+Multiple variations are available !!!
+1. Not Distinct/Unique  +  Rotated&Sorted Both Must !!!
+2. Distinct/Unique Only  +  Rotated&Sorted Both Must !!!
+3. Not Distinct/Unique  +  Sorted or Rotated&Sorted !!!
+4. Distinct/Unique Only  +  Sorted or Rotated&Sorted !!!
+
+Examples: 
+Input-1 :  [1,2,3,4,5] - False, False, True, True 
+Input-2 :  [1,2,3,4,4,5] - False, False, True, False 
+Input-3 :  [3,5,9,1,2] - True, True, True, True 
+Input-4 :  [3,5,9,1,2,3] - True, False, True, False 
+Input-5 :  [4,6,9,1,2,5] - False, False, False, False 
+Input-6 :  [4,5,6,9,1,2,5] - False, False, False, False 
+Input-7 :  [10,12,15,5,7,8,1,2,4] - False, False, False, False 
+Input-8 :  [10,12,12,5,7,8,1,2,4,7] - False, False, False, False 
+
