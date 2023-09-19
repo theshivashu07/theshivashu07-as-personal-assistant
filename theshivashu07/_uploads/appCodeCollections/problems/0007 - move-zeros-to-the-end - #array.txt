@@ -1,0 +1,13 @@
+
+
+Given a sorted array, the task is to remove the duplicate elements from the array.
+
+
+Examples: 
+
+Input: arr[]  = {1, 2, 0, 0, 0, 3, 6}
+Output: 1 2 3 6 0 0 0
+
+Input: arr[] = {0, 1, 9, 8, 4, 0, 0, 2, 7, 0, 6, 0, 9}
+Output: 1 9 8 4 2 7 6 9 0 0 0 0 0
+

@@ -30,7 +30,16 @@ SECRET_KEY = 'django-insecure-gt$5mjtl5f2*gzjb&^@6ikxn6%4r^9m4n_rwbn1h!h%ca*_l!c
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
+
+
 ALLOWED_HOSTS = []
+
+# these below lines are only for set another address+port for our website
+from django.core.management.commands.runserver import Command as runserver
+runserver.default_port = '8080'        # <-- Your port
+runserver.default_addr = '127.0.0.1'
+
+
 
 
 # Application definition
@@ -42,7 +51,6 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-
     # apps
     'guest',
     'appCodeCollections',
