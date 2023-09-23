@@ -14,7 +14,7 @@ from django.contrib import messages
 # def index(request):
 	# return HttpResponse("Hey <b>Shivam Shukla</b>, <b style='font-size:10px'>N your url '@theshivashu07'</b> !!!"); 
 
-def index(request):                 
+def index(request):                   
 	return render(request,"appCodeCollections/index.html");   
 
 
@@ -155,7 +155,8 @@ def editProblem(request, problemslug):
 			BulkViewFunctions.EditProblems(request,objectProblem)	
 		else:
 			print("This is not correct Input's... Reput again!!!")
-		return redirect("/codecollections/problem/"+objectProblem.slug+"/")
+		slug = Problems.objects.get(id=objectProblem.id).slug
+		return redirect("/codecollections/problem/"+slug+"/")
 
 	thisisReturningDatabase = BulkViewFunctions.getBaseStructure()
 	thisisReturningDatabase['ProblemDataSet'] = BulkViewFunctions.ProblemDataSet(objectProblem)

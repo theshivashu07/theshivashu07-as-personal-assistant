@@ -1,0 +1,16 @@
+
+
+Given an ascending sorted rotated array Arr of distinct integers of size N. The array is right rotated K times. Find the value of K.
+
+Example-1: 
+N = 5,  Arr[] = {5, 1, 2, 3, 4}
+Output: 1 
+
+Example 2:  
+N = 5,  Arr[] = {1, 2, 3, 4, 5}
+Output: 0
+
+
+Your Task:
+Complete the function findKRotation() which takes array arr and size n, as input parameters and returns an integer representing the answer. You don't to print answer or take inputs.
+

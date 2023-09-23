@@ -1,0 +1,16 @@
+
+
+Given an array, the task is to Left Rotate an Array by One.
+
+What is meant by the Left Rotation of an Array by One?
+Left Rotation means a rotationappens C that hounter-Clockwise (anticlockwise). The elements are moved counterclockwise by one, which results in the elements moving back by one position from their initial position.
+
+
+Example-1:
+Input:  arr[] = {1,2,3,4,5}
+Output: arr[] = {2,3,4,5,1}
+
+Example-2:
+Input:  arr[] = {30,5,20}
+Output: arr[] = {5,20,30}
+
