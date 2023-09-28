@@ -354,10 +354,10 @@ a.btn-left:hover, .top-header .social-top ul li a:hover, .main-header .menu-wrap
 
 .main-header {
   width: 100%;
-  background-color: #fafafa;
+  background-color: #fdfdfd;
 /*  padding: 10px 30px;*/
   padding: 5px 30px;
-  border-bottom: groove;
+/*  border-bottom: groove;*/
 }
 @media screen and (min-width: 769px) and (max-width: 991px) {
   .main-header {
