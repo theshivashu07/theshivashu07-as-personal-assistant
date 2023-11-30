@@ -14,7 +14,7 @@ from django.contrib import messages
 # def index(request):
 	# return HttpResponse("Hey <b>Shivam Shukla</b>, <b style='font-size:10px'>N your url '@theshivashu07'</b> !!!"); 
 
-def index(request):                
+def index(request):                       
 	return render(request,"appCodeCollections/index.html");   
 
 
@@ -64,7 +64,7 @@ def addProblem(request):
 		getting = request.POST["submit"]
 		tracks = {  "Submit":"problem/"+object.slug+"/", "Submit + Add Solution":"add-solution/"+object.slug+"/", "Submit + Add More":"add-problem/"  }
 		if(tracks.get(getting,0)):
-			return redirect("/codecollections/"+tracks[getting])
+			return redirect("/codecollections/"+tracks[getting])  
 		# I know only three buttons in the options, but for play safe, I code below, otherwise its never coming situation!!!
 		messages.error(request, "Must to visit you on code section, because you do some un-wanted thing.")
 		return redirect("/")	
